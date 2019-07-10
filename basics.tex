@@ -1,0 +1,1311 @@
+% Created 2019-07-03 Wed 17:45
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Python Basics}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Python Basics},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+This lecture covers the core of the Python language, introducing the main concepts of the language and providing a comprehensive set of tools that can be used to solve several fundamental problems.
+\section{Interacting with Python}
+\label{sec:orgdf13d90}
+There are two ways to execute Python scripts.
+First, you write a \texttt{.py} file and run it in a terminal with \texttt{python3 myfile.py}.
+Second, you execute the Python commands line by line in the Python REPL (read-eval-print-loop).
+To open the Python REPL simply type \texttt{python3} in the terminal. You can quit Python by running \texttt{exit()} or with Control-D.
+In the Jupyter notebook you are interacting with a REPL, each cell you execute sends the commands to the interpreter, which then executes and prints outputs and then waits for more commands.
+\section{Built-In Data Types}
+\label{sec:orga5f8216}
+The main data types that are built-in Python are:
+\begin{itemize}
+\item Numerics: hold different types of numbers (integers, floats and complex numbers);
+\item Text: hold characters and strings (\texttt{string});
+\item Boolean: used to test conditions (\texttt{bool}, \texttt{True}, \texttt{False});
+\item Sequences: list of elements where order matters (\texttt{list}, \texttt{tuple} and \texttt{range});
+\item Sets: list of distinct objects where order is not important (\texttt{set}, \texttt{frozenset});
+\item Mapping: maps keys to values (dictionary, \texttt{dict});
+\item Objects: represents all data in Python (class)
+\item Exceptions: represents errors in Python
+\end{itemize}
+All of the built-in types are fully described \href{https://docs.python.org/3.6/library/stdtypes.html}{here}. We will cover most of them. There are also many built-in functions, which are described \href{https://docs.python.org/3.6/library/functions.html}{here}, and we will cover some of them as we go.
+\subsection{Numerical Data}
+\label{sec:org4b95d46}
+Numbers are separated into three different types: \texttt{int}, \texttt{float} and \texttt{complex}.
+Integers can be as big as required, as long as you have free memory available.
+
+Variables in python are not strongly typed.
+This means the type of the variable is inferred at the time of declaration from its context.
+Thus, when creating numerical data, the type of variable will be inferred from its definition.
+
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# integer
+x = 3005
+# big integer
+y = 10000000000000000000000000000000000000000000
+z = 10**30000
+\end{lstlisting}
+
+We can print these numbers on the screen by typing the name of the variable, like \texttt{x}, or by using the function \href{https://docs.python.org/3.6/library/functions.html\#print}{\texttt{print}}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# print the value of the variables on the screen
+x
+y
+z
+# alternatively use print
+print(x)
+# can print multiple variables
+print(x, y, z)
+\end{lstlisting}
+
+We can check the size of these integers (in bytes) with a helper function from the \href{https://docs.python.org/3.6/library/sys.html?module-sys\#module-sys}{\texttt{sys}} module (more on modules later), named \href{https://docs.python.org/3.6/library/sys.html?highlight=sys\#sys.getsizeof}{\texttt{getsizeof}}.
+We use functions inside a module using the dot notation: \texttt{module\_name.name\_of\_function}.
+For example, to use \texttt{getsizeof} we call \texttt{sys.getsizeof}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# import module sys
+import sys
+# print size of the integer stored in x
+print(sys.getsizeof(x))
+# print size of the large integers
+print(sys.getsizeof(y), sys.getsizeof(z))
+\end{lstlisting}
+The number of bytes assigned to the variable changes as the integer increases.
+
+Floating point numbers have a different implementation that varies by operating system, but usually is equivalent to a double type in C (8 bytes).
+To create a float:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# floating point numbers: floats
+a = 3.1415
+b = 2.718281828
+\end{lstlisting}
+
+To create complex numbers we use \texttt{j}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# complex numbers
+c = 2+3j
+d = 1j
+print(c, d)
+\end{lstlisting}
+Complex numbers have properties that can be accessed using the dot notation, just like we accessed the function \texttt{getsizeof} from the module \texttt{sys}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# real part of a complex number
+print(c.real)
+# imaginary part of a complexn umber
+print(c.imag)
+\end{lstlisting}
+We will not talk anymore about complex numbers and choose to focus only on integers and floats.
+
+The integers and floats support the usual mathematical operations.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = 11
+y = 2
+# Addition, subtraction, multiplication and division
+print(x + y, x - y, x*y, x/y)
+# Integer division
+print(x//y)
+# Remainder of integer division
+print(x%y)
+# Absolute value
+print(abs(-x-y))
+# Exponentiation
+print(pow(x, 2))
+print(x**2)                     # equivalent to pow
+\end{lstlisting}
+Notice the use of two built-ins: \href{https://docs.python.org/3.6/library/functions.html?abs\#abs}{\texttt{abs}} for absolute value and \href{https://docs.python.org/3.6/library/functions.html?abs\#pow}{\texttt{pow}} for exponentiation.
+
+Some of the operations will make implicit conversions from integers to floats or the other way around.
+We can check the type of a variable with the built-in function \href{https://docs.python.org/3.6/library/functions.html?\#type}{\texttt{type}}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# x and y are integers
+print(x, type(x))
+print(y, type(y))
+# when we divide x and y, they are implicitely converted to floats
+# so that the result is also a float
+print(x/y, type(x/y))
+\end{lstlisting}
+
+We can convert between integers and floats by calling the built-in functions \href{https://docs.python.org/3.6/library/functions.html?\#int}{\texttt{int}} and \href{https://docs.python.org/3.6/library/functions.html?\#float}{\texttt{float}}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+z = 3.2
+print(int(z), type(int(z)))
+h = 22
+print(float(h), type(float(h)))
+\end{lstlisting}
+These functions are useful to convert strings into numbers.
+\subsection{Text Data}
+\label{sec:orgc511144}
+Textual data in Python is stored in \href{https://docs.python.org/3.6/library/stdtypes.html\#textseq}{\texttt{str}} objects.
+There are several ways of creating strings:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Create strings with single quotes '
+first_name = 'Guilherme'
+# or double quotes "
+last_name = "Salome"
+print(first_name, type(first_name), sys.getsizeof(first_name))
+# A string can also have quotation marks
+more_strings = 'This is a string with "quotation marks"'
+print(more_strings)
+# To create strings with multiple lines use triple quotes '''
+# or triple double quotes """
+multiple_lines = '''This is a string
+that spans
+multiple lines. They can also be created with
+triple quotation marks """ """'''
+print(multiple_lines)
+\end{lstlisting}
+Strings have an implicit join when they are part of a single expression:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+name = "Guilherme " "Salome"
+complete_name = ("Guilherme " "Salome")
+\end{lstlisting}
+Strings are a collection of characters.
+Think of a vector, where each element is a letter.
+We can access letters in a string using the \texttt{[]} notation.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# The first letter of a string has the index 0
+# we can access it with [0]
+name = "Guilherme"
+print(name[0])
+print(name[1], name[2])
+# Last letter
+print(name[8])
+# Last letter of a string can be recovered with the index -1
+print(name[-1])
+\end{lstlisting}
+We can use the built-in function \href{https://docs.python.org/3.6/library/functions.html?\#len}{\texttt{len}} to get number of letters in a string.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(len(name))
+# Since index starts at 0, the last letter is at position len(name)-1
+print(name[len(name) - 1])
+\end{lstlisting}
+Strings are immutable:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+name = "Guilherme"
+print(name[0])                     # first letter of string
+name[0] = 'A'                      # error
+\end{lstlisting}
+We can concatenate strings with the \texttt{+} operator.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+fname = "John"
+lname = "Doe"
+print(fname + lname)
+print(fname + ' ' + lname)
+\end{lstlisting}
+Whatever is being concatenated has to have the type \texttt{str}, otherwise it needs to be converted to a string by using the built-in function \href{https://docs.python.org/3.6/library/functions.html?\#func-str}{\texttt{str}}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = 1
+name = "Guilherme"
+print('Student ' + x + ': ' + name)  # error since x is not a string
+# convert to string with str
+print('Student ' + str(x) + ': ' + name)  # error since x is not a string
+\end{lstlisting}
+Strings are objects.
+Objects hold values, like the value of the string, but can also hold other information, like properties and methods.
+We have seen an object with properties when we created a complex number.
+In that case, the complex number object had two properties, one that held the real part of the number, and another that held the complex part of the number.
+Objects can also have methods.
+Methods are functions which relate to the object itself.
+For example, a method might use the objects value and create a new one.
+In the case of strings, there is a method that takes the string in the variable and returns a new string with all letter capitalized.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+first_name = 'guilherme'
+# Capitalize string
+print(first_name.capitalize())
+print(first_name)
+capitalized = first_name.capitalize()
+# All upper case
+upper_case = first_name.upper()
+print(upper_case)
+# All lower case
+print(upper_case.lower())
+\end{lstlisting}
+Remember that strings are immutable, so string methods all return new strings when used.
+We will use other methods after we talk about sequences and booleans.
+A complete list of the string methods is available \href{https://docs.python.org/3.6/library/stdtypes.html\#string-methods}{here}.
+\subsection{Boolean}
+\label{sec:org03406d5}
+There are two boolean values: \texttt{True} and \texttt{False}.
+The booleans are a subclass of integers, and, in some contexts, the integers 1 and 0 represent the booleans \texttt{True} and \texttt{False}.
+
+We can obtain booleans via comparisons. There are 8 types of comparisons in Python:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(1 < 1)
+print(1 <= 1)
+print(1 > 1)
+print(1 >= 1)
+print(1 == 1)
+print(1 != 1)
+print(1 is 1)  # compares if two object are the same
+print(1 is not 1)
+\end{lstlisting}
+Booleans support the operations: \texttt{and}, \texttt{or} and \texttt{not}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print((1 > 0) and (2 > 1))
+print((1 > 2) or (1 < 2))
+print((1 > 2) or (0 > 1))
+print(not True)
+\end{lstlisting}
+The built-in function \href{https://docs.python.org/3.6/library/functions.html?\#bool}{\texttt{bool}} can convert \uline{any} value to a boolean.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(bool(0), bool(1))
+print(bool('Guilherme'))
+print(bool([]))
+\end{lstlisting}
+When we use the function \texttt{bool} Python evaluates whether the input of the function is associated with False or True.
+The most common objects that will lead to a \texttt{False} value are:
+\begin{itemize}
+\item Constants that are False by definition: \texttt{False} and \texttt{None}
+\item Numbers that are zero: 0, 0.0, 0j
+\item Empty sequences: \texttt{''}, \texttt{()}, \texttt{[]}, \texttt{\{\}}
+\end{itemize}
+Other objects that are non-empty will lead to a value of \texttt{True}.
+\subsection{Sequences}
+\label{sec:orgf3b7add}
+Sequences define a sequence of objects where the order of the objects is kept.
+There are three basic types: \texttt{list}, \texttt{tuple}, \texttt{range}.
+A \href{https://docs.python.org/3.6/library/stdtypes.html\#list}{\texttt{list}} can hold any number of elements and types of objects:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+list_of_numbers = [1, 2, 3, 2.3, 3.1, -1, 0, -5]
+print(list_of_numbers)
+list_of_strings = ['Guilherme', 'Salome', 'HFFE', 'Lecture 13']
+mixed_list = [-1, False, 'Hello', 3.2]
+\end{lstlisting}
+Elements of the list can be accessed by index.
+The index of a list starts at \texttt{0}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# first element at index 0
+print(list_of_numbers[0])
+print(list_of_numbers[1])
+\end{lstlisting}
+The built-in function \texttt{len} gives the length of a list:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(len(list_of_numbers))
+print(len([]))
+print(len('HFFE'))
+\end{lstlisting}
+Notice that a string is backed up by a list, so it shares some of its methods and returns the number of characters when \texttt{len} is called on a string.
+
+Because indices start at 0 and not at 1, the last index of a list is given by the length of such list minus 1.
+The last element of a list can also be accessed via the index \texttt{-1} (equivalent of Matlab's \texttt{end}):
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(mixed_list[3])
+print(len(mixed_list))
+print(mixed_list[len(mixed_list)])  # index out of range
+print(mixed_list[len(mixed_list)-1])
+print(mixed_list[-1])
+\end{lstlisting}
+
+We can recover several elements of a list, also known as slicing, using the \texttt{[]} notation.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+numbers = [-1, 2, 5, 7, 9, 10, 12]
+# recover first element
+numbers[0]
+# recover first three numbers
+numbers[0:3]
+# equivalent to
+numbers[:3]
+# recover from the third number to the fifth
+numbers[2:5]
+# recover from the 2nd number to the last
+numbers[1:len(numbers)]
+numbers[1:]
+# recover the last number
+numbers[-1]
+# recover every other number
+numbers[0:len(numbers):2]        # start:stop:step
+numbers[0::2]
+# recover every 3rd number
+numbers[0::3]
+\end{lstlisting}
+
+Elements of a list can be modified:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+list_of_numbers[0] = 1000
+print(list_of_numbers)
+list_of_numbers[-1] = 'oops'
+print(list_of_numbers)
+\end{lstlisting}
+A list can be extended:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(list_of_numbers)
+list_of_numbers.append(100)     # adds to the end of list
+print(list_of_numbers)
+list_of_numbers.insert(0, 100)  # inserts at beginning of list
+print(list_of_numbers)
+list_of_numbers.insert(1, 100)  # inserts at position 1, shifts everythin to the right
+\end{lstlisting}
+It is important to note that adding elements to the beginning of a list or at a random location inside the list is slow. Appending at the end of the list is much faster.
+
+A list can be shrunk.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(list_of_numbers)
+list_of_numbers.pop()           # removes last item
+print(list_of_numbers)
+list_of_numbers.pop(0)          # removes first item (this is slow)
+print(list_of_numbers)
+del list_of_numbers[1]          # removes element at index 1
+print(list_of_numbers)
+\end{lstlisting}
+
+A \href{https://docs.python.org/3.6/library/stdtypes.html\#tuple}{\texttt{tuple}} is also a sequence, but it is a sequence that cannot be modified after it is created.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+tuple_of_numbers = (1,2,3,4,5)
+print(tuple_of_numbers)
+print(tuple_of_numbers[0], tuple_of_numbers[-1], len(tuple_of_numbers))
+tuple_of_numbers[0] = 100       # raises error
+tuple_of_numbers.append(100)    # raises error
+tuple_of_numbers.pop()          # raises error
+del tuple_of_numbers[0]         # raises error
+\end{lstlisting}
+Tuples are more efficient that lists since they occupy less bytes.
+Tuples are used when you want to fix a sequence of values that should not be changed.
+
+A \href{https://docs.python.org/3.6/library/stdtypes.html\#range}{\texttt{range}} constructs a sequence of numbers and is often used for looping a specific number of times in a loop.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(list(range(0, 10)))
+print(list(range(10)))
+print(list(range(0, 10, 2)))
+\end{lstlisting}
+It is important to know that all functions that return a list of numbers in Python exclude the last number from the list. For example \texttt{range(5)} returns a list with the numbers \texttt{0,1,2,3,4}. This is because lists start in the index 0, so the last index of a list with 5 elements is the index 4.
+This contrasts with lists in Matlab which start at index 1, but is a small change that is more natural to programming and is the default in most of the programming languages.
+\subsection{Sets}
+\label{sec:orgb4dc9ad}
+A \href{https://docs.python.org/3.6/library/stdtypes.html\#set}{\texttt{set}} is a list of \uline{distinct} objects without a specific order (unordered collection).
+To create a set we pass a list of elements to the \texttt{set} function:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = set(['A', 'B', 'C', 'D'])
+print(students)
+{'A', 'B', 'C', 'D'}            # also creates the same set
+set()                           # empty set
+{}                              # NOT an empty set, but an empty dictionary
+print(type(set()), type({}))
+\end{lstlisting}
+
+Notice that the elements in a set are all unique. Indeed, \texttt{set} is an implementation of a mathematical set:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print({'A', 'A', 'A', 'B', 'B', 'C'})
+\end{lstlisting}
+
+A \texttt{set} can be extended and its elements can be removed:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(students)
+students.add('E')
+print(students)                 # notice the order of elements might change
+students.discard('A')           # removes 'A' if it is in the set
+students.discard('A')           # if not in the set, do nothing
+students.remove('B')            # removes 'B' it it is in the set
+students.remove('B')            # if not in the set, raise error
+\end{lstlisting}
+
+We can find how many elements are in a set with \texttt{len}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(len(students))
+\end{lstlisting}
+
+As the implementation of a mathematical set, we can take unions, intersections and differences. We can also check if an element is in a set.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = {'A', 'B', 'C', 'D', 'E'}
+teacher = {'G'}
+assistant = {'I'}
+everyone = students.union(teacher, assistant)  # new set that is union of all
+everyone_but_A = students.difference({'A'})
+print({'A', 'B', 'C'}.intersection({'B', 'C'}))
+print('A' in students)
+\end{lstlisting}
+Other operations are described \href{https://docs.python.org/3.6/library/stdtypes.html\#set}{here}.
+
+A \href{https://docs.python.org/3.6/library/stdtypes.html\#frozenset}{\texttt{frozenset}} is similar to a \texttt{set} but is an immutable collection.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = frozenset(['A', 'B', 'C', 'D', 'E'])
+# can do everything a set does, but cannot be modified
+students.add('F')               # error
+\end{lstlisting}
+A \texttt{frozenset} is useful when you want to name a set of values that will have some use in your program.
+This makes your code more readable and easier to identify key parameters.
+\subsection{Mapping (Dictionaries)}
+\label{sec:org8043729}
+A mapping is an object that associates names (keys) to values (any object).
+The standard implementation of a mapping in Python is a dictionary: \href{https://docs.python.org/3.6/library/stdtypes.html\#dict}{\texttt{dict}}.
+A dictionary can be created by giving the \texttt{dict} constructor a list of \texttt{key:value} pairs:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+grades = {'A': 10, 'B': 8, 'C': 7, 'D': 8.5, 'E': 9.8}
+print(type(grades))
+print(len(grades))
+grades['A']                     # returns value for grade of A
+grades['C'] = 7.5
+print(grades)
+\end{lstlisting}
+
+Dictionaries can be modified, its elements can be removed, new elements can be added, and existing elements can be updated.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(grades)
+grades.update({'A': 0})         # A was cheating
+print(grades)
+del grades['B']                 # remove grade for B
+print(grades)
+grades['F'] = 10                # adds a new pair to the dictionary
+print(grades)
+\end{lstlisting}
+
+We can recover (as a list) all of the keys of a dictionary, all of its values, and all of the \texttt{key:value} pairs:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+list(grades.keys())             # a list of all dict keys
+list(grades.values())           # a list of all dict values
+list(grades.items())            # a list of the key:value pairs
+\end{lstlisting}
+Other methods are described \href{https://docs.python.org/3.6/library/stdtypes.html\#dict}{here}.
+\subsection{Objects}
+\label{sec:orgc7c4f34}
+Objects are the core of everything in Python. In fact, every data in Python is represented by an object. All of the basic types we studied so far are types. That is why when we call \texttt{type(1)}, for example, we get back \texttt{<class 'int'>}. This means the number 1 is an object of the class int.
+
+Every object in Python has: an identity, a type and a value.
+This means every single variable we declare in our scripts will have an identity, a type and a value, since everything in Python is an object, no exceptions.
+
+The \uline{identity} of an object is a value that never changes after it was created, it is like the address of an object in the computer's memory.
+The comparison operator \texttt{is} compares the identity of two objects.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = []
+b = []
+print(a == b)                          # the lists have the same values
+print(a is b)                          # but they are not the same objects
+a.append(1)
+b.append(1)
+print(a == b)  # both lists have the same values, a 1
+# but the 1 that lives in a is not the same that lives in b
+# I can change the value of b[0] and it does not affect a[0]
+print(a is b)
+\end{lstlisting}
+
+We can get the identity of an object with \href{https://docs.python.org/3.6/library/functions.html?\#id}{\texttt{id}} function (a function is also an object in Python):
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print("Identity of 'a': " + str(id(a)))  # id returns an integer representing a's identity
+print("Identity of 'b': " + str(id(b)))  # id returns an integer representing a's identity
+\end{lstlisting}
+
+The \uline{type} of an object determines what functions it supports, it represents the object's definition. The type of an object cannot be changed. As we have seen before, we can discover the type of an object with the \texttt{type} function.
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+  print(type(a))
+  print(type(type))               # type is an object, and has a type
+\end{lstlisting}
+
+The \uline{value} of an object may be mutable or immutable, like lists and tuples.
+
+The built-in functions \href{https://docs.python.org/3.6/library/functions.html?\#dir}{\texttt{dir}} and \href{https://docs.python.org/3.6/library/functions.html?\#help}{\texttt{help}} can be used to inspect the methods of an object, and to get help on those methods:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = [1, 2, 3]
+print(type(a))                  # a is a list
+print(dir(a))                   # these are all of its methods
+# we can understand each method by using the help function
+help(a.reverse)
+help(a.sort)
+\end{lstlisting}
+For now we will skip the topic of how to define new objects, but we will talk about it after we cover loops, conditionals and functions.
+
+\subsection{Exceptions}
+\label{sec:org2c02f05}
+Exceptions are objects that hold the information about errors that occur in Python during the run-time of a script.
+There are many built-in exceptions that are raised depending on the situation.
+For example, trying to access an element of a list with an index that is not correct will raise an \href{https://docs.python.org/3.6/library/exceptions.html?highlight=indexerror\#IndexError}{\texttt{IndexError}}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = ['A', 'B', 'C']
+students[4]
+\end{lstlisting}
+
+For example, trying to access a value stored in a dictionary with a non-existing key will raise a \href{https://docs.python.org/3.6/library/exceptions.html?\#KeyError}{\texttt{KeyError}}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+grades = {'A': 10, 'B': 8}
+grades['C']
+\end{lstlisting}
+
+For example, calling a method on an object that does not actually have that method will raise an \href{https://docs.python.org/3.6/library/exceptions.html?\#AttributeError}{\texttt{AttributeError}}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = {'A', 'B', 'C', 'D', 'E'}
+students.append('F')            # there is no append method in a set
+\end{lstlisting}
+A complete list of the exceptions that are built-in Python is available \href{https://docs.python.org/3.6/library/exceptions.html\#concrete-exceptions}{here}.
+
+The philosophy of programming in Python when it comes to dealing with errors is known as \texttt{EAFP}: Easier to Ask for Forgiveness than Permission.
+It means that when we are coding, we should assume that the values/methods exist and try to do the computations, but if something fails, then we will fix it.
+This is opposed to the style known as LBYL: Look Before You Leap.
+Where you check if everything is as should be before doing the computations.
+This distinction is just a philosophical one, and, in the case of Python, the EAFP increases the speed of developing software.
+
+In a LYBL style of coding we would write software as such:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+if is_everything_right_for_computing():
+    # if everything is right (variables have the values we expect, ...)
+    do_the_computations()
+else:
+    handle_the_error_case()
+\end{lstlisting}
+
+In a EAFP style of coding we would write the same software as:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+try:
+    do_the_computations()
+except SomeErrorHappened:
+    handle_the_error_case()
+\end{lstlisting}
+The EAFP approach is what we will use when handling errors.
+
+Handling errors is an extremely important topic, but requires understanding conditionals, so we will defer studying exceptions to a later section.
+
+\section{Control Flow Tools}
+\label{sec:org7795b2b}
+Control flow refers to the tools we have available to control the execution of our script: conditionals (if, else, elif), loops (while, for) and functions.
+\subsection{Conditionals}
+\label{sec:org88bd86c}
+The syntax for \href{https://docs.python.org/3.6/tutorial/controlflow.html\#if-statements}{\texttt{if}} statements is:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+if condition:
+    # if condition evaluates to True
+    # run code in here
+else:
+    # if condition is False
+    # run code in here instead
+\end{lstlisting}
+
+Notice the use of a colon after the condition and after the \texttt{else} keyword.
+Also observe that we have indented the expressions after the \texttt{if} and \texttt{else} keywords.
+Contrary to other languages that use brackets or the \texttt{end} keyword to delimit a scope, Python uses indentation.
+The indentation indicates what is inside the \texttt{if} block and what is not.
+Finally, notice that semicolons are not required by Python, you can still use them but they are not required, instead Python uses linebreaks to find the end of the command.
+
+The condition that comes after the \texttt{if} keyword is an expression that evaluates to a boolean. If that is true, then the indented code after \texttt{if}  is executed. If the expression evaluates to false, then the indented code after \texttt{eslse} is executed.
+
+For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+value = 100
+if value < 100:
+    print('Value is smaller than 100')
+else:
+    print('Value is at least 100')
+\end{lstlisting}
+
+We can also have an \texttt{if} without an \texttt{else} or an \texttt{elif}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+say_hi = True
+if say_hi:
+    print("Hi!")
+\end{lstlisting}
+
+We can test multiple conditions:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+name = 'Guilherme'
+if name.startswith('A'):
+    print('Starts with letter A')
+elif name.startswith('B'):
+    print('Starts with letter B')
+else:
+    print('Starts with some other letter')
+\end{lstlisting}
+If the first two conditions are not executed then the last condition (the default) is.
+Notice the use of the \texttt{str} method \href{https://docs.python.org/3.6/library/stdtypes.html?\#str.startswith}{\texttt{startswith}} to check whether the first letter of the string \texttt{name} matches some other letter.
+
+It is possible to use several \texttt{elif} to test more conditions.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+if x < -1:
+    doSomething
+elif x >= -1 and x <= 1:
+    doSomethingElse
+elif x > 2 and x != 3:
+    doYetAnotherThing
+else:
+    # x == 3
+    doOtherThing
+\end{lstlisting}
+\subsection{Loops}
+\label{sec:orgd7c340f}
+In Python, we can write loops with \href{https://docs.python.org/3.6/tutorial/introduction.html\#first-steps-towards-programming}{\texttt{while}} and \href{https://docs.python.org/3.6/tutorial/controlflow.html\#for-statements}{\texttt{for}}.
+
+A while loop evaluates an expression, and, if it is True, a block of is executed and the loop repeats.
+The syntax for a \texttt{while} is:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+while condition:
+    # if the condition is true
+    do something here
+\end{lstlisting}
+The code inside the \texttt{while} loop will be executed as long as the \texttt{condition} evaluates to True.
+
+For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+total = 10
+i = 0
+print("Beginning while loop:")
+while i < total:
+    i += 1                      # equivalent to i = i + 1
+    print(i)
+\end{lstlisting}
+
+A \texttt{for} loop can be written as:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for i in iterator:
+    do something here
+\end{lstlisting}
+A for loop iterates the variable \texttt{i} over the values in \texttt{iterator}.
+For each value \texttt{i} takes, the code block is executed.
+
+For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = ['A', 'B', 'C', 'D', 'E']
+for i in [0, 1, 2, 3, 4]:
+    print(students[i])
+\end{lstlisting}
+
+Remember that we have two built-in functions that can help here. The function \texttt{range} can create a list of numbers like the one in the for loop above. And the function \texttt{len} returns the length of an object.
+So:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = ['A', 'B', 'C', 'D', 'E']
+for i in range(len(students)):
+    print(students[i])
+\end{lstlisting}
+
+For loops in Python really behave like a "for-each" loop.
+We can iterate over the elements of \texttt{students} directly, without the need to use an index.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+students = ['A', 'B', 'C', 'D', 'E']
+for name in students:
+    print(name)
+\end{lstlisting}
+The container with the students takes care of giving out each of the elements without explicitly tracking the index of elements.
+If the container (in this case a list) is ordered, then the elements will be processed in the same order.
+If the container is not ordered, like in a \texttt{set}, then the loop would process each elements in an arbitrary order, but all of the elements would be processed.
+
+If you really need to access the indices then you can use the built-in function \href{https://docs.python.org/3.6/library/functions.html\#enumerate}{\texttt{enumerate}} to iterate over the indices and the student names at the same time:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for i, name in enumerate(students):
+    print('students[' + str(i) + ']=' + name)
+\end{lstlisting}
+
+The iterator \texttt{enumerate(students)} returns more than one value (it returns two values at each iteration). In general, iterators can return a \texttt{tuple} with any number of values, and these values are unpacked in the for-loop. In this case, the \texttt{enumerate(students)} returns a tuple with two elements, the first is an integer representing the index (starting at 0), and the second is one of the elements of the students list.
+These two values are unpacked, the first one is assigned to the variable \texttt{i}, and the second is assigned to the variable \texttt{name}.
+
+We can iterate over keys and values of a dictionary.
+To do so, we use the \href{https://docs.python.org/3.6/library/stdtypes.html?highlight=dict.items\#dict.items}{\texttt{items}} method of dictionaries:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+studentsGrades = {'A': 10, 'B': 9, 'C': 9.5, 'D': 8}
+dir(grades)
+help(grades.items)
+for name, grade in studentsGrades.items():
+    print(f"{name}'s grade was {grade}")
+\end{lstlisting}
+
+In some other languages a for-loop is written with the following syntax:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for (int i = a; i < n; i += s) {
+do stuff here
+}
+\end{lstlisting}
+
+This type of loop can be written in Python using the function \texttt{range}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for i in range(a, n, s):
+    # do things here
+\end{lstlisting}
+The function \texttt{range(a, n, s)} will create a list of numbers starting at the value \texttt{a}, stops before the value \texttt{n}, and has a step size \texttt{s}.
+\subsection{Break and Else Statements in For Loops}
+\label{sec:orge46c2e9}
+The \href{https://docs.python.org/3.6/tutorial/controlflow.html?\#break-and-continue-statements-and-else-clauses-on-loops}{\texttt{break}} keyword can be used inside a loop (either for or while) to break out of it.
+Specifically, the \texttt{break} keyword breaks out of the most inner loop.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for i in range(10):
+    if i == 5:
+        break
+    print(i)
+\end{lstlisting}
+Another example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+j = 0
+while True:
+    for i in range(1000):
+        print(i, j)
+        if i == 5:
+            break
+    j += 1
+    if j == 2:
+        break
+\end{lstlisting}
+
+Loops also have an \texttt{else} clause that is executed after the loop finishes (after the iterator is exhausted) and only if the loop finishes without the use of a \texttt{break}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+checkIfPrime = range(3, 10)     # what number is prime from 3 to 9
+for number in checkIfPrime:
+    for divisor in range(2, number):
+        if number % divisor == 0:  # number can be written as a*b with a,b < number
+            print(f'{number} is not prime')
+            print(f'{number}={divisor}*{number//divisor}')
+            break
+    else:
+        # no break occurred, this means no divisor was found
+        print(f'{number} is prime!')
+\end{lstlisting}
+
+Notice that the \texttt{else} clause does not belong to the \texttt{if}, but actually to the \texttt{for}, the indentations are different.
+\subsection{Functions}
+\label{sec:orge44d3d8}
+Functions can be defined with the \texttt{def} keyword and there is no need to specify the type of the return (remember values in Python are inferred when they are assigned).
+The body of the function starts in the next line and must be indented.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def writeFibonacciSeries(n):
+    """
+    Writes a list of the first n numbers from the Fibonacci series.
+
+    Input:
+     n: integer, number of elements to obtain from the Fibonacci series
+        n >= 2
+
+    Output:
+     series: list of integers
+    """
+    series = [1, 1]             # first 2 numbers of the series
+    total = 0
+    while total < n - 2:
+        series.append(sum(series[-2:]))
+        total += 1
+    return series
+\end{lstlisting}
+After the \texttt{def} keyword comes the name of the function, and then parentheses \texttt{()}. Inside the parentheses are the name of the variables, if any, and then comes a colon.
+
+The body of a functin starts with its documentation string (docstring). The triple quotes define a multi-line comment and it is a good practice to add the definition of the function, or at least what it is supposed to do and output.
+
+We can execute this code cell so that the function \texttt{writeFobinacciSeries} is available for use.
+We can now call this function:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+writeFibonacciSeries(10)
+\end{lstlisting}
+
+Notice that calling the function \texttt{help} on or just defined function will output its documentation:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+help(writeFibonacciSeries)
+\end{lstlisting}
+
+The body of the function defines a local scope.
+Any variables that are assigned in the body of the function first refer to the local scope, and then to the global scope.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+message = "Hello World"
+def sayHello():
+    message = "Hello World!!!!"
+    print(message)
+
+print(message)                  # prints Hello World, not Hello World!!!!
+\end{lstlisting}
+
+The variable \texttt{message} is first defined outside the function, it is a global variable.
+Inside the \texttt{sayHello} function we define a variable with the same name, it is a local variable and does not overwrite the global variable with the same name.
+This becomes clear when we print the value of \texttt{message} outside of the function.
+
+Notice that the \texttt{sayHello} function has no \texttt{return} keyword and does not return any value.
+A function that has no \texttt{return} keyword implicitly returns a value of \texttt{None}.
+That is, Python impicitly appends a \texttt{return None} to the function that has no \texttt{return} value.
+The body of the function ends when the indentation ends, so there is no need to use brackets or an \texttt{end} keyword.
+When the value of \texttt{None} is the only one to be returned by a function, the REPL suppress printing it on the screen.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+sayHello()                      # does not print the return value
+print(sayHello())               # prints the return value, which is None
+a = sayHello()
+a == None                       # True
+\end{lstlisting}
+\subsubsection{Functions are Objects, like everything else}
+\label{sec:orgbba6de7}
+Functions are first-class objects, which means they are treated the same as any other object in the language.
+Remember, everything in Python is an object.
+Functions can be created, destroyed (this is done automatically by Python), passed to other functions, assigned to a variable, returned from another function.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+type(sayHello)
+print(sayHello)                 # prints info, address of function in memory
+a = sayHello
+print(a)                        # same address
+# the variable a points to the same function
+id(a) == id(sayHello)
+\end{lstlisting}
+When a function is defined and loaded by the Python interpreter it is assigned some space in memory.
+When we ran the code that defined \texttt{sayHello}, the function is created and assigned some space in memoy.
+The name \texttt{sayHello} then points to that space in memory.
+When we assign it to the variable \texttt{a}, then \texttt{a} starts pointing at the same space in memory.
+We can in fact delete the name \texttt{sayHello} and the function will still be accessible via the name \texttt{a}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+del sayHello
+print(sayHello)                 # name not defined
+print(a)                        # the function lives!
+a()
+\end{lstlisting}
+
+We can pass functions as inputs to other functions, and even return a function from another function:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def greetingFactory(name):
+    def greet():
+        print(f"Welcome, {name}!")
+    return greet
+\end{lstlisting}
+
+The function defined above takes a name as an argument, and creates a function that prints a message using the name.
+It then returns the newly defined function.
+This function that was returned remembers the value of \texttt{name} that was used in its construction, this is called a 'closure'.
+A closure is a function that remembers the values of the variables in the enclosing scope (the scope of \texttt{greetingFactory}).
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+name = 'Guilherme'
+greetMyself = greetingFactory(name)
+greetMyself()
+greetingFactory('Doe')()
+\end{lstlisting}
+\subsubsection{Default Values}
+\label{sec:org40c3c7b}
+Functions can take arguments with default values! (This is not the case in Matlab, where default values is not straightforward)
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def installVirus(prompt, retries=4, reminder='Please try again!'):
+    while True:
+        response = input(prompt)  # asks user for input
+        if response in ('y', 'Y', 'yes', 'Yes'):
+            return True
+        if response in ('n', 'N', 'no', 'No'):
+            return False
+        retries = retries - 1   # retries starts at 4 by default
+        if retries <= 0:
+            break
+    print(reminder)
+\end{lstlisting}
+Notice the use of the membership operator \href{https://docs.python.org/3.6/reference/expressions.html\#membership-test-operations}{\texttt{in}} to check whether the \texttt{response} variable is a member of a set.
+
+This function can be called in several different ways:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+installVirus('Do you want to Install this software?')
+installVirus('Install?', 1)
+installVirus('Delete your computer?', 10, 'Try again!')
+\end{lstlisting}
+You can even specify which variable you are assigning the value to by using name and value pairs:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+installVirus('Delete file?', reminder='Did not work, try again.')
+\end{lstlisting}
+
+You can use other variables to hold the default values for inputs in a function.
+However, the default values are captured (evaluated) when the function is first defined.
+That is, even if the value of the variable changes, the default value will not change:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+i = 10
+def f(arg=i):
+    print(arg)
+i = 20
+f()                             # prints 10
+\end{lstlisting}
+
+The inputs of a function are positional: the order they are defined in the function definition is the order in which they should be received.
+However, is possible to change the order by specifying the name of the input.
+In this case, we pass \texttt{name=value} pair, also known as keyword arguments.
+For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def foo(x, y=0, z=0):
+    print(x, y, z)
+
+# x is a positional input, it has no default value so must always be supplied
+foo()                           # error
+# missing a positional argument
+foo(1)
+# y and z are keyword arguments
+# we can pass them as positional arguments
+foo(1, 10, 20)
+# or by specifying name=value pairs
+foo(1, y=10, z=20)
+# when specifying name=value pairs the order can be changed
+foo(1, z=20, y=10)
+# but positional arguments must always come first
+foo(z=20, y=10, 1)              # error
+\end{lstlisting}
+\subsubsection{Functions with *args and **kwargs}
+\label{sec:orgd87025b}
+You will often find functions where some of its inputs are called \texttt{*args} and \texttt{**kwards}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def myFunction(variable1, *args, **kwargs):
+      pass
+\end{lstlisting}
+Here the \texttt{variable1} is just the first argument that the function receives, it is named 'variable1' and is available for use within the function body.
+The keywords \texttt{*args} and \texttt{**kwargs} allow the function to accept optional arguments, as many as you want.
+Thus, the function above requires at least one argument, called "variable1", and can accept extra arguments.
+
+The keyword \texttt{*args} collects additional positional arguments, that is, arguments that do not have a keyword associated with them.
+These arguments are collected into a tuple with the name 'args'.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def f(a, *args):
+    print(a)
+    print(args)
+f(1, 2, 3, 4, 5, 6, range(10))
+\end{lstlisting}
+
+The keyword \texttt{**kwargs} collects values that are associated with names.
+These names and values are collected into a dictionary, which is available in the function body via the name 'kwargs':
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def f(a, *args, **kwargs):
+      print(a)
+      print(args)
+      print(kwargs)
+f(1, 1, 2, 3, range(10), name='Guilherme', lastname='Salome', age='29')
+\end{lstlisting}
+
+If no extra arguments are passed, then "args" and "kwargs" will be empty:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+f(1)
+\end{lstlisting}
+\subsubsection{Anonymous Functions: lambdas}
+\label{sec:orge6a4a8c}
+We can declare short inline functions using the \texttt{lambda} keyword.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+add = lambda x, y: x + y
+\end{lstlisting}
+After the keyword \href{https://docs.python.org/3.6/tutorial/controlflow.html?\#lambda-expressions}{\texttt{lambda}} comes the arguments, in this case x and y. After the colon comes whatever the function will return, in this case \texttt{x+y}.
+The function here is assigned to the name 'add'.
+
+Lambdas are useful in some contexts.
+Suppose we have a list that we want to sort:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+grades = [('A', 9), ('B', 10), ('C', 7), ('D', 9.5)]
+dir(grades)
+help(grades.sort)
+\end{lstlisting}
+
+The list method \href{https://docs.python.org/3.6/library/stdtypes.html?highlight=list.sort\#list.sort}{\texttt{sort}} sorts a list in place.
+It takes an optional argument called \texttt{key}.
+This argument is a function that takes an element of the list and returns a value.
+The value that is returned is used for sorting the list.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(grades)
+grades.sort()
+print(grades)
+\end{lstlisting}
+
+Notice that the tuples inside this list were sorted by their first value, a string.
+We can sort the list of students and grades based on the grades.
+We can passa a lambda function to the \texttt{key} argument that will return the grade value for sorting:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(grades)
+grades.sort(key=lambda x: x[1])
+print(grades)
+\end{lstlisting}
+
+If we want to sort in a decreasing order:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(grades)
+grades.sort(key=lambda x: x[1], reverse=True)
+print(grades)
+\end{lstlisting}
+\section{Handling Exceptions}
+\label{sec:org31c2bf8}
+It is possible to write a Python script that can handle exceptions as they occur during execution.
+In fact, many of Python's own functions use exceptions as a form of control flow.
+Let's see how we can handle errors:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+while True:
+    try:
+        number = int(input("Please enter an integer: "))
+        break
+    except ValueError:
+        print("Invalid input. Not a number, please try again.")
+print(f'Your number converted to integer = {number}')
+\end{lstlisting}
+
+The \texttt{input} will wait for the user to type something in the standard input and hit enter.
+Whatever was inputed will come in as a string, and the \texttt{int} function will attempt to convert it to an integer.
+If the string does not contain an integer, then a \texttt{ValueError} exception will be raised.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int(2.35)                       # no error, converting float to int works
+int('2')                        # works, there is an integer in the string
+int('2.35')                     # error, no integer in the string
+\end{lstlisting}
+
+Python will execute whatever is in the \href{https://docs.python.org/3.6/tutorial/errors.html\#handling-exceptions}{\texttt{try}} block.
+If no exception occurs inside the block, then the \texttt{except} statement is skipped and the \texttt{try} statement is finished.
+However, if an exception occur inside the \texttt{try} block, then the rest of the \texttt{try} block is skipped.
+Then, if the exception type matches with the keyword that comes after \texttt{except}, the \texttt{except} block is executed.
+After the \texttt{except} block is executed, the code continues on.
+
+If another exception occur with a type different than \texttt{ValueError}, then it is an unhandled exception, and the execution of the script will be stopped and an error message will be shown.
+Try executing the \texttt{while} loop above and instead of entering an integer, hit Ctrl-C Ctrl-C, which will raise a \texttt{KeyboardInterrupt} error.
+Since this error is not handled, then the script will be completely interrupted.
+This is an unhandled error.
+
+It is possible to handle more than one type of exception:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+while True:
+    try:
+        number = int(input("Please enter an integer:"))
+    except ValueError:
+        print("Invalid input. Not an integer, please try again.")
+    except KeyboardInterrupt:
+        print("\n\n")
+        print("Input interrupted by the keyboard.")
+        break                   # break the while loop so the script stops
+    else:
+        print(f'Integer = {number}')
+        break
+\end{lstlisting}
+
+If we hit Ctrl-C Ctrl-C, then the script will raise a \texttt{KeyboardInterrupt} exception.
+On Jupyter this is equivalent to going on the menu \texttt{Kernel} and clicking the button \texttt{Interrupt}.
+Which the second \texttt{except} will catch and handle.
+It hanldes the exception by printing a message and breaking out of the loop, causing the script to end.
+Notice that we have an \texttt{else} clause at the end.
+That clause will only be executed if no exception is raised.
+That happens if the user enters an integer number, in that case the number is printed and the loop is broken.
+
+If the \texttt{except} keyword is used without specifying an exception type, then it will catch \uline{all} exceptions.
+This is not a good practice since it will catch any exception that you may or may not expect.
+Only hanlde exceptions you know how to handle.
+
+Lastly, there is a \texttt{finally} keyword that can be used in a \texttt{try} block:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+try:
+    raise KeyboardInterrupt
+except ValueError:
+    print('A value error occurred.')
+finally:
+    print("Goodbye")
+\end{lstlisting}
+
+The above will \texttt{raise} an exception which is not handled.
+Since the exception is not handled it will stop the execution of the script.
+However, before doing so, the code in the \texttt{finally} clause is executed.
+
+The real world use of the \texttt{finally} clause is to guarantee that resources are correctly closed, like closing a file or a network connection even if an error in the script occurred.
+\section{Assertions}
+\label{sec:org393f5d4}
+Exceptions and the \texttt{try} blocks are used to tackle errors that you can handle.
+Assertions are used to alert you of an error that cannot be recovered (that should stop the execution of the script).
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+  def discountPrice(price, discount):
+      assert 0 <= discount <= 1, "Discount greater than actual price."
+      return price*(1-discount)
+\end{lstlisting}
+The \href{https://docs.python.org/3.6/reference/simple\_stmts.html\#the-assert-statement}{\texttt{assert}} statement will check if the variable \texttt{discount} is between 0 and 1, and, if it is not, it will raise an \texttt{AssertionError} with the message "Discount greater than actual price".
+
+If the \texttt{discountPrice} function sits in the middle of a payment system of some company, and at some point it is invoked with a discount that is greater than 100$\backslash$%, then something clearly went wrong somewhere.
+We found a bug!
+If this assertion error occurred, then we need to stop the program and fix it.
+An assertion error should only be raised if there is a bug in your program.
+\section{Assignment}
+\label{sec:org967c6c0}
+All assignments should be submitted to the Github repository you have been assigned to.
+The deadline is August 16th by 11 PM.
+You should write a report in Latex with the solutions to the problems below.
+If the problem requires you to code, then the code should also be included in the report.
+For a quick guide on how to add Matlab code to your Latex files, refer to the Section "Adding Matlab Code" on \href{https://guilhermesalome.com/teaching/2018-empirical-methods-in-financial-econometrics/posts/lecture-1-latex.html\#org61c35bc}{this tutorial}.
+
+Go to \href{https://www.codewars.com/users/sign\_in}{Codewars} and sign in with your \href{https://github.com}{Github} account.
+Solve the problems listed below.
+Your code must pass the submission test on the Codewars website.
+\subsection{Introductory Problems (start here)}
+\label{sec:org7de2e2b}
+\begin{itemize}
+\item \href{https://www.codewars.com/kata/56dec885c54a926dcd001095}{Opposite Number}
+\item \href{https://www.codewars.com/kata/53da3dbb4a5168369a0000fe}{Even or Odd}
+\item \href{https://www.codewars.com/kata/5715eaedb436cf5606000381}{Sum of Positive Numbers}
+\item \href{https://www.codewars.com/kata/57a0e5c372292dd76d000d7e}{Repeat Strings}
+\item \href{https://www.codewars.com/kata/56bc28ad5bdaeb48760009b0}{Strip First and Last Character}
+\item \href{https://www.codewars.com/kata/remove-string-spaces/python}{Remove White Space}
+\item \href{https://www.codewars.com/kata/54edbc7200b811e956000556}{Counting Sheeps}
+\item \href{https://www.codewars.com/kata/55d24f55d7dd296eb9000030}{Summation}
+\item \href{https://www.codewars.com/kata/57356c55867b9b7a60000bd7}{Basic Calculator}
+\item \href{https://www.codewars.com/kata/576bb71bbbcf0951d5000044}{Counting Numbers in an Array}
+\item \href{https://www.codewars.com/kata/576b93db1129fcf2200001e6}{Summation with Exclusion}
+\end{itemize}
+\subsection{More Problems}
+\label{sec:org26b6dc4}
+\begin{itemize}
+\item \href{https://www.codewars.com/kata/54ff3102c1bad923760001f3}{Count Vowels}
+\item \href{https://www.codewars.com/kata/56747fd5cb988479af000028}{Middle Characters}
+\item \href{https://www.codewars.com/kata/554b4ac871d6813a03000035}{Numbers from a String}
+\item \href{https://www.codewars.com/kata/57cebe1dc6fdc20c57000ac9}{Shortest String}
+\item \href{https://www.codewars.com/kata/5467e4d82edf8bbf40000155}{Reverse Digits}
+\item \href{https://www.codewars.com/kata/554e4a2f232cdd87d9000038}{DNA}
+\item \href{https://www.codewars.com/kata/55908aad6620c066bc00002a}{x and o}
+\item \href{https://www.codewars.com/kata/54c27a33fb7da0db0100040e}{Squares}
+\item \href{https://www.codewars.com/kata/546e2562b03326a88e000020}{Square Digits}
+\item \href{https://www.codewars.com/kata/525f50e3b73515a6db000b83}{Create Phone Number}
+\end{itemize}
+\subsection{Challenges}
+\label{sec:org9fd0eb3}
+\begin{itemize}
+\item \href{https://www.codewars.com/kata/55bf01e5a717a0d57e0000ec}{Multiplicative Persistence}
+\item \href{https://www.codewars.com/kata/556deca17c58da83c00002db}{Tribonacci Sequence}
+\item \href{https://www.codewars.com/kata/5679aa472b8f57fb8c000047}{Equal Sides of an Array}
+\item \href{https://www.codewars.com/kata/576757b1df89ecf5bd00073b}{Build a Tower}
+\end{itemize}
+\end{document}

@@ -1,0 +1,163 @@
+% Created 2019-07-05 Fri 18:12
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Numpy - Assignment}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Numpy - Assignment},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+All assignments should be submitted to the Github repository you have been assigned to.
+The deadline is August 16th by 11 PM.
+You should write a report in Latex with the solutions to the problems below.
+If the problem requires you to code, then the code should also be included in the report.
+You can add code to Latex with the \href{http://texdoc.net/texmf-dist/doc/latex/listings/listings.pdf}{lstlisting package} (see \href{https://tex.stackexchange.com/a/83883/65818}{this stack post}) or the \href{http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf}{minted package} (see \href{https://stackoverflow.com/a/1985330/1445572}{this other stack post}).
+\begin{problem}
+Read the \href{https://docs.scipy.org/doc/numpy/reference/routines.random.html}{\texttt{numpy.random}} documentation page.
+Test the linear regression function using a normal distribution for the unobserved heterogeneity and some other distribution of your choice for the independent variables.
+\end{problem}
+\begin{problem}
+Extend \texttt{linreg\_ols} to compute the standard error of the OLS estimates under the classical assumptions.
+Remember that under the classical assumptions, the standard error of the OLS estimates:
+\begin{align*}
+SE(\hat{\beta}_i) = \sqrt{s^2\cdot[(X'X)^{-1}]_{[i, i]}}
+\end{align*}
+where \(s^2\) is computed from the residuals of the estimation:
+\begin{align*}
+e&\equiv y-X\hat{\beta}\\
+s^2&\equiv\frac{e'e}{n-K}
+\end{align*}
+Remember to update the output of the function and extend its documentation.
+\end{problem}
+\begin{problem}
+Run the linear regression suggested in Equation (8) of \citet{PB1997}.
+\end{problem}
+\begin{problem}
+Python has been around \href{https://en.wikipedia.org/wiki/Python\_(programming\_language)}{since 1990} and has a \href{https://pypi.org}{huge number of packages}.
+Figure out if Python has a function or a package (or many packages) for estimating the parameters of a linear regression using OLS.
+If it does, what is the name of the function or the package?
+What are the outputs of the function you found?
+\end{problem}
+\begin{problem}
+When the classical assumption of homoskedasticity fails, we need a different estimators for the standard errors of the OLS estimates.
+\citet{W1980} proposes a heteroskedasticity-robust estimator for the standard errors of the OLS estimates, which is now known as White's standard error.
+Equation 2.4.1 in \citet{H2000} shows White's standard error:
+\begin{align*}
+\widehat{SE(\hat{\beta}_i)}\equiv\sqrt{\frac{1}{n}[S_{xx}^{-1}\hat{S}S_{xx}^{-1}]_{[i,i]}}
+\end{align*}
+There is a slight change of notation in this part of the \citet{H2000}, and \(x_i'\) is the ith row of \(X\) (\(x_i\) is a column vector with the explanatory variables in the ith row of \(X\)).
+The term \(S_{xx}\) is the sample mean of \(x_ix_i'\): \(S_{xx}=\frac{1}{n}\sum_{i=1}^nx_ix_i'\) (Equation 2.3.6 in \citet{H2000}).
+The term \(\hat{S}\) is an estimator for a matrix of fourth moments, and it is defined as \(\hat{S}=\frac{1}{n}\sum_{i=1}^ne_i^2x_ix_i'\) (Equation 2.5.1 in \citet{H2000}), and \(e_i\) is as before (residual for the ith observation).
+Implement this estimator in the \texttt{linreg\_ols} function.
+You could write a local function to estimate White's standard error in the \texttt{linreg\_ols.m} file.
+\end{problem}
+\begin{problem}
+(Optional) Implement the t-test based on White's standard error. Also, compute the p-value from given the statistic.
+\end{problem}
+\begin{problem}
+\citet{NW1987} proposes another estimator to the standard errors for the OLS estimates under weaker assumptions.
+The estimator the authors propose is robust not only to heteroskedasticity, but also autocorrelation, and is known as the HAC standard errors.
+Does the package you found in Problem 4 have such a function to compute the HAC standard errors?
+If not, can you find some other package that does have it?
+If so, what is the name of the package?
+\end{problem}
+\begin{problem}
+(Optional) Implement the t-test based on the HAC standard error. Also, compute the p-value from given the statistic.
+\end{problem}
+\begin{problem}
+Extend \texttt{linreg\_ols} to accept an optional input named \texttt{cov\_type}, which specifies the type of standard errors estimator to report.
+The variable \texttt{cov\_type} can take one of many values, say "Standard", "White" or "HAC".
+Your function should be able to check if \texttt{cov\_type} is one of those types and act accordingly.
+If it is not, the function should raise an appropriate error alerting the user with a very clear message of what is wrong.
+\end{problem}
+\newpage
+\printbibliography
+\newpage
+\end{document}
