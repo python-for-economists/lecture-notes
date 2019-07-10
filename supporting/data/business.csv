@@ -1,4 +1,4 @@
-Time,Time Code,Category,Economy Name,Economy Code,Paying taxes: Labor tax and contributions (% of commercial profits) [PAY.TAX.LABR.TAX.CONTR.ZS],Paying taxes: Profit tax (% of profits) [PAY.TAX.PRFT.CP.ZS],Paying taxes: Time (hours per year) - Score [PAY.TAX.TM.DFRN],Getting electricity (DB16-19 methodology) - Score [IC.ELC.ACES.DFRN.DB1619],Enforcing contracts: Time (days) - Score [ENF.CONT.DURS.DY.DFRN]
+Time,Time Code,Category,Economy Name,Economy Code,Labor tax and contributions, Profit tax,Paying taxes Score,Getting electricity Score,Enforcing contracts Score
 2018,YR2018,Economies,Brazil,BRA,39.4,22.4,0,82.46,49.92
 2018,YR2018,Economies,"Korea, Rep.",KOR,13.5,18.2,78.52,99.89,86.07
 2018,YR2018,Economies,China,CHN,48.1,11,75.58,65.71,69.16
