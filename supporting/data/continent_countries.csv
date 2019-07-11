@@ -1,249 +1,249 @@
-,Continent,Country
-0,Asia,Afghanistan
-1,Africa,Egypt
-2,Europe,Åland Islands
-3,Europe,Albania
-4,Africa,Algeria
-5,Oceania,American Samoa
-6,Europe,Andorra
-7,Africa,Angola
-8,North America,Anguilla
-9,Antarctica,Antarctica
-10,North America,Antigua and Barbuda
-11,Africa,Equatorial Guinea
-12,South America,Argentina
-13,Asia,Armenia
-14,North America,Aruba
-15,Asia,Azerbaijan
-16,Africa,Ethiopia
-17,Australia,Australia
-18,North America,Bahamas
-19,Asia,Bahrain
-20,Asia,Bangladesh
-21,North America,Barbados
-22,Europe,Belarus
-23,Europe,Belgium
-24,Central America,Belize
-25,Africa,Benin
-26,North America,Bermuda
-27,Asia,Bhutan
-28,South America,Bolivia
-29,Europe,Bosnia and Herzegovina
-30,Africa,Botswana
-31,Antarctica,Bouvet Island
-32,South America,Brazil
-33,Africa,British Indian Ocean Territory
-34,Asia,Brunei
-35,Europe,Bulgaria
-36,Africa,Burkina Faso
-37,Africa,Burundi
-38,South America,Chile
-39,Asia,China
-40,Oceania,Cook Islands
-41,Central America,Costa Rica
-42,America,Curacao
-43,Europe,Denmark
-44,Africa,Democratic Republic of the Congo
-45,Europe,Germany
-46,North America,Dominica
-47,North America,Dominican Republic
-48,Africa,Djibouti
-49,South America,Ecuador
-50,Central America,El Salvador
-51,Africa,Ivory Coast
-52,Africa,Eritrea
-53,Europe,Estonia
-54,South America,Falkland Islands
-55,Europe,Faroe Islands
-56,Oceania,Fiji
-57,Europe,Finland
-58,Europe,France
-59,South America,French Guiana
-60,Oceania,French Polynesia
-61,Antarctica,French Southern and Antarctic Lands
-62,Africa,Gabon
-63,Africa,Gambia
-64,Asia,Georgia
-65,Africa,Ghana
-66,Europe,Gibraltar
-67,North America,Grenada
-68,Europe,Greece
-69,North America,Greenland
-70,North America,Guadeloupe
-71,Oceania,Guam
-72,Central America,Guatemala
-73,Europe,Guernsey
-74,Africa,Guinea
-75,Africa,Guinea-Bissau
-76,South America,Guyana
-77,North America,Haiti
-78,Antarctica,Heard Island and McDonald Islands
-79,Central America,Honduras
-80,Asia,Hong Kong
-81,Asia,India
-82,Asia,Indonesia
-83,Europe,Isle of Man
-84,Asia,Iraq
-85,Asia,Iran
-86,Europe,Ireland
-87,Europe,Iceland
-88,Asia,Israel
-89,Europe,Italy
-90,North America,Jamaica
-91,Asia,Japan
-92,Asia,Yemen
-93,Europe,Jersey
-94,Asia,Jordan
-95,North America,British Virgin Islands
-96,North America,Virgin Islands
-97,North America,Cayman Islands
-98,Asia,Cambodia
-99,Africa,Cameroon
-100,North America,Canada
-101,Africa,Cape Verde
-102,Asia,Kazakhstan
-103,Asia,Qatar
-104,Africa,Kenya
-105,Asia,Kyrgyzstan
-106,Oceania,Kiribati
-107,Australia,Cocos Islands
-108,South America,Colombia
-109,Africa,Comoros
-110,Africa,Republic of the Congo
-111,Europe,Kosovo
-112,Europe,Croatia
-113,North America,Cuba
-114,Asia,Kuwait
-115,Asia,Laos
-116,Africa,Lesotho
-117,Europe,Latvia
-118,Asia,Lebanon
-119,Africa,Liberia
-120,Africa,Libya
-121,Europe,Liechtenstein
-122,Europe,Lithuania
-123,Europe,Luxembourg
-124,Asia,Macau
-125,Africa,Madagascar
-126,Africa,Malawi
-127,Asia,Malaysia
-128,Asia,Maldives
-129,Africa,Mali
-130,Europe,Malta
-131,Africa,Morocco
-132,Oceania,Marshall Islands
-133,North America,Martinique
-134,Africa,Mauritania
-135,Africa,Mauritius
-136,Africa,Mayotte
-137,Europe,Macedonia
-138,North America,Mexico
-139,Oceania,"Micronesia, Federated States of"
-140,Europe,Moldova
-141,Europe,Monaco
-142,Asia,Mongolia
-143,Europe,Montenegro
-144,North America,Montserrat
-145,Africa,Mozambique
-146,Asia,Burma
-147,Africa,Namibia
-148,Oceania,Nauru
-149,Asia,Nepal
-150,Oceania,New Caledonia
-151,Australia,New Zealand
-152,Central America,Nicaragua
-153,Europe,Netherlands
-154,North America,Netherlands Antilles
-155,Africa,Niger
-156,Africa,Nigeria
-157,Oceania,Niue
-158,Asia,North Korea
-159,Oceania,Northern Mariana Islands
-160,Australia,Norfolk Island
-161,Europe,Norway
-162,Asia,Oman
-163,Europe,Austria
-164,Asia,Timor-Leste
-165,Asia,Pakistan
-166,Asia,Palestine
-167,Oceania,Palau
-168,Central America,Panama
-169,Oceania,Papua New Guinea
-170,South America,Paraguay
-171,South America,Peru
-172,Asia,Philippines
-173,Oceania,Pitcairn Islands
-174,Europe,Poland
-175,Europe,Portugal
-176,North America,Puerto Rico
-177,Africa,Reunion
-178,Africa,Rwanda
-179,Europe,Romania
-180,Europe,Russia
-181,Oceania,Solomon Islands
-182,Africa,Zambia
-183,Oceania,Samoa
-184,Europe,San Marino
-185,America,Saint Barthelemy
-186,Africa,Sao Tome and Principe
-187,Asia,Saudi Arabia
-188,Europe,Sweden
-189,Europe,Switzerland
-190,Africa,Senegal
-191,Europe,Serbia
-192,Africa,Seychelles
-193,Africa,Sierra Leone
-194,Africa,Zimbabwe
-195,Asia,Singapore
-196,America,Saint Martin
-197,Europe,Slovakia
-198,Europe,Slovenia
-199,Africa,Somalia
-200,Europe,Spain
-201,Asia,Sri Lanka
-202,Africa,"Saint Helena, Ascension and Tristan da Cunha"
-203,North America,Saint Kitts and Nevis
-204,North America,Saint Lucia
-205,North America,Saint Pierre and Miquelon
-206,North America,Saint Vincent and the Grenadines
-207,Africa,South Africa
-208,Africa,Sudan
-209,Antarctica,South Georgia and South Sandwich Islands
-210,Asia,South Korea
-211,Africa,South Sudan
-212,South America,Suriname
-213,Europe,Svalbard
-214,Africa,Swaziland
-215,Asia,Syria
-216,Asia,Tajikistan
-217,Asia,Taiwan
-218,Africa,Tanzania
-219,Asia,Thailand
-220,Africa,Togo
-221,Oceania,Tokelau
-222,Oceania,Tonga
-223,North America,Trinidad and Tobago
-224,Africa,Chad
-225,Europe,Czech Republic
-226,Africa,Tunisia
-227,Asia,Turkey
-228,Asia,Turkmenistan
-229,North America,Turks and Caicos Islands
-230,Oceania,Tuvalu
-231,Africa,Uganda
-232,Europe,Ukraine
-233,Europe,Hungary
-234,South America,Uruguay
-235,Asia,Uzbekistan
-236,Oceania,Vanuatu
-237,Europe,Holy See (Vatican City)
-238,South America,Venezuela
-239,Asia,United Arab Emirates
-240,North America,United States
-241,Europe,United Kingdom
-242,Asia,Vietnam
-243,Oceania,Wallis and Futuna
-244,Australia,Christmas Island
-245,Africa,Western Sahara
-246,Africa,Central African Republic
-247,Asia,Cyprus
+Continent,Country
+Asia,Afghanistan
+Africa,Egypt
+Europe,Åland Islands
+Europe,Albania
+Africa,Algeria
+Oceania,American Samoa
+Europe,Andorra
+Africa,Angola
+North America,Anguilla
+Antarctica,Antarctica
+North America,Antigua and Barbuda
+Africa,Equatorial Guinea
+South America,Argentina
+Asia,Armenia
+North America,Aruba
+Asia,Azerbaijan
+Africa,Ethiopia
+Australia,Australia
+North America,Bahamas
+Asia,Bahrain
+Asia,Bangladesh
+North America,Barbados
+Europe,Belarus
+Europe,Belgium
+Central America,Belize
+Africa,Benin
+North America,Bermuda
+Asia,Bhutan
+South America,Bolivia
+Europe,Bosnia and Herzegovina
+Africa,Botswana
+Antarctica,Bouvet Island
+South America,Brazil
+Africa,British Indian Ocean Territory
+Asia,Brunei
+Europe,Bulgaria
+Africa,Burkina Faso
+Africa,Burundi
+South America,Chile
+Asia,China
+Oceania,Cook Islands
+Central America,Costa Rica
+America,Curacao
+Europe,Denmark
+Africa,Democratic Republic of the Congo
+Europe,Germany
+North America,Dominica
+North America,Dominican Republic
+Africa,Djibouti
+South America,Ecuador
+Central America,El Salvador
+Africa,Ivory Coast
+Africa,Eritrea
+Europe,Estonia
+South America,Falkland Islands
+Europe,Faroe Islands
+Oceania,Fiji
+Europe,Finland
+Europe,France
+South America,French Guiana
+Oceania,French Polynesia
+Antarctica,French Southern and Antarctic Lands
+Africa,Gabon
+Africa,Gambia
+Asia,Georgia
+Africa,Ghana
+Europe,Gibraltar
+North America,Grenada
+Europe,Greece
+North America,Greenland
+North America,Guadeloupe
+Oceania,Guam
+Central America,Guatemala
+Europe,Guernsey
+Africa,Guinea
+Africa,Guinea-Bissau
+South America,Guyana
+North America,Haiti
+Antarctica,Heard Island and McDonald Islands
+Central America,Honduras
+Asia,Hong Kong
+Asia,India
+Asia,Indonesia
+Europe,Isle of Man
+Asia,Iraq
+Asia,Iran
+Europe,Ireland
+Europe,Iceland
+Asia,Israel
+Europe,Italy
+North America,Jamaica
+Asia,Japan
+Asia,Yemen
+Europe,Jersey
+Asia,Jordan
+North America,British Virgin Islands
+North America,Virgin Islands
+North America,Cayman Islands
+Asia,Cambodia
+Africa,Cameroon
+North America,Canada
+Africa,Cape Verde
+Asia,Kazakhstan
+Asia,Qatar
+Africa,Kenya
+Asia,Kyrgyzstan
+Oceania,Kiribati
+Australia,Cocos Islands
+South America,Colombia
+Africa,Comoros
+Africa,Republic of the Congo
+Europe,Kosovo
+Europe,Croatia
+North America,Cuba
+Asia,Kuwait
+Asia,Laos
+Africa,Lesotho
+Europe,Latvia
+Asia,Lebanon
+Africa,Liberia
+Africa,Libya
+Europe,Liechtenstein
+Europe,Lithuania
+Europe,Luxembourg
+Asia,Macau
+Africa,Madagascar
+Africa,Malawi
+Asia,Malaysia
+Asia,Maldives
+Africa,Mali
+Europe,Malta
+Africa,Morocco
+Oceania,Marshall Islands
+North America,Martinique
+Africa,Mauritania
+Africa,Mauritius
+Africa,Mayotte
+Europe,Macedonia
+North America,Mexico
+Oceania,"Micronesia, Federated States of"
+Europe,Moldova
+Europe,Monaco
+Asia,Mongolia
+Europe,Montenegro
+North America,Montserrat
+Africa,Mozambique
+Asia,Burma
+Africa,Namibia
+Oceania,Nauru
+Asia,Nepal
+Oceania,New Caledonia
+Australia,New Zealand
+Central America,Nicaragua
+Europe,Netherlands
+North America,Netherlands Antilles
+Africa,Niger
+Africa,Nigeria
+Oceania,Niue
+Asia,North Korea
+Oceania,Northern Mariana Islands
+Australia,Norfolk Island
+Europe,Norway
+Asia,Oman
+Europe,Austria
+Asia,Timor-Leste
+Asia,Pakistan
+Asia,Palestine
+Oceania,Palau
+Central America,Panama
+Oceania,Papua New Guinea
+South America,Paraguay
+South America,Peru
+Asia,Philippines
+Oceania,Pitcairn Islands
+Europe,Poland
+Europe,Portugal
+North America,Puerto Rico
+Africa,Reunion
+Africa,Rwanda
+Europe,Romania
+Europe,Russia
+Oceania,Solomon Islands
+Africa,Zambia
+Oceania,Samoa
+Europe,San Marino
+America,Saint Barthelemy
+Africa,Sao Tome and Principe
+Asia,Saudi Arabia
+Europe,Sweden
+Europe,Switzerland
+Africa,Senegal
+Europe,Serbia
+Africa,Seychelles
+Africa,Sierra Leone
+Africa,Zimbabwe
+Asia,Singapore
+America,Saint Martin
+Europe,Slovakia
+Europe,Slovenia
+Africa,Somalia
+Europe,Spain
+Asia,Sri Lanka
+Africa,"Saint Helena, Ascension and Tristan da Cunha"
+North America,Saint Kitts and Nevis
+North America,Saint Lucia
+North America,Saint Pierre and Miquelon
+North America,Saint Vincent and the Grenadines
+Africa,South Africa
+Africa,Sudan
+Antarctica,South Georgia and South Sandwich Islands
+Asia,South Korea
+Africa,South Sudan
+South America,Suriname
+Europe,Svalbard
+Africa,Swaziland
+Asia,Syria
+Asia,Tajikistan
+Asia,Taiwan
+Africa,Tanzania
+Asia,Thailand
+Africa,Togo
+Oceania,Tokelau
+Oceania,Tonga
+North America,Trinidad and Tobago
+Africa,Chad
+Europe,Czech Republic
+Africa,Tunisia
+Asia,Turkey
+Asia,Turkmenistan
+North America,Turks and Caicos Islands
+Oceania,Tuvalu
+Africa,Uganda
+Europe,Ukraine
+Europe,Hungary
+South America,Uruguay
+Asia,Uzbekistan
+Oceania,Vanuatu
+Europe,Holy See (Vatican City)
+South America,Venezuela
+Asia,United Arab Emirates
+North America,United States
+Europe,United Kingdom
+Asia,Vietnam
+Oceania,Wallis and Futuna
+Australia,Christmas Island
+Africa,Western Sahara
+Africa,Central African Republic
+Asia,Cyprus
