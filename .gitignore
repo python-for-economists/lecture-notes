@@ -1,3 +1,4 @@
+.DS_Store
 /*
 /*/
 !*.tex
@@ -6,4 +7,5 @@
 !.gitignore
 !/style/
 !/supporting/
-/supporting/data/Stocks1Min
+/supporting/data/StocksHF/
+
