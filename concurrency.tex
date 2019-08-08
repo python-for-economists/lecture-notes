@@ -1,4 +1,4 @@
-% Created 2019-08-08 Thu 11:10
+% Created 2019-08-08 Thu 16:35
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
@@ -99,8 +99,64 @@
 We can speed up the execution of code by taking advantage of the multiple cores available in modern computers.
 We will learn how to speed up the execution of embarrassingly parallel problems.
 A problem is called embarrassingly parallel if it can be broken into smaller pieces that have little to no dependency between each another.
+\section{For Windows Users}
+\label{sec:org5af468f}
+If you are on a Windows computer, there is an issue that arises when using the Concurrency module for Python.
+This issue will lead to an exception named \texttt{BrokenProcessPool}.
+However, it is very easy to avoid this exception.
+To execute code in parallel, we will need to supply the appropriate method with a function.
+This function will then be scheduled for execution in different cores.
+On Windows, the definition of the function that we execute in parallel cannot be in the Jupyter notebook you are using.
+Therefore, to avoid seeing the \texttt{BrokenProcessPool} exception, all you need to do is move the function definition to a separate file.
+
+For example, in the next sections we will define the functions \texttt{slow\_computation}, \texttt{slow\_computation\_with\_exceptions}, \texttt{slow\_computation\_silent} and \texttt{comp}.
+You should remove those function definitions from the Jupyter notebook and into a separate \texttt{.py} file.
+To do so, go the main page for your Jupyter notebook and select \texttt{New > Text File}.
+Change the name of this text file to \texttt{pcomputations.py}.
+Inside this file, type the code that defines those functions:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import time
+import math
+
+
+def slow_computation(x):
+    print(f"Computing {x}")
+    time.sleep(2)
+    return x
+
+
+def slow_computation_with_exceptions(x):
+    print(f"Computing {x}")
+    time.sleep(2)
+    if x == 2:
+        raise ValueError("x==2")
+    return x
+
+
+def slow_computation_silent(x):
+    time.sleep(2)
+    return x
+
+
+def comp(x):
+    time.sleep(2)
+    return math.log(x)
+\end{lstlisting}
+Now, inside your Jupyter notebook, you can import those functions:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from pcomputations import slow_computation,\
+    slow_computation_with_exceptions, \
+    slow_computation_silent, comp
+\end{lstlisting}
+You can now use these functions inside your notebook, the only difference is that they were defined in another file.
+You can now run the rest of the code in this notebook without any issues.
+
+Remember to \textbf{\textbf{delete the \texttt{def} for the functions in your notebook}} if you are using Windows.
+This only applies when running code in parallel.
 \section{Multiple Python Processes}
-\label{sec:orgcc7109e}
+\label{sec:orga5226a2}
 Consider a function that takes some time to execute:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -194,7 +250,7 @@ next(results)
 \end{lstlisting}
 After an exception is raised in a generator, the generator stops producing new values and starts raising \texttt{StopIteration} if \texttt{next} is called again.
 \section{Futures}
-\label{sec:orgb827567}
+\label{sec:orgf597e8f}
 The name of the module is \texttt{concurrent.futures}, but we have not seen any object of the type \texttt{Future}.
 These objects are used by the \texttt{.map} method.
 A \texttt{Future} class represents a computation that is happening asynchronously, and which may or may not have yet completed (similar to a \texttt{Promise} in JavaScript).
@@ -263,7 +319,7 @@ We get back the futures as they are completed.
 We get back the first futures quickly, but then we need to wait a few seconds for the next future to return.
 Observe that the futures are scheduled and returned in a random order, so the variable \texttt{results} has the results in a random order.
 \section{Ordering Results}
-\label{sec:org97e1588}
+\label{sec:org0ac00ad}
 The \texttt{map} method waits for all futures to finish running, then sorts their order and then creates the generator, which is returned to us.
 We can also do that when submitting the futures with \texttt{executor.submit}, we just need to keep track of the jobs ourselves.
 
@@ -299,7 +355,7 @@ with futures.ProcessPoolExecutor(max_workers=2) as executor:
 print(results)
 \end{lstlisting}
 \section{Progress Display}
-\label{sec:org8967f8a}
+\label{sec:orgb360df7}
 We can use the \href{https://github.com/tqdm/tqdm}{tqdm} package to create a progress bar during the execution of our script.
 First, install it with pip:
 \lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
@@ -354,7 +410,7 @@ for x, res in enumerate(results):
     print(f'{x}: {res}')
 \end{lstlisting}
 \section{Handling Errors}
-\label{sec:org86a7fd7}
+\label{sec:orga9e2850}
 With \texttt{map} we could handle errors up to a point, since when we found an exception the generator would stop giving out new values.
 However, by scheduling the callables ourselves we can handle errors.
 
@@ -403,10 +459,10 @@ for i, val in fails.items():
     print(f'Job {i} failed at computing {comp.__name__}({val})')
 \end{lstlisting}
 \section{Example: Time Series Panel}
-\label{sec:org556f738}
+\label{sec:org6dc0a5d}
 We will now consider a complete example of parallelization with real data.
 \subsection{Loading the Panel}
-\label{sec:orgb27f2a1}
+\label{sec:orgde24743}
 Let's start by loading a time series panel.
 First, obtain the data from this \href{https://github.com/python-for-economists/lecture-notes/blob/master/supporting/data/StocksHF.zip}{repository}.
 Extract the files to a folder you can quickly find.
@@ -509,7 +565,7 @@ returns.iloc[0::385]
 returns
 \end{lstlisting}
 \subsection{Computing the Statistic of Interest}
-\label{sec:org6966615}
+\label{sec:orgd1a63c7}
 We want to compute confidence intervals for a certain statistic, which is computed using intraday data.
 The statistic is computed for each day and for each stock.
 
@@ -535,7 +591,7 @@ In my case, it took about 1.51 seconds.
 If we want to compute confidence intervals for this statistic via bootstrapping, it would take at least 1510 seconds (with 1000 bootstrap samples), or about 25 minutes.
 If we have multiple cores available, then we can speed up the execution of this task.
 \subsection{Generating Bootstrap Samples}
-\label{sec:org66ee91c}
+\label{sec:orge61be2e}
 To build the code, we select a smaller sample to work with.
 Test it, and then scale it to the full sample.
 
@@ -591,7 +647,7 @@ This is an embarrassingly parallel problem, since each bootstrap samples and sta
 However, at the end of the computations we will have several data frames. One data frame for each bootstrap sample.
 And we need to create a function that will aggregate all of the results and compute the confidence intervals.
 \subsection{Computing the Confidence Intervals}
-\label{sec:orgfeddb0e}
+\label{sec:org8d6f7df}
 Consider you have three data frames containing the value of the statistic for two bootstrap samples:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -689,7 +745,7 @@ def getCI(df_iterable):
 getCI([computeRV(bootstrap_returns(test)) for _ in range(5)])
 \end{lstlisting}
 \subsection{Solution in a Single Core}
-\label{sec:orgc2d5254}
+\label{sec:orga3664a1}
 Let's time the solution in a single core:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -707,7 +763,7 @@ for bsamples in [1, 5, 10, 50, 100, 200, 500, 1000]:
 \end{lstlisting}
 
 \subsection{Solution in Parallel}
-\label{sec:org9381795}
+\label{sec:org7952b7a}
 We will use \texttt{Futures} to schedule the computations on different cores.
 Let's create the function that we will submit to each core.
 It will take a \texttt{DataFrame} containing the data, generate a single bootstrap sample and output the statistic:
@@ -747,7 +803,7 @@ for bsamples in tqdm_notebook([1, 5, 10, 50, 100, 200, 500, 1000]):
 \end{lstlisting}
 
 \subsection{Compare Results}
-\label{sec:org1b8b8eb}
+\label{sec:org3e4cac1}
 Let's save the results in a \texttt{DataFrame}:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -768,7 +824,7 @@ ax.grid(True, linestyle='--', alpha=0.8)
 ax.set(xlabel='Samples', ylabel='Time (seconds)')
 \end{lstlisting}
 \subsection{Scaling to the Full Sample}
-\label{sec:org1c8231b}
+\label{sec:org9b6e2b8}
 The results indicate that using two cores instead of one reduces the total execution time in a significant amount.
 We can further reduce the execution time by running the code in a computer with more cores.
 We will discuss two options in detail in the next lecture.
@@ -782,7 +838,7 @@ When we scale to the full sample, this might lead to memory issues.
 If we are working on a computer with limited resources, we will need to take that into consideration, and break the problem in pieces.
 If we use a computer with more resources, then the code as is should be fine.
 \section{Compiling Python}
-\label{sec:org78c019a}
+\label{sec:org8e3adde}
 The project \href{http://numba.pydata.org}{Numba} provides a just-in-time compiler for Python.
 The idea of the project is to transform Python code into optimized machine code.
 It also supports parallelization.
@@ -843,7 +899,7 @@ To have your code compiled, you can only use the supported functions.
 If you are working with the common features of Numpy, then using Numba will possibly increase the speed of your scripts.
 If it does not work, then you already know how to do parallel processing.
 \section{Assignment}
-\label{sec:orgae9177b}
+\label{sec:org93b9c1b}
 \begin{problem}
 Study the presentation: \href{https://www.youtube.com/watch?v=9zinZmE3Ogk}{Types of Concurrency by Raymond Hettinger}.
 Answer the questions:
