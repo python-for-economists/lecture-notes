@@ -1,0 +1,1738 @@
+% Created 2019-08-02 Fri 09:26
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\stdnormal}{\mathcal{N}\left(0, 1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\lstdefinestyle{powershell}{language=bash,style=Matlab-editor,morekeywords={Get-Command}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Advanced Python}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Advanced Python},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\section{Creating New Classes}
+\label{sec:org01c3ca4}
+A class is a blueprint to create new objects, and objects are responsible for storing data and functions together.
+Creating classes is an useful abstraction, as it allows us to use common patterns to simplify code.
+For example, in game theory a useful abstraction could be the player of the game.
+We can use a class to create such a player, add a state representing his utility, a method for computing his utility, a method for his possible actions, and so on.
+
+To create a class we use the following syntax:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class ClassName:
+    # variables shared across all class instances
+    var1 = 'abc'
+    var2 = 123
+
+    # Constructor: function that is exectued
+    # when the class is instantiated
+    def __init__(self, input1):
+        # self represents the instance of the object
+
+        # create a variable for the instance, and store the value
+        # of args[0]
+        self.a = input1
+
+    # Method of the class
+    def printVariable(self):
+        # a method has access to all the variables of the
+        # class instance (the object) via the keyword self
+        print(self.a)
+    # The methods of a class almost always have self as the first input
+    # There are cases where the input will be cls, and there are cases
+    # where there will be no input. We will talk about this after the
+    # Decorator section.
+
+    def incrementVariable(self):
+        # a method can modify existing variables and create new ontes
+        self.a = self.a + 1
+        print(self.a)
+        self.b = 10*self.a
+
+    def computeSum(self):
+        return self.a + self.b
+
+    def createVariable(self, c):
+        self.c = c
+        return self.a + self.b + self.c
+
+    def printClassVariable(self):
+        print(self.var1, self.var2)
+\end{lstlisting}
+We can now create an object instance from the blueprint \texttt{ClassName}.
+That is, we can instantiate \texttt{ClassName}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+instance = ClassName(3.1415)
+# Use its methods
+instance.printVariable()
+instance.incrementVariable()
+print(instance.createVariable(14))
+instance.printClassVariable()
+# We can directly access the variables
+print(instance.a, instance.b, instance.c)
+print(instance.var1, instance.var2)
+\end{lstlisting}
+All classes are based on the blueprint of an even more general abstract class.
+They inherit some attributes and methods from this abstract class.
+One attribute is named \texttt{\_\_dict\_\_}, which stores all of the variables in the instance.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(instance.__dict__)
+# It also has a method named __setattr__
+print(instance.__setattr__)
+# This method is what is used when we assign the value of a variable
+# using the symbol: =
+# All it does is update the variables in
+# the __dict__ with the new value.
+
+# We can see the other attributes and methods with dir
+dir(instance)
+\end{lstlisting}
+\section{Creating a Class for Stock Prices}
+\label{sec:org9842798}
+Let's create a new class that will represent the stock of a company:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# Create a new class to represent a Stock
+class Stock:
+    frequencies = ['1min', '5min']
+
+    def __init__(self, p0, sigma, mean=0.0, frequency='5min'):
+        """
+        """
+        # Validate inputs
+        if p0 < 0:
+            raise ValueError("Negative initial price.")
+        if sigma <= 0:
+            raise ValueError("Non-positive price standard deviation.")
+        if frequency not in frequencies:
+            raise ValueError(
+                f"Invalid frequency. Choose: {', '.join(frequencies)}")
+        # Initialize class instance variables:
+        # current log-price
+        self.p = np.log(p0)
+        # standard deviation of log-prices:
+        self.sigma = sigma
+        # average log-return
+        self.mu = mean
+        # set frequency of price updates
+        self.frequency = frequency
+        if frequency == '5min':
+            # there are 79 5-minutes intervals from 9:30 AM to 4 PM
+            self.delta = 1/79
+        elif frequency == '1min':
+            self.delta = 1/391
+        # history of log-prices
+        self.prices = [self.p]
+
+    def timeStep(self):
+        """Updates the stock price as if a delta time unit had passed.
+        Log-prices are simulated from a Brownian motion:
+        p_t = p_{t-1} + mu*delta + sigma*sqrt(delta)*Normal
+        """
+        trend = self.mu*self.delta
+        ret = trend + self.sigma*np.sqrt(self.delta)*np.random.normal()
+        self.p += ret
+        self.prices.append(self.p)
+
+    def timeSteps(self, total_steps):
+        """Updates the stock price as if a number of time steps of size
+        delta had passed.
+        """
+        for i in range(total_steps):
+            self.timeStep()
+
+    def getPrice(self):
+        return np.exp(self.p)
+
+    def printPrice(self):
+        print(f'Current stock price: US$ {np.exp(self.p)}')
+
+    def graphHistory(self):
+        fig, ax = plt.subplots()
+        ax.plot(range(len(self.prices)), np.exp(self.prices),
+                color='black', linewidth=0.5)
+        ax.set(title='Evolution of Stock Price',
+               xlabel=f'Time (in {self.frequency} intervals)',
+               ylabel=r'Price (in US$)')
+        current_price = ax.scatter(len(self.prices), np.exp(self.p),
+                                   marker='o', s=100)
+        if self.p > self.prices[0]:
+            current_price.set_color('green')
+        else:
+            current_price.set_color('red')
+        ax.grid(True)
+        ax.set_xlim(left=0)
+        fig.show()
+\end{lstlisting}
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+spy = Stock(296.46, 0.011)
+spy.printPrice()
+spy.timeStep()
+spy.printPrice()
+spy.timeSteps(79*252)
+spy.printPrice()
+spy.graphHistory()
+\end{lstlisting}
+\section{Underscores and Dunders in Names}
+\label{sec:orgb3fef4d}
+In a some of the examples, you saw the following attributes:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+spy.__dict__
+spy.__class__
+spy.__doc__
+\end{lstlisting}
+The attributes use underscores in their names.
+It turns out the use of underscores in the names of variables has meaning.
+Underscores can be used in 5 different ways:
+\begin{enumerate}
+\item Single Underscore Leading the Variable Name: \texttt{\_var}
+\item Single Underscore Trailing the Variable Name: \texttt{var\_}
+\item Double Underscore Leading the Variable Name: \texttt{\_\_var}
+\item Double Underscore Leading and Trailing the Variable Name: \texttt{\_\_var\_\_}
+\item Single Underscore by Itself: \texttt{\_}
+\end{enumerate}
+
+Let's explore each of the use cases.
+\subsection{Single Underscore Leading the Variable Name: \texttt{\_var}}
+\label{sec:org77fd052}
+The \texttt{\_var} type of naming is a convention (specified in PEP8) used by Python programmers to indicate that the variable (or method) is meant for internal use only.
+That is, whatever is associated with \texttt{\_var} (an attribute or a method) should only be used by functions inside the class that defined it, and is not meant to be accessed directly outside the class definition.
+It is only a convention, so it is not enforced by the interpreter.
+However, if you see a variable named this way, you should avoid messing with it since it might be used internally in the class for other things.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class SingleUnderscoreLeading:
+    def __init__(self):
+        self.name = "ABC"
+        self._private = "DEF"
+
+    def _internal_function(self):
+        self._private += "GHI"
+
+
+x = SingleUnderscoreLeading()
+print(x.name)
+print(x._private)
+print(x._internal_function())
+\end{lstlisting}
+\subsection{Single Underscore Trailing the Variable Name: \texttt{var\_}}
+\label{sec:orgf102670}
+The use of a trailing underscore in the name of a variable is when you need to give a name to a variable, but that name is already taken by a keyword in Python.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class Asset:
+    def __init__(self, type_):
+        # type is a keyword, so use type_ instead
+        self.type_ = type_
+        # type of the asset: Stock, Option, Debenture, ...
+\end{lstlisting}
+This is also a convention and is specified in PEP8.
+\subsection{Double Underscore Leading the Variable Name: \texttt{\_\_var}}
+\label{sec:org4caec4c}
+The use of a double underscore at the beginning of a variable makes the Python interpreter to change the name of the variable (attribute or method) when the class is instantiated.
+The change of names is called \uline{name mangling}, and it serves two purposes:
+\begin{itemize}
+\item Making the variable harder to access outside of the class definition. This is similar to the case of \texttt{\_var}, but now it is actually enforced by the Python interpreter.
+\item Making it easier to avoid name conflicts if you use this class as a base for another class (subclass). If your class and subclass have many variables, it can be easy to have naming conflicts, so name mangling helps avoid that.
+\end{itemize}
+Example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class NameMangling:
+    def __init__(self):
+        self.a = 1
+        self._b = 2
+        self.__c = 3
+
+test = NameMangling()
+print(test.a)
+print(test._b)
+print(test.__c)                 # no attribute named __c
+# of course, the __c name was mangled
+dir(test)
+# __c was substituted by _NameMangling__c
+# It uses a single leading _, indicating it is reserved
+# for internal use only.
+# But, we can access it outside of the class if we
+# really want (although we shouldn't).
+print(test._NameMangling__c)
+\end{lstlisting}
+
+The object's methods can access the variables without any issues:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class ManglingAMethod:
+    def __init__(self):
+        self.a = 1
+        self._step_size = 2
+
+    def __increase(self):
+        self.a += self._step_size
+
+    def increase(self, total_steps=1):
+        for i in range(total_steps):
+            self.__increase()
+
+
+test = ManglingAMethod()
+print(test.a)
+test.__increase()               # no attribute __increase
+print(test.a)
+test.increase()
+print(test.a)
+test.increase(5)
+print(test.a)
+dir(test)
+# although the name was mangled after the class is instantiated
+# the methods of the class can access it normally
+\end{lstlisting}
+\subsection{Double Underscore Leading and Trailing the Variable Name: \texttt{\_\_var\_\_}}
+\label{sec:org74cff39}
+Variable names with double underscores are known as dunders, where dunder stands for double underscore.
+For example the \texttt{\_\_init\_\_} method of a class is a dunder method.
+
+Names with double underscores do not go through name mangling.
+However, they have a special meaning in the Python language.
+These dunder variables define special operations in Python.
+For example, \texttt{\_\_init\_\_} defines the class constructor, \texttt{\_\_doc\_\_} stores the class documentation, \texttt{\_\_setattr\_\_} defines what the \texttt{=} operator should do, and so on.
+There are several of these dunder attributes and they are all discussed in the \href{https://docs.python.org/3/reference/datamodel.html\#basic-customization}{Python data model page}.
+We will discuss a few of them in the next section.
+
+You should avoid defining \uline{new} attributes of a class using double underscores, since they can be used by Python in a special way.
+Even if they are not being used right now, in the future something might be changed in the language specification and the name you used could start having a special meaning.
+\subsection{Single Underscore by Itself: \texttt{\_}}
+\label{sec:org20ba0c5}
+A single underscore is actually used outside of the context of classes and objects.
+It is used to represent some output of a function that we do not care about.
+Say you have a function that returns two outputs, but you do not care about the second output.
+Then, when you unpacked the function results, you would use \texttt{\_} to store the value you do not care about.
+In other words, \texttt{\_} represents throwaway values.
+Example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def foo(x):
+    return x**2, np.sqrt(x)
+
+
+# We only want the 1st output
+a = foo(4)
+# but a function will always return all of its outputs in a tuple
+# We can use tuple unpacking
+a, b = foo(4)
+# Say we do not really care about b, then substitute it for _
+a, _ = foo(4)
+# Or, if we do not care about the value of a, then we substitute it for _
+_, b = foo(4)
+
+
+person = ('First Name', 'Last Name', 29, 0.0)
+_, last_name, age, _ = person
+print(last_name, age)
+print(_)
+\end{lstlisting}
+The \texttt{\_} indicates values that we do not have an use for, and serves as a temporary variable.
+In some REPLs, \texttt{\_} also represents the result of the last expression evaluated and that was not assigned a name.
+\section{Special Methods}
+\label{sec:org56c148b}
+We will now explore some of the dunder methods of a class in more detail.
+\subsection{The \texttt{\_\_len\_\_} method}
+\label{sec:org22a542a}
+When we create a list in Python, we can use the function \texttt{len} to get its length.
+Remember that everything in Python is an object, including lists.
+When we call \texttt{len} on an object, the object instance will look for the method \texttt{\_\_len\_\_} and execute, and then return its value.
+If the dunder method \texttt{\_\_len\_\_} is not implemented, it will lead to an exception.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = [1, 2, 3]
+print(len(a))
+dir(a)
+print(a.__len__())
+
+
+class MyList:
+    def __init__(self, *values):
+        self.values = list(values)
+
+
+a = MyList(1, 2, 3, 4, 5)
+a.values
+# Try to find the length of the object a:
+len(a)
+# error, because there is no __length__ method implemented
+
+
+class MyList:
+    def __init__(self, *values):
+        self.values = list(values)
+
+    def __len__(self):
+        # len is implemented for the list type, which is self.values
+        return len(self.values)
+
+
+a = MyList(1, 2, 3, 4, 5)
+print(len(a))
+\end{lstlisting}
+\subsection{The \texttt{\_\_bool\_\_} method}
+\label{sec:org2d870ff}
+The \texttt{\_\_bool\_\_} method is responsible for returning a boolean when we evaluate an object in the \texttt{if} context, or when we call the built-in \texttt{bool} on the object:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+bool([])
+bool([1, 2, 3])
+
+
+class Answer:
+    def __init__(self):
+        self.answer = input("What do monkeys eat? ")
+
+    def __bool__(self):
+        if self.answer in set(["Bananas", "bananas", "BANANAS!!!!"]):
+            return True
+        else:
+            return False
+
+
+my_answer = Answer("bananas")
+print(bool(my_answer))
+my_answer = Answer("apples")
+print(bool(my_answer))
+\end{lstlisting}
+\subsection{The \texttt{\_\_call\_\_} method}
+\label{sec:org1af2755}
+The \texttt{\_\_call\_\_} method is what makes an object callable.
+That is, the object instance can be behave as a function.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class PutOption:
+    def __init__(self, stock_price, sigma, strike, tenor):
+        # Validate inputs
+        if stock_price <= 0:
+            raise ValueError("Stock price must be positive.")
+        if sigma <= 0:
+            raise ValueError("Standard deviation must be positive.")
+        if strike <= 0:
+            raise ValueError("Strike price must be positive.")
+        if tenor <= 0:
+            raise ValueError(
+                "Time to expiration (in days) must be positive.")
+        # Underlying asset
+        self.underlying = Stock(stock_price, sigma, frequency='5min')
+        # Strike price
+        self.strike = np.float(strike)
+        # Time to expiration in days
+        self.tenor = tenor
+
+    def __payoff(self, price):
+        return np.max((0, self.strike - price))
+
+    def getPayoff(self):
+        # Simulate stock price
+        self.underlying.timeSteps(self.tenor*79)
+        # Return option payoff
+        return self.__payoff(self.underlying.getPrice())
+
+    def __call__(self):
+        """Simulates stock price and returns payoff."""
+        return self.getPayoff()
+
+
+put = PutOption(200, 0.011, 220, 30)
+put()
+\end{lstlisting}
+\subsection{The \texttt{\_\_repr\_\_} and \texttt{\_\_str\_\_} methods}
+\label{sec:orgcfc980a}
+The \texttt{\_\_repr\_\_} method is used when we inspect an object on the REPL, or when we call the built-in \texttt{repr} on an object.
+The \texttt{\_\_str\_\_} method is used when we call \texttt{print} on the object. The \texttt{print} function calls \texttt{str} on the object, which gives us the result of the object's \texttt{\_\_str\_\_} method.
+The differences are discussed below:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = [1, 2, 3]
+x                               # or repr(x)
+# what about print?
+print(x)                        # calls str(x)
+y = {'a': 1, 'b': 2}
+repr(y)
+print(y)
+\end{lstlisting}
+\texttt{repr} is used to give an unambiguous representation of the object.
+In the case of simple objects, \texttt{repr} and \texttt{str} coincide.
+\texttt{str} is used to give a human readable representation of the object
+
+Consider a more complicated object:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import datetime
+# Get a date object representing today's date
+today = datetime.date.today()
+# print will give a readable representation of the object:
+str(today)
+# but repr will give an unambiguous representation of the object
+repr(today)
+# notice that repr basically returns the way we construct the object
+# indeed:
+today = datetime.date(2019, 7, 9)
+print(today)
+\end{lstlisting}
+
+We can define the \texttt{\_\_repr\_\_} and \texttt{\_\_str\_\_} methods ourselves:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class PutOption:
+    def __init__(self, stock_price, sigma, strike, tenor):
+        # Validate inputs
+        if stock_price <= 0:
+            raise ValueError("Stock price must be positive.")
+        if sigma <= 0:
+            raise ValueError("Standard deviation must be positive.")
+        if strike <= 0:
+            raise ValueError("Strike price must be positive.")
+        if tenor <= 0:
+            raise ValueError(
+                "Time to expiration (in days) must be positive.")
+        # Underlying asset
+        self.stock_price = stock_price
+        self.sigma = sigma
+        self.frequency = '5min'
+        self.underlying = Stock(stock_price,
+                                sigma,
+                                frequency=self.frequency)
+        # Strike price
+        self.strike = np.float(strike)
+        # Time to expiration in days
+        self.tenor = tenor
+
+    def __payoff(self, price):
+        return np.max((0, self.strike - price))
+
+    def getPayoff(self):
+        # Simulate stock price
+        self.underlying.timeSteps(self.tenor*79)
+        # Return option payoff
+        return self.__payoff(self.underlying.getPrice())
+
+    def __call__(self):
+        """Simulates stock price and returns payoff."""
+        return self.getPayoff()
+
+    def __repr__(self):
+        return (f"PutOption({self.stock_price}, {self.sigma}"
+                f", {self.strike}, {self.tenor})")
+
+    def __str__(self):
+        return (f"PutOption: Strike=US${self.stock_price}, "
+                f"Tenor={self.tenor} days")
+
+
+put = PutOption(200, 0.011, 220, 30)
+repr(put)
+str(put)
+\end{lstlisting}
+\section{Decorators}
+\label{sec:org8db8262}
+\href{https://www.python.org/dev/peps/pep-0318/}{Decorators} are used to modify callables (like functions, methods or classes), but without permanently changing them.
+That is, decorators perform local changes to a callable.
+\subsection{Input Validation}
+\label{sec:org0bc29ed}
+In the classes above we did some data validation.
+It is common to have several functions where you need to validate inputs (or perform assertions) that are very similar.
+For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def ols(x, y):
+    if x.shape[0] != y.shape[0]:
+        raise ValueError("Number of rows must match for x and y")
+    if x.shape[0] < x.shape[1]:
+        raise ValueError(
+            "x: Need more observations than charactersitics.")
+    # estimate ols
+    # return estimates
+    return
+
+
+def probit(x, y):
+    if x.shape[0] != y.shape[0]:
+        raise ValueError("Number of rows must match for x and y")
+    if x.shape[0] < x.shape[1]:
+        raise ValueError(
+            "x: Need more observations than charactersitics.")
+    # estimate probit
+    # return estimates
+    return
+
+
+def logit(x, y):
+   if x.shape[0] != y.shape[0]:
+        raise ValueError("Number of rows must match for x and y")
+    if x.shape[0] < x.shape[1]:
+        raise ValueError(
+            "x: Need more observations than charactersitics.")
+    # estimate logit
+    # return estimates
+    return
+
+
+x = np.random.random((5, 2))
+y = np.random.random((5, 1))
+ols(x, y)
+x = np.random.random((4, 2))
+ols(x, y)
+x = np.random.random((2, 5))
+ols(x, y)
+\end{lstlisting}
+We repeated ourselves in the code above.
+There is a common pattern of validation that we should be able to simplify.
+For example, we could have one function that validates the input:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def validateRegressionInput(x, y):
+    if x.shape[0] != y.shape[0]:
+        raise ValueError("Number of rows must match for x and y")
+    if x.shape[0] < x.shape[1]:
+        raise ValueError(
+            "x: Need more observations than charactersitics.")
+    return True
+
+
+def ols(x, y):
+    if validateRegressionInput(x, y):
+        # estimate ols
+        # return estimates
+    return
+
+
+def probit(x, y):
+    if validateRegressionInput(x, y):
+        # estimate probit
+        # return estimates
+    return
+
+
+def logit(x, y):
+    if validateRegressionInput(x, y):
+        # estimate logit
+        # return estimates
+    return
+\end{lstlisting}
+Now our functions are much cleaner and do input validation without repeating code.
+An alternative solution is to wrap the functions in another function which performs the validation.
+That is, create a function that returns a function, and this new function will do input validation before estimating the regression:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def validateRegressionInput(func):
+    def functionWithValidatedInput(x, y):
+        if x.shape[0] != y.shape[0]:
+            raise ValueError("Number of rows must match for x and y")
+        if x.shape[0] < x.shape[1]:
+            raise ValueError(
+                "x: Need more observations than charactersitics.")
+        return func(x, y)
+    return functionWithValidatedInput
+\end{lstlisting}
+
+The function \texttt{validateRegressionInput} is a functional in the math sense.
+That is, we pass it a function, and it returns a new function.
+Observe that this new function takes the same inputs as the original function: x and y.
+However, the function returned by \texttt{validateRegressionInput} also validates the inputs.
+After validating the inputs, the original function is called (here represented by \texttt{func}).
+\texttt{func} is called with the inputs x and y, and it returns the value of \texttt{func(x, y)}.
+
+\texttt{validateRegressionInput} takes a function and returns a similar function that has been extended to do input validation:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# We can now define our functions
+def ols(x, y):
+    # estimate ols
+    # return estimates
+    return
+
+
+# Now we call the functional validateRegressionInput to get back an extended version
+# of ols, where the input is validated!
+ols = validateRegressionInput(ols)
+
+
+def probit(x, y):
+    # estimate probit
+    # return estimates
+    return
+
+
+probit = validateRegressionInput(probit)
+
+
+def logit(x, y):
+    # estimate logit
+    # return estimates
+    return
+
+
+logit = validateRegressionInput(logit)
+
+
+x = np.random.random((5, 7))
+y = np.random.random(5)
+logit(x, y)
+\end{lstlisting}
+
+Here we see a common pattern: create a function and then modify it.
+Now, Python has a syntax for this pattern, and this syntax is called the decorators syntax.
+A decorator is a function that returns another function, just like \texttt{validateRegressionInput} in the example above.
+We can then decorate other functions with this decorator, that is, extend other functions with the decorator.
+
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# THIS:
+def ols(x, y):
+    # estimate ols
+    # return estimates
+    return
+
+
+ols = validateRegressionInput(ols)
+
+# IS EQUIVALENT TO:
+@validateRegressionInput
+def ols(x, y):
+    # estimate ols
+    # return estimates
+    return
+
+
+x = np.random.random((5, 2))
+y = np.random.random(5)
+ols(x, y)
+y = np.random.random(6)
+ols(x, y)
+\end{lstlisting}
+
+\subsection{Timing Execution}
+\label{sec:orgf8497f3}
+Consider a scenario where you have four different functions to compute some task, and you would like to know which is faster.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import random
+import math
+import numpy as np
+
+
+def f1(sample_size):
+    sample = []
+    for i in range(sample_size):
+        sample.append(random.gauss(0, 1))
+    return sum(sample)/len(sample)
+
+
+def f2(sample_size):
+    sample = []
+    for i in range(sample_size):
+        sample.append(random.gauss(0, 1))
+    return math.fsum(sample)/len(sample)
+
+def f3(sample_size):
+    sample = [random.gauss(0, 1) for _ in range(sample_size)]
+    return math.fsum(sample)/len(sample)
+
+
+def f4(sample_size):
+    sample = np.random.normal(size=(sample_size))
+    return sample.mean()
+\end{lstlisting}
+Notice the use of the built-in \href{https://docs.python.org/3/library/random.html}{\texttt{random}} package for generating random numbers, and the use of the built-in \href{https://docs.python.org/3/library/math.html}{\texttt{math}} package and its function \texttt{fsum} to accurately compute the sum of the list of numbers (more accurate than \texttt{sum} in terms of numerical errors).
+
+We can time the execution of functions with the functions from the built-in \href{https://docs.python.org/3/library/time.html}{\texttt{time}} module.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import time
+# Get a value measured in seconds of a "performance counter"
+# (a clock with a good resolution for measuring time)
+start = time.perf_counter()
+# The number itself does not mean anything, we need to compare
+# it to the stop.
+# time to get the elapsed time in seconds
+stop = time.perf_counter()
+print(f"Elapsed time: {stop - start: .4f} seconds")
+\end{lstlisting}
+
+Let's use \texttt{time.perf\_counter} to build a decorator for measuring the execution time of a function:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def time_this(func):
+    def wrapper(sample_size):
+        start = time.perf_counter()
+        results = func(sample_size)
+        stop = time.perf_counter()
+        print(f"Elapsed time: {stop - start: .4f} seconds")
+        return results
+    return wrapper
+\end{lstlisting}
+
+We can decorate the functions we want to time, and when we call them, the time will be printed automatically.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+@time_this
+def f1(sample_size):
+    sample = []
+    for i in range(sample_size):
+        sample.append(random.gauss(0, 1))
+    return sum(sample)/len(sample)
+
+
+@time_this
+def f2(sample_size):
+    sample = []
+    for i in range(sample_size):
+        sample.append(random.gauss(0, 1))
+    return math.fsum(sample)/len(sample)
+
+
+@time_this
+def f3(sample_size):
+    sample = [random.gauss(0, 1) for _ in range(sample_size)]
+    return math.fsum(sample)/len(sample)
+
+
+@time_this
+def f4(sample_size):
+    sample = np.random.normal(size=(sample_size))
+    return sample.mean()
+
+
+for f in [f1, f2, f3, f4]:
+    f(10000)
+\end{lstlisting}
+
+We can modify the decorator so that it tells us which function is being executed:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def time_this(func):
+    def wrapper(sample_size):
+        start = time.perf_counter()
+        results = func(sample_size)
+        stop = time.perf_counter()
+        print(f"Function: {func.__name__}")
+        print(f"Elapsed time: {stop - start: .4f} seconds")
+        return results
+    return wrapper
+
+
+@time_this
+def f1(sample_size):
+    sample = []
+    for i in range(sample_size):
+        sample.append(random.gauss(0, 1))
+    return sum(sample)/len(sample)
+
+
+@time_this
+def f2(sample_size):
+    sample = []
+    for i in range(sample_size):
+        sample.append(random.gauss(0, 1))
+    return math.fsum(sample)/len(sample)
+
+@time_this
+def f3(sample_size):
+    sample = [random.gauss(0, 1) for _ in range(sample_size)]
+    return math.fsum(sample)/len(sample)
+
+
+@time_this
+def f4(sample_size):
+    sample = np.random.normal(size=(sample_size))
+    return sample.mean()
+
+
+for f in [f1, f2, f3, f4]:
+    f(10000)
+\end{lstlisting}
+
+\subsection{Multiple Decorators}
+\label{sec:org75cd743}
+We can use multiple decorators to decorate a function.
+Since each decorator returns a function, we can chain more than one, and, at the end, we will still have a function.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def capitalize_all(func):
+    def wrapper(name):
+        return func(name.upper())
+    return wrapper
+
+
+def yell(func):
+    def wrapper(name):
+        greeting = func(name)
+        return f"{greeting}!!!!!!!!!!!!!!!!!!!!!!!"
+    return wrapper
+
+
+@capitalize_all
+def greet(name):
+    return f"Hello, {name:s}!"
+
+
+greet("Everyone")
+
+
+@yell
+@capitalize_all
+def greet(name):
+    return f"Hello, {name:s}!"
+
+
+greet("Everyone")
+\end{lstlisting}
+\subsection{Decorating Functions that Have Many Arguments}
+\label{sec:org2853ac9}
+We can use the \texttt{*args} and \texttt{**kwargs} notations to deal with functions of many arguments:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Create a decorator for a function that can take many input arugments
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+    return wrapper
+\end{lstlisting}
+Remember that \texttt{*args} collects all positional inputs and stores them in the tuple \texttt{args}, which is available inside the \texttt{wrapper} function.
+And \texttt{**kwargs} collects all keyword arguments and stores them in the dictionary \texttt{kwards}, which is also available inside the \texttt{wrapper} function.
+
+The \texttt{args} tuple and the \texttt{kwargs} dictionary are then forwarded to the original function \texttt{func}.
+The \texttt{*} and \texttt{**} are unpacking operators in this context (the symbol \texttt{*} and \texttt{**} are overloaded!).
+When we call \texttt{func(*args, **kwargs)}, the operator \texttt{*} will unpack \texttt{args}, so that each input in the tuple \texttt{args} is passed to \texttt{func} separately.
+The operator \texttt{**} will unpack \texttt{kwards}, so that each keyword input is also passed separately.
+\texttt{func} can then function regularly with its inputs.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        print('Positional arguments: ', args)
+        print('Keyword arguments: ', kwargs)
+        return func(*args, **kwargs)
+    return wrapper
+
+
+@decorator
+def foo(x, y, z=1):
+    print(x, y, z)
+
+
+foo(1, 2, z=10)
+foo(1, 2, 3)
+foo(z=1, x=2, y=-3)
+\end{lstlisting}
+\subsection{Making the Documentation of Decorated Functions Available}
+\label{sec:orgf548609}
+When we create a function with a docstring, we can call \texttt{help} to get back useful comments about the function.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def greet(name):
+    """Returns a warm welcome message."""
+    return f"Hello, {name}!"
+
+
+# Function name and documentation are available
+greet("abc")
+greet.__name__
+greet.__doc__
+\end{lstlisting}
+
+However, when we decorate a function, we loose the original docstring:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Decorate greet
+def toUpperCase(func):
+    def wrapper(name):
+        """Decorator docstring"""
+        return greet(name).upper()
+    return wrapper
+
+
+decorated_greet = toUpperCase(greet)
+print(decorated_greet("Abc"))
+# However, the original function name and documentation are gone
+decorated_greet.__name__
+print(decorated_greet.__doc__)
+\end{lstlisting}
+
+We can decorate the original function \texttt{func} with the decorator \texttt{wraps} from the Python module \texttt{functools}.
+By decorating \texttt{func} with \texttt{wraps} before calling \texttt{wrapper}, we can make the original docstring available in the decorated version:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import functools
+
+
+def toUpperCase(func):
+    @functools.wraps(func)
+    def wrapper(name):
+        """Decorator docstring"""
+        return greet(name).upper()
+    return wrapper
+
+
+decorated_greet = toUpperCase(greet)
+decorated_greet.__name__
+decorated_greet.__doc__
+\end{lstlisting}
+\section{Instance, Class and Static Methods}
+\label{sec:orgd477740}
+There are two special decorators that can be used inside a class definition: \texttt{classmethod} and \texttt{staticmethod}.
+These decorators are built-in the language and modify the methods of a class.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class DecoratedClass:
+    def instance_method(self):
+        # has access to the variables of the instance
+        # and also the variables common to all instances (class variable)
+        # via self.__class__
+        return "instance method", self
+
+    @classmethod
+    def class_method(cls):
+        # instead of receiving self, it receives cls
+        # which represents the class itself
+        # this method does not have access to the instance variables
+        # only the class variables
+        # That is, cls points to the class itself.
+        return "class method", cls
+
+    @staticmethod
+    def static_method():
+        # this method does not have self neither cls as input
+        # it cannot access the instance variables nor the class variables
+        # but we can define it to take other inputs
+        return "static method"
+\end{lstlisting}
+
+The \texttt{instance\_method} can access the object's instance variables via \texttt{self}.
+The \texttt{class\_method} can access the class variables via \texttt{cls}, that is, it can look at the blueprint of the object itself.
+The \texttt{static\_method} cannot access any of the instance or the class variables.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+obj = DecoratedClass()
+print(obj.instance_method(), obj)
+print(obj.class_method(), DecoratedClass)
+print(obj.static_method())
+\end{lstlisting}
+
+Let's try to use the methods of \texttt{DecoratedClass} without an instance:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+DecoratedClass.static_method()
+# works, since it does not depend on anything else, we just need
+# the class to be defined
+DecoratedClass.class_method()
+# also works, because it only depends on the class itself, and not on a
+# particular instance
+DecoratedClass.instance_method()
+# does not work, because it needs an instance to access
+\end{lstlisting}
+
+The \texttt{staticmethod} decorator basically makes the method a regular function.
+It is used to make that function live in the namespace of the class.
+
+The \texttt{classmethod} decorator gives a method access to the class itself.
+This can be used to create extra constructors!
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class Option:
+    def __init__(self, strike, tenor, type_):
+        self.strike = strike
+        self.tenor = tenor
+        self.type_ = type_
+
+    def __repr__(self):
+        return f"Option({self.strike}, {self.tenor}, {self.type_})"
+
+    @classmethod
+    def long_straddle(cls, strike, tenor):
+        return cls(strike, tenor, 'long-straddle')
+
+    @classmethod
+    def short_straddle(cls, strike, tenor):
+        return cls(strike, tenor, 'short-straddle')
+
+    def payoff(self, price):
+        if self.type_ == 'c':
+            return np.max([0, price - self.strike])
+        elif self.type_ == 'p':
+            return np.max([0, self.strike - price])
+        elif self.type_ == 'long-straddle':
+            return np.abs(price - self.strike)
+        elif selt.type_ == 'short-straddle':
+            return -np.abs(price - self.strike)
+
+
+call = Option(200, 30, 'c')
+repr(call)
+long_straddle = Option.long_straddle(200, 30)
+repr(long_straddle)
+\end{lstlisting}
+\section{Iterators}
+\label{sec:org213e0c3}
+Iterators are objects that implement the \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_} dunder methods.
+They represent a collection of things we want to iterate over.
+We have used iterators in for-loops:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for i in [0, 1, 2]:
+    print(i)
+# the list [0, 1, 2] is an iterator
+# it is a collection of things we want to iterate over
+# and it implements the dunder methods iter and next
+\end{lstlisting}
+Another example are file objects, which could be used to iterate over the lines of a file.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+with open('my_file.txt', 'w') as f:
+    f.write('\n'.join(["a","b","c"]))
+with open('my_file.txt', 'r') as f:
+    for line in f:
+        print(line)
+\end{lstlisting}
+An iterator represent a collection that we can iterate over (with a for-loop, for example).
+To make it work, the iterator object must have a \texttt{\_\_next\_\_} method, that returns the next value in the set:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+f = open('my_file.txt', 'r')
+print(f.__next__())
+# Each time we call __next__ the object returns the next value
+# in the collection.
+# Same as:
+print(next(f))
+# we can call the dunder next until the last line
+print(f.__next__())
+# if we call it again, we will get an exception
+print(f.__next__())
+\end{lstlisting}
+Notice that we get an exception with an interesting name: \texttt{StopIteration}.
+This means the iterator is over, there are no more elements in the collection to iterate over.
+
+Let's see how a for-loop really works in Python:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# We can go back to the beginning of the file by calling
+f.seek(0)
+
+# Consider this loop:
+for line in f:
+    print(line)
+
+f.seek(0)
+# Under the hood, what is happening is:
+while True:
+    try:
+        line = next(f)
+    except StopIteration:
+        break
+    else:
+        print(line)
+\end{lstlisting}
+That is, read a line, then run the code that was inside the for-loop.
+Then, read the next line and so on.
+When we get the StopIteration exception, it means we are out of lines to read, so we break the loop.
+
+Another example of iterator is the object returned by enumerate:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+names = ["A", "B", "C"]
+numbered_names = enumerate(names)
+print(next(numbered_names))
+
+# for-loop with enumerate:
+for pos, name in enumerate(names):
+    print(f"{pos}: {name}")
+
+
+# Equivalent to:
+iterator = enumerate(names)
+while True:
+    try:
+        pos, name = next(iterator)
+    except StopIteration:
+        break
+    else:
+        print(f"{pos}: {name}")
+\end{lstlisting}
+
+Notice that after getting all elements of the iterator, we reach the end and \texttt{StopIteration} is raised.
+We cannot reset \texttt{numbered\_names} like we could with the file.
+The file object is a special case.
+
+To iterate over \texttt{numbered\_names} from the beginning, we would need to call enumerate again.
+That is, calling enumerate is, somehow, giving us an iterator.
+
+Now, an \textbf{\textbf{ITERABLE}} (as opposed to \textbf{\textbf{ITERATOR}}), is an object that gives us an iterator when we ask for it.
+Again, an iterable is an object that gives us an iterator.
+
+We can ask for an iterator from an iterable by using the function iter, or the dunder method \texttt{\_\_iter\_\_}.
+For example, a list itself is not an iterable, but it is an iterator.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = [0, 1, 2, 3]
+next(x)
+# error, list is not an iterator
+\end{lstlisting}
+
+But why can we use lists in a for-loop?
+Because it is an iterable, that is, it can create an iterator from the values in the list:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x_iterator = iter(x)
+next(x_iterator)
+# works!
+\end{lstlisting}
+
+A list is an object that can generate iterators. It is an iterable.
+Thus, when we use a for-loop with an ITERABLE, what is happening is:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+iterator = iter(iterable)
+while True:
+    try:
+        value = next(iterator)
+    except StopIteration:
+        break
+    else:
+        # do something with value
+        pass
+\end{lstlisting}
+We use the iterable to get an iterator.
+And then loop over the elements of the iterator until it is done.
+The iterator is then \textbf{\textbf{SPENT}}, that is, there are no more values to get out of it.
+If we want to loop over again, then we need to create a fresh iterator, by asking the iterable for a new iterator.
+The list is an iterable that saves the elements, and can generate as many iterators as we need from the same values.
+
+Let's create a simple iterable.
+An iterable must implement the \texttt{\_\_iter\_\_} method to return an iterator.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class FibonacciIterable:
+    def __init__(self, n):
+        self.n = n
+
+    def __iter__(self):
+        return FibonacciIterator(self.n)
+
+
+# Now, we need to creat the ITERATOR, which implements
+# the __next__ method.
+class FibonacciIterator:
+    def __init__(self, n):
+        self.n = n
+        self.previous = [1]
+
+    def __next__(self):
+        value = self.previous[-1]
+        if value > self.n:
+            raise StopIteration
+        else:
+            next_value = sum(self.previous[-2:])
+            self.previous.append(next_value)
+            return value
+
+
+
+iterable = FibonacciIterable(10)
+iterator = iter(iterable)
+next(iterator)
+\end{lstlisting}
+
+We can use an iterable in a for-loop:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for fib in FibonacciIterable(10):
+    print(fib)
+
+# equivalent to:
+iterator = FibonacciIterable(10).__iter__()
+while True:
+    try:
+        fib = next(iterator)
+    except StopIteration:
+        break
+    else:
+        print(fib)
+\end{lstlisting}
+
+Notice that we are repeating oruselves with the code above.
+We had to create two separate objects, an iterable and an iterator.
+We can create a single object that implements both the \texttt{\_\_iter\_\_} method and the \texttt{\_\_next\_\_} method:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class FibonacciSequence:
+    def __init__(self, stop_at_most):
+        self.stop_at_most = stop_at_most
+        self.previous = [1]
+
+    def __iter__(self):
+        # the instance itself implements the __next__ method, so itself
+        # is an iterator (and an iterable)
+        return self
+
+    def __next__(self):
+        value = self.previous[-1]
+        if value > self.stop_at_most:
+            raise StopIteration
+        else:
+            next_value = sum(self.previous[-2:])
+            self.previous.append(next_value)
+            return value
+
+
+fib = FibonacciSequence(30)
+\end{lstlisting}
+
+Now, \texttt{fib} is an actual iterator, it implements both \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_}.
+We can use it in a loop to get values, since we can call \texttt{\_\_iter\_\_} to get an iterator from it, and then loop over the elements.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+for i in fib:
+    print(i)
+# But remember, when an there are no more elements to loop, the
+# iterator is spent, and we need a new one to iterate again.
+next(fib)
+
+for i in FibonacciSequence(50):
+    print(i)
+\end{lstlisting}
+
+Notice that in an iterator, we do not compute all of its elements at once.
+We obtain the elements as we go.
+This means, we can create iterators that store infinite numbers:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class NaturalNumbers:
+    def __init__(self):
+        self.n = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        value = self.n
+        self.n += 1
+        return value
+
+
+n = NaturalNumbers()
+next(n)
+\end{lstlisting}
+We can call \texttt{n} forever, it is now a list with an inifinite number of elements.
+
+The idea behind iterators is that you have a set of things you want to do, say very complicated tasks.
+But you would like to get the results as you finish each task.
+An iterator allows you to do just that.
+When we call \texttt{next}, it will do the first complicated task in the list, which might take awhile.
+When it is finished, it will return you the value so that you can analyze it or store it.
+We can then call \texttt{next} again to begin the next task, and so on.
+\section{Generators}
+\label{sec:org087f1bb}
+Generators are simple iterators.
+Iterators are a very general idea, that require us to build a class and define \texttt{\_\_iter\_\_} and \texttt{\_\_next\_\_}.
+We gain a lot of control and can add a lot of complexity to an iterator.
+But, we do need to write more code for it.
+
+Generators are a way to construct simple iterators.
+Instead of constructing a class, we will construct a function using the keyword \texttt{yield}.
+We use the keyword \texttt{yield} whenever we want to return a value and stop so that other code can execute.
+This is what was happening in the for-loop with an iterator, we called \texttt{next}, got some value back, ran the code inside the loop, and then called \texttt{next} again, and so on.
+Let's recreate the natural numbers example with generators:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class NaturalNumbers:
+    def __init__(self):
+        self.n = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        value = self.n
+        self.n += 1
+        return value
+
+
+def natural_numbers():
+    n = 1
+    while True:
+        yield n
+        n += 1
+
+
+natural_generator = natural_numbers()
+type(natural_generator)
+# A generator behaves just like an iterator, but is created with
+# the yield keyword.
+# We can call next on the iterator to get the values:
+next(natural_generator)
+\end{lstlisting}
+
+We can create a finite generator:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def names():
+    yield "A"
+    yield "B"
+    yield "C"
+
+names_gen = names()
+# When we call next for the first time, the function will start
+# being executed. When it finds the first yield, it returns that
+# value and stops the execution of the function at that line.
+# We can then do other things:
+first_name = next(names_gen)
+print(f"The first name is: {first_name}")
+# We can then go back to that function again by calling next, which
+# will continue the execution from where it started
+second_name = next(names_gen)
+print(f"The second name is: {second_name}")
+# When we call next, we will reach the last yield, and after that,
+# calling next would lead to StopIteration exceptions.
+next(names_gen)
+next(names_gen)
+\end{lstlisting}
+
+Generators are great to create generators (that are iterators) in a more readable fashion:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def fibonacci(n):
+    """Get the first n elements of the Fibonacci sequence."""
+    prev = [1]
+    for i in range(n):
+        yield prev[-1]
+        prev.append(sum(prev[-2:]))
+
+
+for i in fibonacci(10):
+    print(i)
+\end{lstlisting}
+\section{Generator Expressions}
+\label{sec:orgd150365}
+Generator expressions are a way to create generators, which are simple iterators, in an even simpler way.
+Generator expressions allow us to create generators in a single line:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def names_gen():
+    for name in ["A", "B", "C"]:
+        yield name
+
+# equivalent to:
+names_gen = (name for name in ["A", "B", "C"])
+type(names_gen)
+next(names_gen)
+next(names_gen)
+next(names_gen)
+next(names_gen)
+# raises StopIteration
+\end{lstlisting}
+We can use the built-in \texttt{list}, to get a list of values out of a generator
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(list(names_gen()))
+\end{lstlisting}
+
+We can also filter the values we give back in a generator expression:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+even_numbers = (x for x in range(20) if x % 2 == 0)
+print(list(even_numbers))
+
+# and also modify numbers that we return
+squared_number = (x**2 for x in range(10))
+print(list(squared_number))
+\end{lstlisting}
+The full syntax for generator expressions is:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+generator = (expression for value in collection if condition)
+\end{lstlisting}
+Avoid creating generator expressions that extend over a line.
+The syntax is meant for simple generators.
+\section{List Comprehensions}
+\label{sec:org105ad57}
+We have used list comprehensions in a few of the examples.
+List comprehensions are used to build simple lists, very much like generator expressions are used to build simple generators.
+The syntax of list comprehensions and generator expressions is basically the same, with the difference that list comprehensions use square-brackets, while generator expressions use parentheses.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# create a simple list of squared numbers
+squared_numbers = [x**2 for x in range(10)]
+print(squared_numbers)
+
+# create a new list with filtered strings
+messy_data = ['JOHN    ', ' JackSOn ', 'Sophia   ']
+clean_data = [name.strip().capitalize() for name in messy_data]
+\end{lstlisting}
+List comprehensions create lists.
+Generator expressions create generators.
+Lists store all the values in memory at once, while generators create the values as requested.
+\section{Chaining Iterators}
+\label{sec:orgd1ba3d7}
+Iterators can be chained together to create an efficient workflow.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def naturals():
+    n = 1
+    while True:
+        yield n
+        n += 1
+
+
+def squared(sequence):
+    for i in sequence:
+        yield i**2
+
+
+chain = squared(naturals())
+type(chain)
+next(chain)
+\end{lstlisting}
+
+When we call \texttt{next} on chain, we start executing \texttt{squared}.
+When we reach the for-loop, the loop will call next on \texttt{sequence}.
+But \texttt{sequence} is our generator \texttt{naturals()}.
+Calling next on \texttt{naturals()} will start executing it, and it will yield the first number.
+This number is stored into the variable \texttt{i}, which is then squared and yielded to us.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def printed(sequence):
+    for i in sequence:
+        print(f"Number: {i}")
+        yield i
+
+chain = squared(printed(naturals()))
+next(chain)
+\end{lstlisting}
+\section{Context Managers}
+\label{sec:org0e0cb99}
+We used context managers before when dealing with files.
+The idea of context managers is that you want to execute some code, but you need something else done after the code is finished or even if the code fails.
+In the case of files, we need the file to be properly closed, so even if our code fails, the file closes and we do not run the risk of corrupting the file.
+
+We start a context manager with the keyword \texttt{with}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+with open('my_file.txt', 'r') as f:
+    for line in f:
+        print(line)
+
+# equivalent to
+f = open('my_file.txt', 'r')
+try:
+    for line in f:
+        print(line)
+finally:
+    f.close()
+# Even if the code inside the try block leads to an error,
+# the code inside the finally block will execute, properly
+# closing the file.
+\end{lstlisting}
+
+The \texttt{open} function returns an object, as everything in Python is an object, that can be used as a context manager.
+An object that can be used as a context manager implements the \texttt{\_\_enter\_\_} and \texttt{\_\_exit\_\_} methods.
+Let's replicate the functionality of \texttt{open} with our own context manager:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+class FileReader:
+    def __init__(self, filename):
+        self.filename = filename
+
+    def __enter__(self):
+        self.file = open(self.filename, 'r')
+        return self.file
+
+    def __exit__(self, *args):
+        self.file.close()
+
+
+with FileReader('my_file.txt') as f:
+    for line in f:
+        print(line)
+\end{lstlisting}
+When we call \texttt{FileReader} on the \texttt{with} line two things happen:
+\begin{enumerate}
+\item The class constructor is executed with 'my\textsubscript{file.txt}' as the input;
+\item The \texttt{\_\_enter\_\_} method is executed and its return value is assigned to \texttt{f}.
+\end{enumerate}
+Then we run our for-loop, and after the loop finishes, the \texttt{\_\_exit\_\_} method of the \texttt{FileReader} instance is executed, closing the file.
+\section{String Formatting}
+\label{sec:orgf863547}
+We will learn two ways of formatting strings in Python.
+First, using the \texttt{format} method of strings:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from datetime import date
+name = "World"
+print("Hello, {}!".format(name))
+
+print("Hello, {}! Today's date is {}.".format(name, date.today()))
+print("Hello, {name}! Today's date is {date}.".format(
+    name=name, date=date.today()))
+\end{lstlisting}
+
+Second, is using \href{https://docs.python.org/3/reference/lexical\_analysis.html\#f-strings}{formatted string literals}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(f"Hello, {name}!")
+print(f"Hello, {name}! Today's date is {date.today()}.")
+print(f"5 + 2 = {5 + 2}")
+from math import pi
+print(f"Pi with 8 decimal cases: {pi:.8f}")
+print(f"Pi with 4 decimal cases: {pi:.4f}")
+# The colen specifies how to format the variable when
+# constructing the string.
+# .f means the number is a float
+# .8f means we want to use 8 decimal places
+\end{lstlisting}
+Formatted string literals were introduced in Python 3.6, so it is not available on earlier Python versions.
+Formatting strings with \texttt{format} is available ever since the introduction of Python 3.
+For more details on the formatting options check the \href{https://docs.python.org/3/library/stdtypes.html\#printf-style-string-formatting}{String Formatting reference page}.
+\section{Debugging}
+\label{sec:org172b83a}
+Python has a built-in debugger, available in the module \href{https://docs.python.org/3.6/library/pdb.html}{\texttt{pdb}}.
+We can use \texttt{pdb} to insert breakpoints in the code, which interrupt the execution of the code and allow us to inspect the variables in the stack.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import pdb
+
+def code_that_will_fail():
+    x = [1, 2, 3]
+    y = [3, 4, 5]
+    pdb.set_trace()             # breakpoint
+    z = x @ y
+    return z
+
+
+code_that_will_fail()
+\end{lstlisting}
+When the code hits the \texttt{pdb.set\_trace}, it will interrupt execution, and you will get a message in the REPL that starts with \texttt{(Pdb)}.
+You can type code and hit enter to execute.
+For example, you can type \texttt{x} to inspect its value.
+You can then use the \href{https://docs.python.org/3.6/library/pdb.html\#debugger-commands}{Debugger Commands} to continue executing the code.
+You can continue the execution with:
+\begin{itemize}
+\item \texttt{next}: executes the next line
+\item \texttt{step}: executes the next line, and if it is a function, goes inside it and stops there (so you can see what is happening inside the function)
+\item \texttt{return}: executes all lines until a return is found
+\item \texttt{continue}: execute all lines until another breakpoint is found
+\end{itemize}
+You can also type \texttt{help} to get a list of the commands.
+To quit the debugger just type \texttt{exit}.
+
+Another way to enter the debug mode is post-mortem, where the code failed and you did not set up any breakpoints.
+You can run \texttt{pdb.pm()} to debug the last error.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def code_that_will_fail():
+    x = [1, 2, 3]
+    y = [3, 4, 5]
+    z = x @ y
+    return z
+
+
+code_that_will_fail()
+pdb.pm()
+\end{lstlisting}
+This is useful for debugging smaller pieces of code.
+\section{Assignment}
+\label{sec:org63b2db2}
+\begin{problem}
+Study the presentation: \href{https://youtu.be/cKPlPJyQrt4?t=123}{Understanding Ideas Behind Advanced Python Features}.
+Summarize the main points of the talk.
+\end{problem}
+\end{document}
