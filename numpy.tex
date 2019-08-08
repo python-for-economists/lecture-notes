@@ -1,0 +1,988 @@
+% Created 2019-07-30 Tue 16:14
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\stdnormal}{\mathcal{N}\left(0, 1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\lstdefinestyle{powershell}{language=bash,style=Matlab-editor,morekeywords={Get-Command}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Numpy}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Numpy},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+We have covered the basics of the Python language.
+We know how to work with the basic data types, create functions and handle exceptions.
+To continue learning Python, we will implement the ordinary least squares (OLS) estimator for the parameters of a linear regression under the classical assumptions.
+
+Let's assume that the economic model of interest is given by:
+\begin{align*}
+\underbrace{y}_{n \times 1}=\underbrace{X}_{n\times K}\underbrace{\beta}_{K\times 1} + \underbrace{\varepsilon}_{n\times 1}
+\end{align*}
+where \(y\) is a \(n\times 1\) vector of observed dependent variables, \(X\) is an \(n \times K\) matrix of observed explanatory variables, \(\beta\) is a \(K\times 1\) vector of unknown parameters and \(\varepsilon\) is a \(n\times 1\) vector of unobserved explanatory variables.
+
+We know that the OLS estimator of \(\beta\) is given by:
+\begin{align*}
+\hat{\beta}=(X'X)^{-1}X'y
+\end{align*}
+Our first objective is to implement this estimator.
+
+Using a bottom-up approach, we need to understand:
+\begin{enumerate}
+\item The basic data types in Python;
+\item How to create vectors and matrices;
+\item How to do matrix transposition, inversion and multiplication;
+\item How to create a function that given \(X\) and \(y\) produces \(\hat{\beta}\);
+\item How to generate data to test out our code.
+\end{enumerate}
+Step 1 was already accomplished with our last lecture.
+We now turn to creating vectors and matrices in Python.
+
+To do so, we will use a package called \href{https://docs.scipy.org/doc/numpy/index.html}{NumPy}.
+NumPy is a package for scientific computing in Python.
+It implements an object to represent N-dimensional arrays (vectors, matrices and higher dimensional matrices).
+It also has linear algebra functions and random number generators.
+
+Why do we need Numpy?
+Python is a dynamically typed language, it infers the type of a variable at runtime.
+This means that when Python store variables in memory, it not only stores the variable's value, but also its type.
+Then, when we perform a computation, like adding two variables (\texttt{x+y}), Python looks up the type of \texttt{x} and the type of \texttt{y}, and applies the definition of \texttt{+} to those types if it makes sense to do so. If those types are integers, for example, then Python performs an integer addition.
+However, if the type of \texttt{x} is integer, but \texttt{y} is a list, then the operation is not defined and Python will raise an exception (error).
+This type of checking is called a runtime type check.
+
+The runtime type check makes programming in Python a pleasure, since you do not have to worry about types all the time.
+However, it does lead to inefficiencies when we start performing operations on large datasets.
+Numpy solves those inefficiencies.
+
+Numpy introduces a new type of list, called a Numpy array.
+In an array, the type of all elements is the same.
+This has two benefits.
+First, the type is only stored once, so performing operations with numpy is much faster than with Python lists.
+Second, since all elements have the same type, their position in the memory is easy to compute.
+This means that accessing random elements in a numpy array is quick.
+
+Numpy also provides a set of operations for numpy array, all implemented in C.
+Arrays are not required to be 1 dimensional, so the class can also deal with matrices and higher dimensional arrays.
+Numpy is the base of other higher-level packages, like \texttt{pandas} and \texttt{scipy}.
+\section{Install}
+\label{sec:org3d462ad}
+Numpy can be installed with \texttt{pip}.
+After activating your environment in the terminal, run:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+pip install numpy
+\end{lstlisting}
+Now \texttt{numpy} is available for Python.
+In the jupyter notebook, we can import the package by executing:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import numpy
+\end{lstlisting}
+The \texttt{import} will look for the package named \texttt{numpy}, will find it and load all of its content.
+The methods, variables and objects defined in the Numpy package will be available in the object \texttt{numpy}.
+
+You will often see the following command being used:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import numpy as np
+\end{lstlisting}
+Which makes the \texttt{numpy} functionality available via \texttt{np}.
+This is often used because it requires less typing to use numpy.
+\section{Basics}
+\label{sec:org89f9729}
+To create a matrix with numpy we run:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+matrix = np.array([[0, 1, 2, 3],
+                   [4, 5, 6, 7]])
+\end{lstlisting}
+This creates a new matrix with dimensions 2 by 4.
+
+Basic properties of \texttt{np.ndarray}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+type(matrix)
+print(f'Shape of matrix = {matrix.shape}')
+print(f'Number of axes = {matrix.ndim}')
+print(f'Total number of elements = {matrix.size}')
+\end{lstlisting}
+The elements of the matrix can be accessed by using its indices.
+Since the matrix has 2 dimensions, we need to give it two indices: an index for the row and an index for the column. Remember that in Python the indexing starts at 0.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(matrix[0, 0])                    # element at row 0 and column 0
+print(matrix[1, 3])                    # last element of the 2nd row
+print(matrix[1, -1])                   # last element of the 2nd row
+print(matrix[-1, -1])                  # element at last row and last column
+\end{lstlisting}
+We can use \texttt{:} to slice the matrix and obtain all values of a certain row or of a certain column:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(matrix[0, :])             # first row, all columns
+print(matrix[:, 0])             # all rows, first column
+print(matrix[0, 1:3])           # first row, columns 1 and 2
+print(matrix[:, 1:3])           # all rows, columns 1 and 2
+\end{lstlisting}
+We can also select specific columns or rows:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(matrix[:,[0, 3]])         # all rows, first column and last column
+\end{lstlisting}
+
+Like the built-in function \texttt{range}, numpy also provides a way to generate a sequence of numbers with the function \texttt{np.arange}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+vector = np.arange(20)
+\end{lstlisting}
+We can reshape this vector into a matrix:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+matrix = vector.reshape(4,5)
+\end{lstlisting}
+Notice that when converting a vector into a matrix we need to decide whether to put the values first into columns, or first into rows.
+For example, if we have a vector \([1,2,3,4]\) and want to reshape it into a \(2x2\) matrix, there are 2 natural possibilities: create the new matrix by filling each row first, or create the matrix by filling each column first.
+\begin{align*}
+\text{Fill Rows: }\begin{pmatrix}
+1 & 2\\
+3 & 4
+\end{pmatrix}\text{ vs. Fill Columns:}
+\begin{pmatrix}
+1 & 3\\
+2 & 4
+\end{pmatrix}
+\end{align*}
+The default in Python is to fill each row before moving to the next (first matrix above).
+The behavior is controlled by a keyword argument \texttt{order} given to the reshape method.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = np.arange(4)
+# Different ways of reshaping
+# fill each row, row by row
+a.reshape((2, 2), order='C') # this is also the default
+# fill each column, column by column
+a.reshape((2, 2), order='F')
+\end{lstlisting}
+We can also get the type of the values stored in the matrix:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(matrix.dtype)
+\end{lstlisting}
+Observe that the \texttt{np.array} takes a list of numbers as input, it does not take numbers as separate inputs:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+np.array([1,2,3,4])             # correct, creates a vector
+np.array(1,2,3,4)               # wrong
+\end{lstlisting}
+If a list of lists is given, then we get a two-dimensional array:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+np.array([[0, 1], [1, 2]])
+\end{lstlisting}
+\section{Data Types}
+\label{sec:orga275776}
+The data type of values stored in a matrix are usually inferred when the values are assigned:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+matrixOfIntegers = np.array([[0, 1, 2, 3, 4, 5],
+                             [5, 4, 3, 2, 1, 0],
+                             [10, 9, 8, 7, 6, 5]])
+print(matrixOfIntegers.dtype)
+matrixOfFloats = np.array([[1.0, 2.3],
+                           [-5.1, 9.8234]])
+print(matrixOfFloats.dtype)
+\end{lstlisting}
+The first matrix has the type \texttt{int64} and the second matrix has the type \texttt{float64}.
+Notice that if we try to change a value in the first matrix to a float, it will be implicitly converted to an integer:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(matrixOfIntegers[0, 0])
+matrixOfIntegers[0, 0] = 0.34
+print(matrixOfIntegers[0, 0])
+\end{lstlisting}
+We can specify the type of data when we first create the matrix:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+matrix = np.array([[0, 1], [2, 3]], dtype='float64')
+matrix[0, 0] = 3.2
+print(matrix)
+\end{lstlisting}
+The matrix is initialized with integers, but we specify the type to be a float, so the values are implicitly converted to floats.
+
+The most common data types for numbers are:
+\begin{center}
+\begin{tabular}{ll}
+Data Type & Description\\
+\hline
+int\_ & default integer type (usually int64)\\
+float\_ & default float type (usually float64)\\
+complex\_ & default complex type (usually complex128)\\
+bool\_ & default boolean type (uses a byte)\\
+\hline
+int<bytes> & where <bytes> can be 8, 16, 32 or 64\\
+uint<bytes> & unsigned integer\\
+float<bytes> & \\
+complex<bytes> & \\
+\end{tabular}
+\end{center}
+
+Remember that defining a data type will convert the initial values to the defined type:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+matrix = np.array([[0, 1],
+                   ['False', True],
+                   ['a', 'b']], dtype='bool_')
+\end{lstlisting}
+If the values cannot be converted, an error is raised:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+matrix = np.array([[0, 1], [2, 'abc']], dtype='float_')
+\end{lstlisting}
+The command raises a \texttt{ValueError} and informs us that the string 'abc' cannot be converted to a float.
+
+It is also possible to store strings in numpy arrays (matrices):
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+names = np.array(['A', 'B', 'C', 'D'], dtype='str_')
+print(names.dtype)
+\end{lstlisting}
+Notice that the type is actually "<U1". The "U" stands for "unicode string" and "1" is the number of characters.
+Since all values passed to the \texttt{np.array} constructor have just 1 character, numpy assumes all data that we will store on this matrix will have a single character.
+This might not be the case, and if we try to store a bigger string:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+names[0] = 'Guilherme'
+print(names[0])
+\end{lstlisting}
+Instead of storing the entire string, only the first character was stored.
+We can let numpy know that we need more space in memory by defining how many characters we need:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+names = np.array(['A', 'B', 'C', 'D'], dtype='<U100')
+names[0] = 'Guilherme'
+print(names[0])
+\end{lstlisting}
+Now we can store 100 characters in each element of the matrix.
+
+Numpy can handle other data types, even objects:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+grades = np.array([{'A': 9, 'B': 8, 'C': 10},
+                   {'A': 'Econ', 'B': 'Finance', 'C': 'Econ'}])
+\end{lstlisting}
+In this case the data type is \texttt{object}, and \texttt{grades} is a matrix with two elements, where each is a dictionary.
+The type \texttt{object} is used for creating arrays that can hold any data type, since everything is an object in Python.
+In this case, we are loosing the efficiency that comes with Numpy, since we are creating an array that can hold different types of data.
+In some cases we might still want to do so, since Numpy provides several useful functions for dealing with arrays.
+
+The complete documentation on specifying data types (\texttt{dtype}) can be found \href{https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html\#arrays-dtypes}{here}.
+Arrays can also hold more than one type, details on how to hanlde multiple types can be found \href{https://docs.scipy.org/doc/numpy/user/basics.rec.html\#module-numpy.doc.structured\_arrays}{here}.
+\section{Empty and Pre-Filled Arrays}
+\label{sec:orgb77244a}
+On many cases we will want to create an empty array and populate as the code is executed.
+We can create arrays pre-filled with ones or zeros via:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ones = np.ones((4, 5))
+zeros = np.zeros((10, 3))
+\end{lstlisting}
+The functions \texttt{np.ones} and \texttt{np.zeros} take a tuple as input, which defines the shape of the matrix to be created.
+
+The function \texttt{np.empty} creates an "empty" matrix of the given shape and data type:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+empty = np.empty((4, 10), dtype='float_')
+\end{lstlisting}
+The matrix is filled with whatever values are in the memory.
+If you use this command make sure all values are correctly replaced, otherwise you may run into bugs.
+
+It is also possible to pre-fill a matrix with any given value:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+full = np.full((10, 3), 3.14)
+manyStrings = np.full((5,5), 'StudentName')
+\end{lstlisting}
+\section{Operations}
+\label{sec:org9efda68}
+Arithmetic operations with numpy arrays are always \uline{element wise}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = np.arange(10)
+b = np.ones(10)
+print(f'Type a = {a.dtype}, b = {b.dtype}')
+c = a + b
+print(c)
+print(f'Type c = {c.dtype}')    # implicit conversion of a to float
+print(c*10)
+print(c - 10)
+print(c**2)
+\end{lstlisting}
+Notice that \texttt{**} is the same as \texttt{pow(c,2)}.
+
+Comparisons are also done element wise:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(c > 5)
+\end{lstlisting}
+Booleans can be used to recover elements of an array:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+c[c>5]
+\end{lstlisting}
+You can recover the indices that satisfy a condition with the \texttt{np.where} function:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+indices = np.where(c <= 2)
+print(indices)
+print(c[indices])
+\end{lstlisting}
+
+It is possible to manipulate all elements of an array and accumulate the values:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# some random values to stand in as returns
+returns = np.random.random((78, 5))
+returns /= 100                       # divides everything by 100
+help(np.sum)
+RV = np.sum(returns**2, axis=0)
+annRV = 100*np.sqrt(252*RV)
+print(f'RV = {RV}\n'
+      f'annualized RV = {annRV}')
+\end{lstlisting}
+The \texttt{np.random.random} is a function that generates random values in the interval \([0, 1)\).
+The \texttt{np.sum} function accumulates over elements in an array by summing them.
+Calling \texttt{np.sum} without the \texttt{axis} argument will sum all of the elements in a matrix, resulting in a single value.
+The keyword argument \texttt{axis=0} instructs the sum to occur along the rows.
+Numpy provides many universal mathematical functions, such as \texttt{np.sqrt} for computing the square root of a number (remember, element wise).
+
+We can find the minimum and maximum values in an array:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(f'Min RV = {np.min(annRV)}\n'
+      f'Max RV = {np.max(annRV)}')
+print(f'Index of Min = {np.argmin(annRV)}\n'
+      f'Index of Max = {np.argmax(annRV)}')
+\end{lstlisting}
+
+Numpy arrays also implement a multitude of different methods:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = np.array([4,3,2,1]);
+# in-place sort
+x.sort()
+print(x)
+# common operations
+print(x.sum(), x.mean(), x.max(), x.min())
+# equivalent to
+print(np.sum(x), np.mean(x), np.max(x), np.min(x))
+# index of extremum
+print(x.argmin(), x.argmax(), np.argmin(x), np.argmax(x))
+# cummulative sum
+x.cumsum()
+# cummulative product
+x.cumprod()
+# variance
+x.var()
+x.std()
+x.std() == x.var()**0.5
+# search sorted array for index where a new value can be inserted
+# without affecting the sort
+x.searchsorted(2.5)
+\end{lstlisting}
+
+Numpy also implements matrix operations:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Inner Product: <a, b>
+x = np.array([1, 2, 3])
+y = np.array([-1, 0, 10])
+print(np.dot(x, y))
+# Matrix multiplication
+# create identity matrix
+a = np.eye(2)
+b = np.random.random((2, 2))
+print(np.matmul(a, b))
+# The symbol @ is overloaded for matrix multiplication
+print(a @ b)
+print(a @ b == np.matmul(a,b))
+# Matrix transposition
+print(np.transpose(b))
+print(b.T)
+# Matrix inversion
+c = np.array([[1, 2],
+              [3, 4]])
+print(np.linalg.inv(c))
+\end{lstlisting}
+Numpy also implements other functions, like singular value decomposition (\texttt{np.linalg.svd}), eigenvalues (\texttt{np.linalg.eig}), Moore-Penrose inverse (\texttt{np.linalg.pinv}), Kronecker product (\texttt{np.kron}) and others.
+For more information on linear algebra with Numpy check the \href{https://docs.scipy.org/doc/numpy/reference/routines.linalg.html}{reference page}.
+\section{Mutability and Copying Arrays}
+\label{sec:org8482bc6}
+Create a new array:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = np.array([4,3,2,1], dtype='float_')
+# arrays are mutable
+x[0] = 10.32
+print(x)
+\end{lstlisting}
+What happens when we assign a new name to x?
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = x
+a[1] = -2.34
+# What is printed?
+print(a, a[1], x[1])
+\end{lstlisting}
+Notice that \texttt{x} is a name to an array, and \texttt{a} is a reference to \texttt{x}. Thus, \texttt{a} is also a name to the exact same array.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a == x
+a is x
+\end{lstlisting}
+This is a sensible behavior for memory efficiency.
+If you do need to make a copy of an array, then:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(x)
+a = np.copy(a)                  # deep copy
+print(a)
+np.all(a == x)
+a is x
+a[:] = np.pi
+print(a, x)
+\end{lstlisting}
+We can check if all elements of an array are \texttt{True}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(a == x).all()
+np.all(a==x)
+# built in
+all(a == x)
+\end{lstlisting}
+\section{Additional Functionality}
+\label{sec:org8eb4b58}
+Numpy has several functions that can be applied element-wise:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = np.array([1, 2, 3, 4])
+# vectorized functions (element-wise)
+print(np.sin(x))                # implicit type conversion
+print(np.log(x), np.exp(x))
+\end{lstlisting}
+These functions are referred to as universal functions (\texttt{ufunc}).
+They are universal in the sense that they work with arrays (work with many elements).
+
+We can compose these operations:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# +, -, /, * and ** also work element-wise
+print(np.log(x + 1)*3/np.exp(x)**2)
+\end{lstlisting}
+
+If a function is not universal (also known as vectorized), applying it on an array will lead to error:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def f(x):
+    return 1 if x > 0 else 0
+f(x)
+\end{lstlisting}
+
+The issue here is that \texttt{bool(x)} is not defined for numpy arrays.
+While \texttt{x > 0} works, the part that says \texttt{if x > 0} is equivalent to \texttt{if bool(x > 0)}, which is undefined for arrays.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+bool(x)
+# Remember that for Python lists bool is always defined
+bool(list(x))
+\end{lstlisting}
+
+We can vectorize a function:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+f = np.vectorize(f)
+f(x)
+\end{lstlisting}
+
+The function \texttt{np.vectorize} is basically creating a for-loop around \texttt{f}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+res = np.zeros(len(x))
+for i in np.arange(len(x)):
+    res[i] = f(x[i])
+print(res)
+\end{lstlisting}
+
+We can accomplish the result of the function \texttt{f} using np.where:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+help(np.where)
+# returns 1s where x > 0, and 0 otherwise
+np.where(x > 0, 1, 0)
+\end{lstlisting}
+
+Remember that comparisons are element-wise and can be used for slicing:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# comparisons are element-wise
+a = np.array([-1, 0, 1])
+b = np.array([1.2, -2.3, 3])
+a > b                           # implicit type conversion for a
+a > 0.2
+# slice based on comparisons
+a[a > 0.2]
+a[a > b]
+\end{lstlisting}
+
+The Numpy subpackage \texttt{np.random} implements several random number generators.
+You can get more information about them with \texttt{help}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+help(np.random)
+\end{lstlisting}
+
+The Numpy subpackage \texttt{np.linalg} has other linear algebra tools.
+You can also use \texttt{help} to learn more about them:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# numpy subpackage np.linalg implements linear algebra functions
+help(np.linalg)
+\end{lstlisting}
+
+A table that compares commands in Matlab to commands in Numpy is available \href{https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html}{here}.
+A good overview of many numpy features is available \href{https://docs.scipy.org/doc/numpy/user/quickstart.html\#quickstart-tutorial}{here}.
+\section{Implementing the OLS Estimator for Linear Regressions}
+\label{sec:orgada69f0}
+We now know everything we need to know about Python to estimate parameters in a linear regression:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y):
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    return beta
+\end{lstlisting}
+
+Generate some test data to test \texttt{linreg\_ols}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# 1000 data points with a constant + 3 explanatory variables
+x = np.hstack((np.ones((1000, 1)), np.random.random((1000, 3))))
+print(x)
+beta = np.random.random((4, 1))
+epsilon = np.random.random((1000, 1))
+y = x @ beta + epsilon
+print(y)
+\end{lstlisting}
+
+Estimate beta and compare the estimate to the true value:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+beta_hat = linreg_ols(x, y)
+print(np.hstack((beta, beta_hat)))
+\end{lstlisting}
+
+Let's update \texttt{linreg\_ols} so that adding a constant to \texttt{x} is automatic:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y):
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    x = np.hstack((np.ones((x.shape[0], 1)), x))
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    return beta
+\end{lstlisting}
+
+Test it again:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x = x[:, 1:]
+print(x)
+print(x.shape, y.shape)
+beta_hat = linreg_ols(x, y)
+print(beta_hat)
+\end{lstlisting}
+
+Update \texttt{linreg\_ols} so that adding a constant can be optionally specified by the user:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y, intercept=True):
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    if intercept:
+        x = np.hstack((np.ones((x.shape[0], 1)), x))
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    return beta
+
+
+# if no intercept is supplied, than a column of ones is added
+print(linreg_ols(x, y))
+print(linreg_ols(x, y, True))
+print(linreg_ols(x, y, 1))
+print(linreg_ols(x, y, False))
+\end{lstlisting}
+
+Always remember to add documentation to your functions (your future self will thank you):
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y, intercept=True):
+    """Estimates linear regression coefficients with OLS.
+
+    Estimates beta in a linear regression: y = x @ beta + epsilon.
+    Uses the ordinary least squares estimator.
+
+    Args:
+        x (np.array): A nxK matrix of explanatory variables
+        y (np.array): A nx1 matrix of dependent variables
+        intercept (bool): Specifies whether to estimate intercept coefficient
+
+    Returns:
+        beta (np.array): A Kx1 vector with the beta estimates
+
+    Raises:
+        AssertionError: x and y have different number of rows
+        LinAlgError: if x is a singular matrix
+
+    Example:
+        linreg_ols(np.array([[1, -2], [0.5, -3.1]]), np.array([1, 2.3]))
+    """
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    if intercept:
+        x = np.hstack((np.ones((x.shape[0], 1)), x))
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    return beta
+
+
+help(linreg_ols)
+\end{lstlisting}
+\section{Save and Load Results}
+\label{sec:orgc2fbcc1}
+After running linear regressions, we might want to save the results.
+We can use \texttt{np.save} for that.
+It saves the results in a file for later use.
+The function \texttt{np.save} saves in a binary file, which is faster for loading compared to \texttt{.csv} files (but it is not human-readable).
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+beta = linreg_ols(np.random.random((1000, 3)),
+                  np.random.random((1000, 1)))
+print(beta)
+
+help(np.save)
+np.save('regression_estimates', beta, allow_pickle=False)  # npy extension
+\end{lstlisting}
+If you are only using the data only on your computer (not sharing), then you can set \texttt{allow\_pickle=True} to speed things up.
+
+To load the data, use \texttt{np.load}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# load the data
+del beta
+print(beta)                     # not defined
+beta = np.load('regression_estimates.npy', allow_pickle=False)
+print(beta)
+\end{lstlisting}
+
+We can save the results in a \texttt{.csv} file, which is easier to share and inspect.
+To do so, we use \texttt{np.savetxt}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+np.savetxt('regression_estimates.csv', beta, delimiter=',')
+# load from .csv
+del beta
+print(beta)
+beta = np.loadtxt('regression_estimates.csv', delimiter=',')
+print(beta)
+\end{lstlisting}
+
+We can also use np.loadtxt to load data created outside Python.
+Download \href{https://raw.githubusercontent.com/Salompas/handson-ml/master/datasets/housing/housing.csv}{this data set on housing prices in California}, and save the file in your working folder.
+The data contains information on household prices in California in 1990 (based on the census at that time).
+
+Look at the data file to understand it first.
+Skip first line since they are the headers.
+Ignore the last column since it is string data.
+So, we need to select all but the last column.
+
+A missing value in a \texttt{.csv} file is represented as \texttt{,,}.
+The value would be considered as an empty string (\texttt{''}) by Numpy.
+The file has some missing data, so we also need to deal with it.
+
+Load the data:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+data = np.loadtxt('housing.csv', delimiter=",",
+                  skiprows=0, usecols=range(9),
+                  converters={4: lambda x: 0.})
+# delimiter: to specify its a csv file
+# skiprows: skips the first row, which has headlines
+# usecols: to select first 9 columns
+# converters: apply the anonymous functions to all strings it encounters
+#             thus, transforming '' into a 0.0
+print(data.shape)
+print(data)
+\end{lstlisting}
+The function \texttt{np.loadtxt} is useful for files that are well formated and do not require much work.
+Later we will learn another package that implements a database object and provides much more powerful loading functions.
+\section{Organizing Outputs}
+\label{sec:org95d1bbd}
+Let's extend linreg\textsubscript{ols} so the R-squared is also computed:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y, intercept=True):
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    if intercept:
+        x = np.hstack((np.ones((x.shape[0], 1)), x))
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    # residuals
+    e = y - x @ beta
+    rsquared = 1 - (np.sum(e**2)/np.sum((y-y.mean())**2))
+    return (beta, rsquared)
+
+
+# we are returning a tuple, where the first element are the estimated
+# betas, and the second element is the R-squared
+x = np.random.random((1000, 5))
+y = np.random.random((1000, 1))
+results = linreg_ols(x, y)
+print(results)
+print(results[0], results[1])
+# tuple unpacking (a.k.a. unpacking):
+beta, rsquared = results
+beta, rsquared = linreg_ols(x, y)
+\end{lstlisting}
+
+As we start adding more outputs to a function, it can become harder to identify what is each output represents.
+We can organize the outputs by using a dictionary:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y, intercept=True):
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    if intercept:
+        x = np.hstack((np.ones((x.shape[0], 1)), x))
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    # residuals
+    e = y - x @ beta
+    rsquared = 1 - (np.sum(e**2)/np.sum((y-y.mean())**2))
+    return {'beta': beta, 'r2': rsquared}
+
+
+results = linreg_ols(x, y)
+# Check what are the outputs:
+print(results.keys())
+# Assign variable names
+beta = results['beta']
+rsquared = results['r2']
+# A dictionary can also be unpacked:
+beta, rsquared = results.values()
+print(beta, rsquared)
+\end{lstlisting}
+
+We can also organize the output using a \texttt{namedtuple}.
+A \texttt{namedtuple} is similar to a tuple, but its elements have names.
+And the elements of a \texttt{namedtuple} can be accessed with the \texttt{.} notation:
+
+The \texttt{namedtuple} is defined in the \texttt{collections} package, which is built-in Python.
+The \texttt{namedtuple} is a factory function, which returns a subclass.
+A subclass is what defines an object, it is just a definition.
+But, we can use it to create instances of the object, which can actually be used.
+\texttt{namedtuple} takes the name of the object as an input, and also a list of properties that the object will have.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from collections import namedtuple
+
+Point = namedtuple('Point', ['x', 'y'])
+mouse = Point(0.3, 0.7)
+print(mouse.x)
+print(mouse.y)
+\end{lstlisting}
+
+We can adapt the example above to organize the output of \texttt{linreg\_ols}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def linreg_ols(x, y, intercept=True):
+    assert x.shape[0] == y.shape[0], "Different number of rows"
+    if intercept:
+        x = np.hstack((np.ones((x.shape[0], 1)), x))
+    beta = np.linalg.inv(x.T @ x) @ x.T @ y
+    # residuals
+    e = y - x @ beta
+    rsquared = 1 - (np.sum(e**2)/np.sum((y-y.mean())**2))
+    RegressionOutput = namedtuple('RegressionOutput', ['beta', 'rsquared'])
+    return RegressionOutput(beta, rsquared)
+
+
+results = linreg_ols(x, y)
+# Check what are the field names:
+print(results._fields)
+# Recover the values
+print(results.beta)
+print(results.rsquared)
+\end{lstlisting}
+This is a more efficient way of providing results, since you can name the outputs.
+Also, the outputs are saved in a tuple, which is immutable and so is slightly more memory efficient.
+\section{Assignment}
+\label{sec:org71dc26a}
+All assignments should be submitted to the Github repository you have been assigned to.
+The deadline is \textbf{August 12th by 11 PM}.
+You should write a report in Latex with the solutions to the problems below.
+If the problem requires you to code, then the code should also be included in the report.
+You can add code to Latex with the \href{http://texdoc.net/texmf-dist/doc/latex/listings/listings.pdf}{lstlisting package} (see \href{https://tex.stackexchange.com/a/83883/65818}{this stack post}) or the \href{http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf}{minted package} (see \href{https://stackoverflow.com/a/1985330/1445572}{this other stack post}).
+
+\begin{problem}
+Read the \href{https://docs.scipy.org/doc/numpy/reference/routines.random.html}{\texttt{numpy.random}} documentation page.
+Test the linear regression function using a normal distribution for the unobserved heterogeneity and some other distribution of your choice for the independent variables.
+\end{problem}
+
+\begin{problem}
+Extend \texttt{linreg\_ols} to compute the standard error of the OLS estimates under the classical assumptions.
+Remember that under the classical assumptions, the standard error of the OLS estimates:
+\begin{align*}
+SE(\hat{\beta}_i) = \sqrt{s^2\cdot[(X'X)^{-1}]_{[i, i]}}
+\end{align*}
+where \(s^2\) is computed from the residuals of the estimation:
+\begin{align*}
+e&\equiv y-X\hat{\beta}\\
+s^2&\equiv\frac{e'e}{n-K}
+\end{align*}
+Remember to update the output of the function and extend its documentation.
+\end{problem}
+
+\begin{problem}
+Download \href{https://raw.githubusercontent.com/Salompas/handson-ml/master/datasets/housing/housing.csv}{this data set on housing prices in California}, and save the file in your working folder.
+This data set was first used in \citet{PB1997}, and was later modified for use in \citet{G2017}.
+The data contains information on household prices in California in 1990 (based on the census at that time).
+The first line of the file contains the name of the explanatory variables.
+Run the linear regression suggested in Equation (8) of \citet{PB1997}.
+\end{problem}
+
+\begin{problem}
+Python has been around \href{https://en.wikipedia.org/wiki/Python\_(programming\_language)}{since 1990} and has a \href{https://pypi.org}{huge number of packages}.
+Figure out if Python has a function or a package (or many packages) for estimating the parameters of a linear regression using OLS.
+If it does, what is the name of the function or the package?
+What are the outputs of the function you found?
+\end{problem}
+
+\begin{problem}
+When the classical assumption of homoskedasticity fails, we need a different estimators for the standard errors of the OLS estimates.
+\citet{W1980} proposes a heteroskedasticity-robust estimator for the standard errors of the OLS estimates, which is now known as White's standard error.
+Equation 2.4.1 in \citet{H2000} shows White's standard error:
+\begin{align*}
+\widehat{SE(\hat{\beta}_i)}\equiv\sqrt{\frac{1}{n}[S_{xx}^{-1}\hat{S}S_{xx}^{-1}]_{[i,i]}}
+\end{align*}
+There is a slight change of notation in this part of the \citet{H2000}, and \(x_i'\) is the ith row of \(X\) (\(x_i\) is a column vector with the explanatory variables in the ith row of \(X\)).
+The term \(S_{xx}\) is the sample mean of \(x_ix_i'\): \(S_{xx}=\frac{1}{n}\sum_{i=1}^nx_ix_i'\) (Equation 2.3.6 in \citet{H2000}).
+The term \(\hat{S}\) is an estimator for a matrix of fourth moments, and it is defined as \(\hat{S}=\frac{1}{n}\sum_{i=1}^ne_i^2x_ix_i'\) (Equation 2.5.1 in \citet{H2000}), and \(e_i\) is as before (residual for the ith observation).
+Implement this estimator in the \texttt{linreg\_ols} function.
+You could write a local function to estimate White's standard error in the \texttt{linreg\_ols.m} file.
+\end{problem}
+
+\begin{problem}
+(Optional)
+
+Implement the t-test based on White's standard error. Also, compute the p-value from given the statistic.
+\end{problem}
+
+\begin{problem}
+\citet{NW1987} proposes another estimator to the standard errors for the OLS estimates under weaker assumptions.
+The estimator the authors propose is robust not only to heteroskedasticity, but also autocorrelation, and is known as the HAC standard errors.
+Does the package you found in Problem 4 have such a function to compute the HAC standard errors?
+If not, can you find some other package that does have it?
+If so, what is the name of the package?
+\end{problem}
+
+\begin{problem}
+(Optional)
+
+Implement the t-test based on the HAC standard error. Also, compute the p-value from given the statistic.
+\end{problem}
+
+\begin{problem}
+Extend \texttt{linreg\_ols} to accept an optional input named \texttt{cov\_type}, which specifies the type of standard errors estimator to report.
+The variable \texttt{cov\_type} can take one of many values, say "Standard", "White" or "HAC".
+Your function should be able to check if \texttt{cov\_type} is one of those types and act accordingly.
+If it is not, the function should raise an appropriate error alerting the user with a very clear message of what is wrong.
+\end{problem}
+\newpage
+\printbibliography
+\newpage
+\end{document}
