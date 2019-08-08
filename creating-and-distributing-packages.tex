@@ -1,0 +1,456 @@
+% Created 2019-08-08 Thu 17:05
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\stdnormal}{\mathcal{N}\left(0, 1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\lstdefinestyle{powershell}{language=bash,style=Matlab-editor,morekeywords={Get-Command}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Creating and Distributing Packages}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Creating and Distributing Packages},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+The Python Package Index (PyPI, \url{https://pypi.org}) is the main repository for Python packages.
+PyPI hosts important packages, such as Numpy, Scipy, Tensorflow, Pandas and many others.
+PyPI hosts large and well developed packages, but it can also host packages developed by anyone, including you.
+These packages can then be installed in any system with \texttt{pip}.
+
+In this lecture we will learn how to create a package that can be distributed by PyPI and installed by other Python users.
+\section*{Clarifying Concepts: Package, Module, Script}
+\label{sec:org7bb8de0}
+A Python \texttt{script} is a text file ending in \texttt{.py} containing Python code that can be interpreted by the Python interpreter.
+We can run a script, say \texttt{script.py}, by calling:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left}
+\begin{lstlisting}
+  python3 script.py
+\end{lstlisting}
+The contents of the file are then interpreted and executed.
+We use scripts to write short programs.
+However, when our programs start getting longer, keeping everything in a single file is just not recommended.
+The idea is to separate pieces of code that can be reused by our main script into another file (or files).
+
+A \texttt{module} is a script file used to organize Python code and which can be reused by other scripts.
+Modules are written with the intent of being imported by other scripts or modules, and ideally contain code that can be reused.
+For example, you decide your original \texttt{script.py} file is too big and move some of its code to another file, \texttt{my\_module.py}.
+This file can now be imported inside \texttt{script.py} with a statement like \texttt{import my\_module}, which makes whatever was defined in \texttt{my\_module.py} available for use.
+
+Lastly, a \texttt{package} is a collection of modules, created via a folder hierarchy.
+For example, say you have three files \texttt{stocks.py}, \texttt{futures.py} and \texttt{options.py}.
+The common theme here is finance.
+So we could package these modules into a finance package.
+To do so, we create a folder \texttt{finance/} and move all of the module files inside that folder.
+We can then import these modules via any script via:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from finance import stocks, futures, options
+\end{lstlisting}
+Or:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import finance.stocks as Stocks
+\end{lstlisting}
+
+PyPI hosts packages.
+Each project hosted in PyPI is a package, which organizes one or more modules.
+Therefore, each project in PyPI is just a collection of python scripts, organized under a single name (namespace).
+
+Before we move on to how to host a package on the PyPI repositories and make it available to other Python users, we need to discuss two things: the use of \texttt{\_\_name\_\_} in scripts and modules, and where your local Python searches for modules and packages.
+\section*{Module and Scripts: The Global Variable \texttt{\_\_name\_\_}}
+\label{sec:org2ed7035}
+Whenever Python executes a script, it creates some global variables with various information and then runs the code in the script.
+You can check what these variables are with the built-in function \texttt{globals}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(globals())
+\end{lstlisting}
+
+\begin{verbatim}
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
+\end{verbatim}
+
+
+One of these global variables is \texttt{\_\_name\_\_}.
+This variable is used to indicate whether a script file is being run as the main module or is being imported.
+Therefore, \texttt{\_\_name\_\_} will contain the string \texttt{'\_\_main\_\_'} if the file is being run as a script, as in \texttt{python my\_script.py}.
+But, if the file is being imported as a module, as in \texttt{import my\_script}, then \texttt{\_\_name\_\_} will contain the name of the module as a string.
+
+For example, create the file:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(__name__)
+\end{lstlisting}
+Save it and run it with \texttt{python my\_script.py}.
+You will get back the string \texttt{'\_\_main\_\_'}.
+
+Now, open a Python REPL and import \texttt{my\_script.py}.
+To import the file as a module, Python will execute the contents of \texttt{my\_script.py} in a separate environment where \texttt{\_\_name\_\_} will be \texttt{'my\_script'}.
+
+The most common use of the global variable \texttt{\_\_name\_\_} is to create a module that can be imported by other scripts, but that can also be used as a standalone script.
+To do so, we check whether \texttt{\_\_name\_\_} corresponds to \texttt{'\_\_main\_\_'} or to the module's name.
+For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# My module
+def fibo(n: int) -> int:
+    """Computes the nth number of the Fibonacci series."""
+    phi = (1 + 5 ** 0.5) / 2
+    return int((phi**n-((-phi)**(-n)))/(5**0.5))
+
+
+if __name__ == '__main__':
+    import sys
+    print(fibo(int(sys.argv[1])))
+\end{lstlisting}
+If the file above is imported, \texttt{import my\_module}, then Python will only execute the definition of the function \texttt{fibo}, since the \texttt{if} part will fail, and then we could access the function via \texttt{my\_module.fibo}.
+However, if we run the file as a script, then Python will execute the definition of the function, but it will also evaluate the function with whatever arguments were given.
+
+In summary, the use of \texttt{if \_\_name\_\_ ...} allows you to have a module that can be imported by other code, but that can also be run independently. The separation of those parts is done by checking whether the code is being imported as a module or run as a script.
+\section*{Search Path}
+\label{sec:org461b0a6}
+When importing a module (or a package) with \texttt{import module\_name}, Python needs to search for files containing the code.
+Python first searches for a built-in module with module name.
+If the module is not a built-in, then Python starts looking for the module in the folders contained in \texttt{sys.path}.
+The first item in the list \texttt{sys.path} will be the folder that contains the script Python is running, or the current directory if Python was launched interactively (REPL).
+The list will also contain a folder with a name similar to \texttt{lib/python3.6/site-packages}. This folder, \texttt{site-packages}, is where \texttt{pip} installs the packages.
+
+This means, when creating a package, you should be careful about naming, so that it doesn't clash with an existing built-in package.
+If your package name is the same as some other package on PyPI then you will be asked to change its name.
+\section*{Creating a package containing a single module}
+\label{sec:org8c1a1c9}
+Let's first create a package that contains only a single module.
+To do so, we will create the following folders and files:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+  package_example/
+  |-- setup.py
+  |-- README.md
+  |-- LICENSE.txt
+  |-- project_name/
+      |-- __init__.py
+      |-- sequences.py
+\end{lstlisting}
+The file \texttt{setup.py} should contain the configurations necessary for PyPI to correctly classify your project and distribute it.
+The file \texttt{README.md} should contain the documentation of your project, with information as what APIs are available and how to use them.
+The file \texttt{LICENSE.txt} contains the license under which your project is distributed (\href{https://choosealicense.com}{examples}).
+The following example contains most of the setup you will usually need:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from setuptools import setup, find_packages
+
+# Load complete description of project from a markdown file
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+# Call setup to define project data
+setup(
+    # Name of the package: must be unique, later used with pip install
+    name='project_name',
+    # Project version number: MAJOR.MINOR[.MICRO]
+    version='0.0.1',
+    # One line description of project
+    description='My project description',
+    # Project complete documentation (loaded from README.md)
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    # Project home repository
+    url="http://github.com/username/project_name",
+    # Author information
+    author="First Name Last Name",
+    author_email="email@email.com",
+    # License information
+    license="MIT",
+    # Name the modules in your package
+    packages=find_packages(),
+    # Additional Metadata
+    classifiers=[
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.6",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    # Dependencies
+    install_requires=[
+        "numpy >= 1.15.0",
+        "pandas >= 0.23.0",
+        "matplotlib >= 3.0.0",
+    ]
+)
+\end{lstlisting}
+The package \texttt{setuptools} is a package that helps build and distribute other Python packages.
+It can be installed with \texttt{pip install -U setuptools}.
+We use two of its functions, \texttt{setup} and \texttt{find\_packages}.
+The function \texttt{setup} is used to define the name and other important information about our project.
+The function \texttt{find\_packages} is used to automatically find what modules were defined in our package, and it is useful for big projects with numerous files, but can be used for small projects as well.
+
+The project version is a string following the format \texttt{MAJOR.MINOR[.MICRO]}. The \texttt{MAJOR} number designates a major change in the package, usually adding many new features, which may change the APIs and break backwards-compatibility.
+As an user of a package, we do not want to automatically upgrade this package when a major version is released, since it may break our code.
+The \texttt{MINOR} number is changed when there are changes that do not break the APIs or when there are bug fixes.
+The optional \texttt{MICRO} number can also be used to indicate bug fixes and very small changes.
+
+The \texttt{classifiers} keyword takes a list of strings containing some pre-specified descriptors for projects to help sorting on PyPI's website.
+Follow \href{https://pypi.org/classifiers/}{this link} for a list of all possible classifiers, and \href{https://www.python.org/dev/peps/pep-0301/\#distutils-trove-classification}{this link} for PEP 301 which provides some more details on classifiers.
+
+Now we can actually define the modules in our package.
+To do so, create a folder with the same name as the project, in this case the folder is called \texttt{project\_name}.
+Inside this folder, create a script named \texttt{\_\_init\_\_.py}.
+The \texttt{\_\_init\_\_.py} script tells Python to treat the directory as containing packages.
+It is used to organize the \texttt{import} of multiple packages and for small projects is often left empty (empty file).
+For now, leave it empty.
+
+Lastly, add the module files that contain the code you want to share in the \texttt{project\_name} folder. In this case, we have the module \texttt{sequences.py}.
+Let's add some code to the module:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# sequences.py
+def fibo(n: int) -> int:
+    """Computes the nth number of the Fibonacci series."""
+    phi = (1 + 5 ** 0.5) / 2
+    return int((phi**n-((-phi)**(-n)))/(5**0.5))
+\end{lstlisting}
+
+\section*{Compilation}
+\label{sec:orgadc38ed}
+Before we can use the module, we need to compile it; and that is where \texttt{setup.py} is used.
+Install \texttt{setuptools} and \texttt{wheel} using \texttt{pip}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+python3 -m pip install --user --upgrade setuptools wheel
+\end{lstlisting}
+Then run:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# change the working directory to the package_example folder
+cd ~/Desktop/package_example
+# run setup to create install/distribution files
+python3 setup.py sdist bdist_wheel
+\end{lstlisting}
+This will create a source distribution (\texttt{sdist}) and a wheel distribution (\texttt{bdist\_wheel}).
+The source distribution has all of the files in the folder above, and is similar to zipping your entire project folder.
+Since you have the entire project, you can build it on any system.
+
+The wheel distribution is also similar to zipping the entire project folder, but includes the compiled binaries from your code. These binaries are specific to your system and to a version of Python. The advantage of a wheel distribution is that it can be installed by simply unzipping its contents in the right location. This makes it fast to install packages on similar systems, since you skip the compilation step.
+
+After running the command above, you will notice that a folder called \texttt{dist} was created. In that folder you will find the archives for your package.
+Notice the name of the archives depend on the version specified in \texttt{setup.py}.
+
+To test if our package works, we will install it locally (without sending it to PyPI). Local installation is crucial when developing the package and ironing out bugs, since you do not want to re-upload to PyPI every time you fix some small issue.
+\section*{Using pip to install the package locally}
+\label{sec:orged44f22}
+To install a package locally, we call \texttt{pip install} with the \texttt{-e} option and give it the path to the project we want installed.
+For example:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+pip install -e package_example
+\end{lstlisting}
+This will install the project in the usual place where Python installs projects, but instead of fetching the project from PyPI it uses the local source.
+
+You can now import the package in Python using the name defined in the \texttt{setup.py} file. Remember the package has only one module named \texttt{sequences.py}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from project_name import sequences
+print(sequences.fibo(10))
+\end{lstlisting}
+\section*{Using \texttt{\_\_init\_\_.py}}
+\label{sec:org3c31919}
+To use the \texttt{sequences.py} module, we first had to import it from the package.
+We can use the \texttt{\_\_init\_\_.py} file to make the importing more straightforward.
+The \texttt{\_\_init\_\_.py} file is run by Python when importing a package, and it allows us to make the package itself behave as a module.
+Modify the \texttt{\_\_init\_\_.py} file to have the following:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# __init__.py
+from .sequences import fibo
+\end{lstlisting}
+The \texttt{.} is to tell Python to find the \texttt{sequences} module in the local directory where \texttt{\_\_init\_\_.py} is.
+Now, when we \texttt{import project\_name}, the \texttt{\_\_init\_\_.py} file is going to be run and its local variables are going to be available under the \texttt{project\_name} name space.
+
+Since we updated the package, we need to update the version in \texttt{setup.py} and then reinstall it. Update the version number to \texttt{0.0.2} and re-run the following:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+cd ~/Desktop/package_example
+python3 setup.py sdist bdist_wheel
+cd ~/Desktop
+pip install -e package_example
+\end{lstlisting}
+Now, we can import the package and the \texttt{fibo} function will be directly available:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import project_name
+print(project_name.fibo(10))
+\end{lstlisting}
+
+The usefulness of \texttt{\_\_init\_\_.py} is to make some parts of the modules directly available under the package name, while keeping the rest of the modules separate.
+\section*{Creating a package containing multiple modules}
+\label{sec:orge77ca03}
+To add more modules to the package, simply add other \texttt{.py} files containing code to the \texttt{project\_name} folder. Then update the version number in \texttt{setup.py} and reinstall.
+\section*{Distributing your package with PyPI}
+\label{sec:org2fdbe33}
+To distribute the package we will use a package called \texttt{twine}.
+This package is a utility to assist with publishing packages on PyPI.
+Install it with \texttt{pip}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+pip install twine
+\end{lstlisting}
+We will first test uploading our package to a test version of PyPI so that we do not pollute the real PyPI with test projects.
+Start by registering an account on \href{https://test.pypi.org/account/register/}{Test PyPI}.
+Then we can just upload what we have already compiled with \texttt{twine}.
+To do so:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Change working directory to project folder
+cd ~/Desktop/package_example
+# Upload the archive files to TestPyPI
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+\end{lstlisting}
+Notice that \texttt{twine} is available as a standalone program, even though we installed it with \texttt{pip}.
+As an aside, this can be done with any Python program, it is just an extra step when distributing software, but one step we are not interested in right now (more details \href{https://docs.python-guide.org/shipping/freezing/}{here}).
+
+The command above will upload the contents from the \texttt{package\_example/dist} directory to the Test PyPI repository. Remember that the contents of the \texttt{dist} folder are archives of the source code.
+The \texttt{*} in \texttt{dist/*} is a special notation for \texttt{bash} which expands to all files in the \texttt{dist} folder.
+
+When you run the command for the first time you may get an error about registering your email. Just follow the instructions in the error message and then try again.
+
+Notice that we have created two versions of our project, namely versions \texttt{0.0.1} and \texttt{0.0.2}.
+When we compile the project for both versions, we created two sets of archives for each version.
+The command above will upload the archives for all versions to TestPyPI.
+It is important that all versions are available, so that if you need a specific version of the package you can get it from the repository.
+
+Now, you can log in \href{https://test.pypi.org/manage/projects/}{Test PyPI} and you should see your project there.
+To install your project from Test PyPI run the following:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Uninstall the version installed from the local files
+pip uninstall project_name
+# Install the version from Test PyPI
+pip install -i https://test.pypi.org/simple/ project-name
+\end{lstlisting}
+Since we are using Test PyPI we need to use the option \texttt{-i https://test.pypi.org/simple/} to let \texttt{pip} know where to find the project.
+By default, \texttt{pip} would search on the official PyPI repository.
+
+To distribute the package on the official PyPI repository we follow similar steps.
+Begin by registering an account on \href{https://pypi.org/account/register/}{PyPI}.
+Then upload with \texttt{twine}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+cd ~/Desktop/package_example
+twine upload dist/*
+\end{lstlisting}
+If there are naming clashes or other issues you will get an error message.
+Just follow the steps to fix the issue.
+You can now install your package with \texttt{pip}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+pip install package_name
+\end{lstlisting}
+\section*{Summary}
+\label{sec:org2241670}
+By the end of this lecture notes you should know:
+\begin{itemize}
+\item Difference between: script, module and package
+\item How to use \texttt{\_\_name\_\_} in a module
+\item The places and order where Python searches for packages
+\item How to create a package
+\item How to compile a package
+\item How to install a package from a local source archive
+\item How to use \texttt{\_\_init\_\_} to facilitate importing
+\item How to distribute your package with PyPI
+\end{itemize}
+If you find any typos or issues with these notes, please send me an \href{mailto:guilhermesalome@gmail.com?subject=Feedback: Python: Topic: Creating and Distributing Packages}{email} with your feedback.
+\section*{References}
+\label{sec:orgf865d35}
+\begin{itemize}
+\item \href{https://packaging.python.org/tutorials/packaging-projects/}{Packaging Python Projects Tutorial}
+\item \href{https://setuptools.readthedocs.io/en/latest/setuptools.html}{Building and Distributing Packages with setuptools}
+\item \href{https://packaging.python.org/tutorials/installing-packages/\#installing-from-local-archives}{Installing Packages}
+\item \href{https://stackoverflow.com/questions/448271/what-is-init-py-for}{What \texttt{\_\_init\_\_.py} is for?}
+\item \href{https://timothybramlett.com/How\_to\_create\_a\_Python\_Package\_with\_\_\_init\_\_py.html}{How to create a Python Package with \texttt{\_\_init\_\_.py}}
+\item \href{https://packaging.python.org/guides/using-testpypi/}{Using TestPyPI}
+\end{itemize}
+\end{document}
