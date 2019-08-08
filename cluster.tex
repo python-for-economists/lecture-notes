@@ -1,0 +1,1601 @@
+% Created 2019-08-08 Thu 18:07
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\stdnormal}{\mathcal{N}\left(0, 1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\lstdefinestyle{powershell}{language=bash,style=Matlab-editor,morekeywords={Get-Command}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Economics Department Cluster, and Your Own Cluster}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Economics Department Cluster, and Your Own Cluster},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+Now that we know how to run code in multiple cores, we can take advantage of the availability of powerful computers.
+The Economics Department at Duke has its own cluster of computers that Master's and PhD students can use.
+We will discuss how to set up Python, create scripts and submit them for execution in the cluster.
+After we learn how to use the Economics cluster, we will learn how to use \href{https://m.do.co/c/c2080c9faccc}{DigitalOcean} to gain access to very powerful computers for a limited time.
+\section{Requesting Access to the Cluster}
+\label{sec:org7c24703}
+To access the cluster, you will need a username and password.
+The username for the Econ Cluster is the same as your University NetID username, but the password is different.
+If you do not have a password yet, or do not remember it (if you are a PhD student you were probably assigned a password during your 1st year at Duke), you can request a password by emailing \href{mailto:help@econ.duke.edu}{help@econ.duke.edu}.
+\section{Connecting to the Cluster}
+\label{sec:orgc623136}
+You can think of the Econ Cluster as a collection of several computers, which are managed by some centralized software.
+One of these computers is responsible for handling log in, and is known as the front-end node (or the login node).
+This node is also responsible for receiving and scheduling tasks on the other computers in the cluster.
+
+To log in the Econ Cluster we will use the \href{https://en.wikipedia.org/wiki/Secure\_Shell}{SSH} protocol.
+This protocol was designed to allow two computers to securely communicate over an insecure network.
+If you are using a Mac or Linux-based operating system (like Ubuntu), then you already have what is required to use SSH.
+If you are on Windows, then you will need to install an SSH client.
+A good way to get one is by installing \href{https://git-scm.com/downloads}{Git}.
+After installing Git, you should have a program named \texttt{Git Bash}, which is similar to the \texttt{Terminal} program used on Mac or Ubuntu.
+
+Open the \href{https://support.apple.com/guide/terminal/welcome/mac}{Terminal} program or \texttt{Git Bash}. You should see a window similar to the one depicted in Figure \ref{fig:org50e0690}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_terminal_mac.png}
+\caption{\label{fig:org50e0690}
+Terminal on a Mac.}
+\end{figure}
+
+You can type commands after the dollar sign, and the terminal will interpret the commands and execute them (REPL).
+We will discuss how to use the terminal in the next section.
+
+To log in the Econ Cluster, we will the the \texttt{ssh} command.
+The \texttt{ssh} command uses the syntax:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+ssh username@hostname
+\end{lstlisting}
+Where \texttt{username} is the username you will use to log in, and \texttt{hostname} is the address of the computer host that you will connect to.
+If you are currently inside the Duke network, then the \texttt{hostname} is \texttt{login.econ.duke.edu}.
+In my case, I would execute:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+ssh gfs8@login.econ.duke.edu
+\end{lstlisting}
+Then, I am asked for my password to finish logging in (see Figure \ref{fig:orgf273554}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_ssh_password.png}
+\caption{\label{fig:orgf273554}
+SSH Asking for Password.}
+\end{figure}
+
+After typing your password, you should be greeted with a welcome message and are now connected to the cluster (see Figure \ref{fig:orgee83f1f}).
+You are connected to a \href{https://en.wikipedia.org/wiki/Bash\_(Unix\_shell)}{bash} terminal, which can take commands and will execute them.
+We will discuss these commands in the next section.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_ssh_logged_in.png}
+\caption{\label{fig:orgee83f1f}
+SSH Welcome Message.}
+\end{figure}
+
+If you are outside the Duke network, then you first the need to \texttt{ssh} into the Duke network, and then \texttt{ssh} again into the Econ Cluster.
+To \texttt{ssh} into the Duke network, you should use \texttt{login.oit.duke.edu} as the \texttt{hostname}, but now the username and password are the same you use for logging into Duke websites (like Dukehub).
+After that, you can execute \texttt{ssh} again to log in the Econ Cluster (see Figure \ref{fig:orgb49990c}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_ssh_from_outside.png}
+\caption{\label{fig:orgb49990c}
+SSH From Outside Duke Network.}
+\end{figure}
+\section{Using a Bash Terminal}
+\label{sec:orgb85e659}
+Now that we are connected to the cluster, we can discuss how to use the terminal.
+The terminal window you see is a bash shell.
+A shell is just a user interface to the underlying operating system, and bash refers to the type of interface.
+
+We can interact with the shell either by typing commands and executing them line by line, or by creating script files.
+We will cover some basic commands of the bash shell.
+\subsection{Working Directory}
+\label{sec:org01b87cf}
+The command \texttt{pwd} prints the current working directory:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+pwd
+\end{lstlisting}
+You can change the working directory with the \texttt{cd} command:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: cd folder
+cd /econ
+pwd
+cd /econ/home
+pwd
+cd /econ/home/g/gfs8
+pwd
+cd ..				# .. refers to the parent folder
+pwd
+\end{lstlisting}
+While \texttt{..} represents the parent folder, there is a shortcut for your home folder as well:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+cd ~
+# ~ represents the home folder
+# alternatively
+cd $HOME
+\end{lstlisting}
+\subsection{Creating Folders}
+\label{sec:org66bbf46}
+You have permission to change things around only in your home folder.
+In my case, my home folder is the folder \texttt{/econ/home/g/gfs8}.
+We can create a new folder with the command \texttt{mkdir}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: mkdir folder_name
+mkdir Python
+mkdir Test
+# create multiple folders
+mkdir A B C
+\end{lstlisting}
+\subsection{Listing Files and Folders}
+\label{sec:org337da17}
+We can list all files and folders inside a folder with the command \texttt{ls}.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: ls
+ls
+# display one file or folder per line
+ls -1
+\end{lstlisting}
+You can get a full list of the options a command accepts by reading the manual page of the command.
+You can access the manual page of a command using \texttt{man}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: man command_name
+man ls
+\end{lstlisting}
+\subsection{Deleting Files and Folders}
+\label{sec:org6cddabf}
+We can delete an empty folder with the command \texttt{rmdir}.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: rmdir folder_name
+rmdir Test
+# remove multiple folders
+rmdir A B C
+\end{lstlisting}
+To remove a non-empty folder we need to use the more versatile command \texttt{rm} with the option \texttt{-r}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# create a non-empty folder
+mkdir Test Test/A Test/B
+# check it is non-empty
+ls -1 Test
+# equivalent to
+cd Test
+ls -1
+cd ..
+# try to remove with rmdir
+rmdir Test			# error
+# use rm -r
+rm -r Test			# works
+\end{lstlisting}
+The command \texttt{rm} can also be used to remove files.
+\subsection{Creating Files}
+\label{sec:orgff639cc}
+We can create empty files with the \texttt{touch} command:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: touch file_name
+touch test.txt
+# create multiple files
+touch a.csv b.jpg
+# remove files
+rm test.txt
+# remove multiple files
+rm a.csv b.jpg
+\end{lstlisting}
+We can also create and edit files.
+To edit a file we need an editor.
+Some of the editors available inside the bash terminal are: \href{https://www.nano-editor.org}{nano}, \href{https://www.vim.org}{vim} and \href{https://www.gnu.org/software/emacs/}{emacs}.
+You can create or edit a file with these editors by typing the name of the editor followed by the name of the file.
+The editor \texttt{nano} is the most straightforward to use, however, the editors \texttt{vim} and \texttt{emacs} are extremely powerful and might be worth to learn if you often use your computer to type text into files.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# create a new file with nano
+nano data.csv
+# nano will now open with an empty file
+# type in:
+# 1,21,0
+# 2,28,25000
+# 3,35,70000
+# then use Ctrl-O to save the file, and then Ctrl-X to exit nano
+# create another file
+nano description.txt
+# type in:
+# id,age,income
+\end{lstlisting}
+\subsection{Inspecting Files}
+\label{sec:org8b2afa8}
+You can quickly inspect the contents of a file with the \texttt{cat} command.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# check name of files
+ls -1
+# see contents of data.csv
+cat data.csv
+# see contents of description.txt and data.csv
+cat description.txt data.csv
+\end{lstlisting}
+If the file is too big and you do not want to display its entirety on the screen, you can use the \texttt{head} and \texttt{tail} commands.
+The \texttt{head} command displays the first few lines of a file, while the \texttt{tail} command displays the last lines of a file.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# see first lines of the file
+head data.csv
+# see only first two lines of the file
+head -n 2 data.csv
+# see only the first line of the file
+head -n 1 data.csv
+# see last lines of the file
+tail data.csv
+# see only very last line of the file
+tail -n 1 data.csv
+# display first line of multiple files
+head -n 1 description.txt data.csv
+\end{lstlisting}
+\subsection{Copying and Moving Files}
+\label{sec:org02ac16e}
+To copy files use the \texttt{cp} command.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: cp source_file target_file
+# create a copy of data.csv
+cp data.csv data_copy.csv
+# create a copy of the data inside a data folder
+mkdir Data
+cp data.csv Data/
+ls Data
+\end{lstlisting}
+Files can be moved with the \texttt{mv} command.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# remove the copy of data.csv from the Data folder
+rm Data/data.csv
+ls Data
+# move the original data file to the Data folder
+mv data.csv Data/
+# check the file changed folder
+ls
+ls Data
+\end{lstlisting}
+\section{Bash scripts}
+\label{sec:org92342b8}
+A bash script is just like a Python script: it is a text file containing commands that should be executed line by line.
+We can create a bash script by creating a file with the extension \texttt{.sh}.
+Let's use the command \texttt{echo} to print strings to the terminal window and save them in a script file.
+
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: echo string
+echo "Hello there!"
+echo "How are you?"
+\end{lstlisting}
+Save it in a file (\texttt{nano greetings.sh}):
+
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# greetings.sh
+echo "Hello there!"
+echo "This is a bash terminal."
+echo "Welcome."
+head data.csv
+\end{lstlisting}
+
+We can execute this file with the command \texttt{source}.
+The \texttt{source} command takes a script file and executes it line by line in the current shell.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: source script_name
+source greetings.sh
+\end{lstlisting}
+And you should see the three messages displayed in the shell.
+
+We can use a shell script to execute several programs, including programs in other languages.
+To do so, the shell must be able to find other programs.
+For example, when we typed \texttt{nano} before, the shell searched for the program \texttt{nano} and then executed it with the parameters we passed it.
+We can check whether the terminal can find a program with the command \texttt{which}.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# syntax: which program_name
+# if the program can be found, then the shell
+# displays the path to the program binaries
+which nano
+which emacs
+# if the program cannot be found, then nothing is displayed
+which foo123
+\end{lstlisting}
+If the program cannot be found, then it could either not be available in the machine, or it could be outside of the path of the terminal.
+The path is a list of folders where the terminal searches for programs.
+If the program cannot be found in those folders, then the terminal does not return anything.
+However, if you know in which folder the program lives, then you can specify the full path to it.
+Alternatively, you can add its folder to the search path (this is left for another time, as it introduces some complications).
+
+On the cluster, we have \texttt{Python} installed, but it is a super old version that is quite different from the Python we have been using:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+which python
+python --version
+\end{lstlisting}
+Python3 was launched in 2008, and offers several improvements over the Python2 version of the language.
+These improvements also meant that Python3 is backwards incompatible.
+That is, Python2 code usually does not work with the Python3 interpreter.
+It has been more than a decade since the introduction of Python3, and Python3 is now the standard.
+Python2 still receives minor  updates, but will be officially retired \href{https://pythonclock.org}{soon}.
+
+On the cluster we still have Python2 installed, and I could not find Python3 installed anywhere.
+The solution will be to install Python3 and the packages we want ourselves.
+\section{Installing Python 3 and Packages on the Cluster}
+\label{sec:orgef68c95}
+To install Python, we will use a tool called \href{https://github.com/pyenv/pyenv}{pyenv}.
+It is similar to the \texttt{virtualenv} we used in the very first class, but it can automatically install several different versions of Python.
+To \href{https://github.com/pyenv/pyenv-installer}{install} \texttt{pyenv}, run the following on bash:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# connect to the cluster
+ssh gfs8@login.econ.duke.edu
+# change to ~ folder
+cd ~
+# install pyenv
+curl https://pyenv.run | bash
+\end{lstlisting}
+After the installation is done, create the file \texttt{.bashrc} on your home folder:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+nano ~/.bashrc
+\end{lstlisting}
+Type the following inside your \texttt{.bashrc} file:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+export PATH="/econ/home/g/gfs8/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"(miniconda3-latest)
+\end{lstlisting}
+\textbf{On the first line, instead of \texttt{/g/gfs8/}, change it to reflect your own home folder.}
+
+Whenever you want to work with Python, you should first execute the \texttt{.bashrc} file with the \texttt{source} command.
+It is similar to what we do with \texttt{virtualenv}.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+source ~/.bashrc
+\end{lstlisting}
+We will now install a Python version that comes with a package manager called \texttt{conda}, which work just like \texttt{pip}.
+We are using \texttt{conda} because it can install some packages with less issues than \texttt{pip}, when in a restricted environment.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+pyenv install miniconda3-latest
+conda install numpy scipy matplotlib pandas
+\end{lstlisting}
+We are now ready to begin.
+\section{Submitting Python Code}
+\label{sec:org410159b}
+Let's create a Python script that will perform some computation and save the results.
+Create a file named \texttt{pyscript.py} and type the following:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import numpy as np
+x = np.random.random(200)
+y = np.random.random(200)
+res = x*y*np.exp(y)
+np.savetxt('results.csv', res, delimiter=',')
+\end{lstlisting}
+
+We can now write a bash script that will interact with the operating system and tell Python to execute the script.
+To execute a Python script we would simply call \texttt{python pyscript.py}.
+However, we need to make sure that the correct Python version is available and is being used.
+To do so, we activate our "environment" by calling \texttt{source \textasciitilde{}/.bashrc}.
+We then verify the Python version, and finally execute the script.
+Create the script named \texttt{send\_python.sh} and type the following:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+pwd
+date
+source ~/.bashrc
+python --version
+python pyscript.py
+\end{lstlisting}
+
+We can now run this script:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+source send_python.sh
+\end{lstlisting}
+It will execute the script and display what is happening on the screen.
+After it is done, a file named \texttt{results.csv} should be on your working directory.
+You can check it out with:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+cat results.csv
+\end{lstlisting}
+\section{Slurm: Scheduling Tasks}
+\label{sec:orgf22cc05}
+Bash scripts are important because they are how we can interact with the Econ Cluster.
+Remember, the Cluster is simply a collection of computers being managed by some software.
+The software that manages the Econ Cluster is the \href{https://en.wikipedia.org/wiki/Slurm\_Workload\_Manager}{Slurm Workload Manager}.
+
+In the previous section, we logged in the log-in node of the cluster.
+At that node, we can interact with the cluster via the terminal, and even execute some Python code via a \texttt{bash} script.
+However, Slurm will not allow us to execute a lot of code, or code that takes too long to run.
+Instead, Slurm allows us to submit tasks for it to run and manage.
+That is, we can give Slurm a \texttt{bash} script, and it will allocate the script to some computer in the cluster, run it, and save the results in your home folder.
+In doing so, Slurm allows all users of the Cluster access to powerful computers, but there may be a queue.
+\subsection{Shebang}
+\label{sec:org2cb9b2b}
+The script \texttt{send\_python.sh} is almost ready to be submitted for execution with Slurm.
+It is only missing a \href{https://en.wikipedia.org/wiki/Shebang\_(Unix)}{shebang} line.
+The shebang is the very first line of a text file used as a script, which specifies the interpreter that should be used when executing the file.
+While we could execute our script with \texttt{source}, by adding a shebang to the file, we can execute it as an executable file.
+Create the following test script:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+#!/bin/bash
+# test_shebang.sh
+echo "Hello!"
+\end{lstlisting}
+We can still execute it with \texttt{source}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+source test_shebang.sh
+\end{lstlisting}
+But now, we can execute it as an executable file:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# make the file executable
+chmod +x test_shebang.sh
+# execute it
+./test_shebang.sh
+\end{lstlisting}
+The first line of the script tells the terminal that it should use \texttt{bash} to interpret its contents.
+Slurm needs this shebang to correctly submit the script.
+\subsection{Submitting to the Cluster}
+\label{sec:org9de0f74}
+Modify the \texttt{send\_python.sh} so that its first line is \texttt{\#!/bin/bash}.
+Delete the \texttt{results.csv} file from the folder.
+
+We can submit the \texttt{send\_python.sh} script to Slurm with the command \texttt{sbatch}.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# submit script to Slurm
+sbatch send_python.sh
+\end{lstlisting}
+If there is no immediate issue with the script, Slurm will schedule the script for execution in one of the computers (nodes) of the cluster.
+The scheduled script is called a job.
+Slurm will print the job number on the screen.
+\subsection{The Queue}
+\label{sec:orgc648913}
+After submitting a script for execution, you should have its job number.
+You can use this number to check what is the state of the job.
+We can use the command \texttt{squeue} to see all jobs currently scheduled and being executed.
+See Figure \ref{fig:org2fd1677} for the output of \texttt{squeue}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_squeue.png}
+\caption{\label{fig:org2fd1677}
+Slurm queue after submitting a job.}
+\end{figure}
+
+The job we just submitted has the number \texttt{33759}.
+You can see in the second line after the command \texttt{squeue} that the job has been scheduled.
+The \texttt{NAME} shows the name of the script submitted, \texttt{USER} shows the user who submitted the job (net id), \texttt{ST} shows the state of the job (PD stands for pending, while R stands for running).
+The \texttt{TIME} shows for how long the job has been running.
+In the case of our job it has not started yet, so \texttt{TIME} is \texttt{0:00}.
+Notice that some other users have jobs running for more than 17 hours!
+The \texttt{NODELIST} describes the reason why the job is in the queue.
+In the case of the job we submitted, \texttt{(None)} means the job will be executed next.
+Usually, if there are not enough resources available to execute your script, you will see a \texttt{(Resources)}, which indicates Slurm is waiting for other scripts to finish before executing yours.
+When the script is being executed, \texttt{NODELIST} will show the node (computer) where the script is running.
+
+If we have multiple jobs running, then we can check the status of the jobs submitted only by us (not by everyone).
+We can do so with the option \texttt{-u username}, which displays \texttt{squeue} but only for the specified username.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+squeue -u gfs8
+\end{lstlisting}
+
+See Figure \ref{fig:org5fe8d51} for an example.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_squeue_username.png}
+\caption{\label{fig:org5fe8d51}
+View of Slurm queue for a specified user.}
+\end{figure}
+
+In this case I submitted several jobs.
+The queue shows they are all running, some are running on different nodes, and they have been running for a few seconds already.
+If you run \texttt{squeue -u gfs8} again, then you might see fewer jobs.
+This is because when a job is completed, it does not show up in the queue anymore.
+\subsection{Details on a Job}
+\label{sec:org8778f33}
+We can use the \texttt{sacct} to get information on running and completed jobs we have submitted to Slurm.
+Running \texttt{sacct} will display details for all jobs submitted by you on a certain period of time.
+If you have the job number, then you can use pass it with the option \texttt{-j} to get details about that specific job (see Figure \ref{fig:orgc0e7528}):
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+sacct -j 33759
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_sacct_job.png}
+\caption{\label{fig:orgc0e7528}
+View details of a submitted job.}
+\end{figure}
+
+If you want even more information about a specific job, then you can use the command \texttt{sacct\_ec}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+sacct_ec -j 33759
+\end{lstlisting}
+
+Figure \ref{fig:org16c74ce} displays the output of \texttt{sacct\_ec}.
+Notice it shows the node where the script was executed, and even the start and end time of the script.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_sacct_ec.png}
+\caption{\label{fig:org16c74ce}
+View even more details of a submitted job.}
+\end{figure}
+
+These commands are useful when you submit jobs that might take a long time to execute, or when debugging scripts that are failing to execute.
+\subsection{Canceling a Job}
+\label{sec:org6ba0762}
+You can cancel a job using the \texttt{scancel} command.
+For example, if the job number is 33759, then \texttt{scancel 33759} will cancel the job.
+You can only cancel jobs you started yourself.
+If your script is taking longer than expected to complete, then you might have some bug in your code that is causing it to hang.
+In this case, canceling the job might be required.
+\subsection{Outputs of the Job}
+\label{sec:org1d178a1}
+When a job is submitted and starts running, a file with the name \texttt{slurm-XXXXX.out} is created.
+The \texttt{XXXXX} represents the number of the corresponding job.
+This file contains whatever your script prints to the screen.
+For example, when we executed the \texttt{send\_python.sh} script, it printed a couple of lines on the terminal.
+If we submit this script to Slurm, then the lines that would be printed on the terminal are saved on the \texttt{slurm-XXXXX.out} file.
+
+The \texttt{.out} file can be used as a log of what is happening in your script.
+You can use it to debug your program, since debugging in the cluster is not as straightforward as debugging in your local machine (you cannot stop the execution of the code and inspect variables, for example).
+
+The Python script we submitted also created a file containing the results.
+This file is also saved in our working directory (but this can be changed within the \texttt{send\_python.sh} script with \texttt{cd}).
+When we submit a job with Slurm, our home folder is directly accessible by the job, and behaves as a local drive.
+
+\section{Slurm: Partitions and Nodes}
+\label{sec:orgd8a7c72}
+Slurm organizes the cluster in \texttt{partitions}, where each \texttt{partition} is a set of \texttt{compute nodes} (computers used to run code).
+We can get an overview of the partitions available in the Econ Cluster with the \texttt{sinfo} command.
+Figure \ref{fig:org956fad3} displays the output of \texttt{sinfo}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_sinfo.png}
+\caption{\label{fig:org956fad3}
+Overview of cluster partitions.}
+\end{figure}
+
+Notice there are two partitions, \texttt{common*} and \texttt{common-lm}.
+Different partitions might have different purposes.
+For example, there could be a partition for debugging code, and another for actually submitting tasks.
+In this case, the two partitions are for computing.
+The default partition is marked with an asterisk.
+That is, the partition \texttt{common} is where jobs are submitted to by default.
+
+There are four compute nodes in the default partition. Some of them are in use, other are idle, leading to the \texttt{mix} state.
+In the \texttt{common-lm} partition there are two nodes, which are idle.
+The \texttt{NODELIST} column gives the names of the nodes.
+The nodes in the \texttt{common} partition are \texttt{bafcnm-01}, \texttt{bafcnm-02}, \texttt{comp-node-18} and \texttt{comp-node-19}.
+The nodes in the \texttt{common-lm} partition are \texttt{bafclnm-01} and \texttt{bafcnm-02}.
+
+Notice that the column \texttt{TIMELIMIT} says \texttt{infinite}.
+This is the time limit to which jobs are subject.
+In this case, there is no time limit.
+
+We can display information organized by node instead of partition with the option \texttt{-N}. We can also use the option \texttt{-l} to display extra information.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+sinfo -N -l
+\end{lstlisting}
+
+Figure \ref{fig:org19f4b9a} displays the output of \texttt{sinfo -N -l}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Matlab - 2019/supporting/matlab_sinfo_nodes_long.png}
+\caption{\label{fig:org19f4b9a}
+Overview of cluster nodes.}
+\end{figure}
+
+Notice that some of the nodes have 512 GB of memory, and the nodes in the default partition have 64 GB of memory.
+The nodes in the common partition have more CPUS than the nodes in the \texttt{common-lm} partition.
+The \texttt{S:C:T} column displays the number of sockets in each motherboard\footnote{The socket is the physical space in a computer's motherboard where the physical CPU is placed. Most common motherboards only have one socket. However, motherboards for cluster computers usually have more than one socket. This is the case for the computers in the Econ Cluster. Some of them have 4 sockets, while others have 8 sockets. That is, a single computer can have 4 or 8 different physical CPUs.}, the number of cores in each processor, and the number of threads in each core.
+If you multiple these numbers you get the number in the \texttt{CPUS} column.
+In terms of parallel computing, the number of \texttt{CPUS} is more or less equivalent to the number of parallel process that can be used with \texttt{parfor}.
+
+It is important to know that when you submit a job to Slurm, it does not mean the job will use an entire compute node to execute.
+That is, a single compute node can execute multiple jobs at the same time.
+For example, a single job might use just one of the CPUS of a compute node, so that the other CPUS can be allocated to other jobs.
+It is also possible to have a job use multiple CPUS, including CPUS from more than one compute node.
+On the next section we will see how to request CPUS and memory when submitting jobs to Slurm.
+\section{Slurm: Requirements and Directives}
+\label{sec:orgf3f23fa}
+When it comes to speeding up code execution, we saw that Python allows us to use more than one processor core to speed up loops using the \texttt{concurrent.futures} module.
+With the Econ Cluster, we can submit a job and request a certain number of CPUS to be available.
+Additionally, we can also request a certain amount of memory, so that we do not run into memory issues when launching multiple Python processes on different cores.
+We will see how to specify these requirements using directives.
+\subsection{Directives}
+\label{sec:org545e1c1}
+When we submit a script with \texttt{sbatch}, Slurm checks the script for directives.
+Directives are lines that start with \texttt{\#SBATCH}.
+We can add directives that tell Slurm what resources are required to run the script.
+Slurm then processes these directives and waits until the resources are available to start executing your script.
+This allows us to specify, for example, how many CPUS and memory we need to run the script.
+\subsection{Requesting Memory and CPUs}
+\label{sec:orgc59627c}
+Let's modify the \texttt{send\_python.sh} script to add some directives.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+#!/bin/bash
+# require 12 GB of memory for this job
+#SBATCH --mem=12G
+# require 4 CPUS for this job
+#SBATCH --cpus-per-task=4
+pwd
+date
+source ~/.bashrc
+python --version
+python pyscript.py
+\end{lstlisting}
+The first directive requires a large amount of memory (12 GB).
+Remember that the more processes you launch, the more memory you need, since Python needs to distribute all of the variables to each of the processes.
+If you run into problems executing a parallel code in the cluster, it might be because you requested too little memory.
+If this is the case, either request more memory or reduce the number of workers you require.
+By using the \texttt{-{}-mem} directive, we know that when our code is executed, at least 12 GB of memory will be available.
+
+There is a caveat with the memory directive in Slurm.
+If at some point our code requires more than 12 GB of memory, Slurm will kill the execution of the job.
+This happens even if more memory is available at the node.
+That is, if the node has 64 GB of free memory, but  your code uses more than the 12 GB that were requested, then Slurm will kill the job.
+This means that the \texttt{-{}-mem} directive is binding.
+You must make sure that your program does not use more memory than what was requested.
+
+The second directive requires a node that has at least four available CPUS.
+Contrary to the memory directive, the \texttt{-{}-cpus-per-task} directive will allow your code to use more CPUS if available.
+That is, if Slurm starts executing your job and all CPUS of the node are not in use, then your code may receive more CPUS than were requested.
+This allows us to use \texttt{parfor} to speed the execution of the code.
+If more resources are available, then we might even get more CPUS than requested.
+We will use the built-in module \texttt{os} to obtain the number of physical cores available.
+
+Let's modify the \texttt{pyscript.py} script to run code in parallel:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from concurrent.futures import ProcessPoolExecutor
+import time
+from os import cpu_count
+# Count how many cores were allocated to this job
+total_cpus = cpu_count()
+print(f'Total CPUs Available: {total_cpus}')
+
+
+def slow_computation(x):
+    time.sleep(2)
+    return x
+
+
+# Time code execution as number of CPUS increases
+for cpus in range(1, total_cpus + 1):
+    start = time.perf_counter()
+    with ProcessPoolExecutor(max_workers=cpus) as executor:
+        results = executor.map(slow_computation, range(10))
+    print(f'CPUs: {cpus} | Time: {time.perf_counter() - start:.2f}')
+\end{lstlisting}
+
+The line where \texttt{cpu\_count} is called recovers how many cores are available.
+The number of cores is then used with \texttt{ProcessPoolExecutor} input \texttt{max\_workers}.
+This limits how many cores are used to executor the \texttt{slow\_computation}.
+When \texttt{max\_workers} is one, we are using a single core.
+The \texttt{max\_workers} increases one by one, until all available cores are being used.
+We time the execution of the code for each iteration, and print the findings on the screen.
+The \texttt{print} output is saved in the \texttt{slurm-XXXXX.out} file, which we can later inspect with \texttt{cat}.
+
+Observe that when there is only one core being used, the \texttt{map} becomes a regular for-loop (although the order of execution is random).
+Since we are calling the \texttt{slow\_computation} function 10 times, and each call takes about 2 seconds, then the total time of execution with a single core should be about 20 seconds.
+
+On the next iteration in the for-loop, the variable \texttt{cpus} becomes two.
+Now, we run \texttt{map} using two cores.
+This means that the command \texttt{sleep(2)} will be executed twice at the same time, so the loop will execute faster.
+Indeed, it should take about 5 seconds to execute, since we have two processes (one at each core) paused at the same time.
+
+Since the number of workers in the cluster can be high, the time to execute our script will get progressively smaller.
+After submitting the code with \texttt{sbatch send\_python.sh}, we can inspect the output file.
+Figure \ref{fig:orga624340} displays the output.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Python - 2019/supporting/python_cluster_cores_test.png}
+\caption{\label{fig:orga624340}
+Output of Python script using multiple cores on the cluster.}
+\end{figure}
+
+In this case, even though we only requested four CPUS, many more were available.
+Indeed, we could create a pool of workers with twelve workers!
+\subsection{Multiple Jobs and Transferring Files}
+\label{sec:org1f222b2}
+We have discussed how to submit a single job that uses many cores to speed up computation.
+An alternative paradigm is submitting several different jobs that use a single core, and then collecting all of their results.
+We will consider the example we have been working with on the lecture about concurrency.
+\subsubsection{Financial Data}
+\label{sec:orge8e2598}
+We were working with stock data, computing a statistic and bootstrapping its confidence interval.
+Let's create a script containing several functions.
+We need functions for:
+\begin{itemize}
+\item Loading and cleaning the data;
+\item Computing the statistic of interest;
+\item Obtaining a bootstrap sample;
+\item Combining results to obtain the confidence interval.
+\end{itemize}
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import pandas as pd
+import numpy as np
+import os
+
+
+def load_stocks(tickers):
+    """Computes panel of geometric intraday-returns for stocks."""
+    folder = ('/Users/guilhermesalome/'
+              'Teaching/Duke/Econ890 Python - 2019/supporting/data/StocksHF/')
+
+    # Obtain the data and times from the first file
+    date_times = pd.read_csv(f'{folder}{tickers[0]}.csv',
+                             skiprows=0, header=None, usecols=[0, 1])
+    dt = pd.to_datetime(date_times[0]*10**4+date_times[1], format='%Y%m%d%M%S')
+    dt.name = 'Time'
+
+    # Create extractor to simplify list inside pd.concat
+    def extract(folder, ticker):
+        df = pd.read_csv(f'{folder}{ticker}.csv',
+                         skiprows=0,
+                         header=None)
+        df = df.iloc[:, 2]
+        df.name = ticker
+        return df
+
+    panel = pd.concat([extract(folder, t) for t in tickers], axis=1)
+    panel.index = dt
+    # Compute geometric returns, but only intraday
+    returns = np.log(panel).groupby(panel.index.date).diff()
+    returns = returns.dropna()
+    return returns
+
+
+def computeRV(returns):
+    return returns.groupby(returns.index.date).apply(lambda x: (x**2).sum())
+
+
+def bootstrap_returns(returns):
+    groups = returns.groupby(returns.index.date, group_keys=False)
+    return groups.apply(lambda group: group.sample(n=group.shape[0], replace=True))
+
+
+def getCI(df_iterable):
+    """Computes 99% confidence intervals from a list of pandas data frames."""
+    all_stats = np.array([df.values for df in df_iterable])
+    # Obtain column names
+    cols = df_iterable[0].columns.values
+    # Create multi index indicate this is the lower bound
+    cols_lower = pd.MultiIndex.from_tuples(zip(cols, ['lower']*len(cols)))
+    # Create data frame with lower bound of confidence interval
+    lower = pd.DataFrame(data=np.quantile(all_stats, 0.005, axis=0),
+                         index=df1.index, columns=cols_lower)
+    # Create multi index indicate this is the upper bound
+    cols_upper = pd.MultiIndex.from_tuples(zip(cols, ['upper']*len(cols)))
+    # Create data frame with upper bound of confidence interval
+    upper = pd.DataFrame(data=np.quantile(all_stats, 0.995, axis=0),
+                         index=df1.index, columns=cols_upper)
+    # Merge both frames
+    ci = pd.merge(left=lower, right=upper, left_index=True, right_index=True)
+    # Do a sort on the columns first hierarchy
+    return ci.sort_index(axis=1, level=0)
+\end{lstlisting}
+We have most of the tools we need to speed the code execution using the cluster.
+Before we can actually execute it, we need to first get the stock data from our computer into the cluster.
+\subsubsection{Transferring Files to the Cluster}
+\label{sec:org58e3b13}
+To do so, we will use the command \texttt{scp}, which is similar to the \texttt{ssh} command, but is used to copy files securely.
+The syntax for \texttt{scp} is the following:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+scp file_to_copy username@host:~
+\end{lstlisting}
+The command will take the file named \texttt{file\_to\_copy} and copy it to the folder \texttt{\textasciitilde{}} in the host.
+Remember that \texttt{\textasciitilde{}} represents your home folder.
+
+At the time of writing, I am outside of the Duke network, so there are two steps to copy the data from my laptop to the Econ Cluster.
+First, I need to transfer the data from my laptop to the Duke login node.
+Then, I \texttt{ssh} into the Duke login node and transfer the data from there to the Econ Cluster.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# Locate the file on my laptop
+ls -1
+# fake_data.mat is in the current working directory
+scp fake_data.csv gfs8@login.oit.duke.edu:~
+# will ask for your password and then start transferring the file
+# Now, ssh into the login node of Duke
+ssh gfs8@login.oit.duke.edu
+# check that fake_data.mat is in the current working directory
+ls -1
+# transfer to the Econ Cluster
+scp fake_data.csv gfs8@login.econ.duke.edu:~
+# ssh into the Econ Cluster
+ssh gfs8@login.econ.duke.edu
+# verify that the file was transferred
+ls -1
+\end{lstlisting}
+
+If you are transferring a lot of files, or want a graphical user interface, then you could use the program \href{https://cyberduck.io}{Cyberduck}, for example.
+
+Another option to get files is the command \texttt{wget}.
+If you have your file hosted somewhere online, like on Github.
+Then you can get the url to the file, and use \texttt{wget url} to download the file:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+mkdir PYTHONCLASS
+cd PYTHONCLASS
+wget https://raw.githubusercontent.com/python-for-economists/lecture-notes/master/supporting/data/StocksHF.zip
+unzip StocksHF.zip
+rm StocksHF.zip
+\end{lstlisting}
+\subsubsection{Modifying the Code to Work on the Cluster}
+\label{sec:orgc11b3b9}
+We created a folder named \texttt{PYTHONCLASS} that will have our main python script and our bash script to submit the job to Slurm.
+Inside this folder, we created another folder named \texttt{StocksHF} when we unzipped the \texttt{StocksHF.zip} file.
+The financial data is inside this folder, so we need to update the function \texttt{load\_stocks} to reflect that:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def load_stocks(tickers):
+    """Computes panel of geometric intraday-returns for stocks."""
+    folder = '/econ/home/g/gfs8/PYTHONCLASS/'
+    # rest of the code ...
+\end{lstlisting}
+
+We now need to decide how to break the execution of the code.
+We can split it by stock, for example, letting a single core work on getting the confidence intervals for a single stock.
+Or, we can split the problem even further, by computing the confidence interval for each stock, month by month, and so on.
+Let's try the first approach: split execution by stock.
+
+Create a \texttt{.py} file named \texttt{rv\_conf\_intervals.py}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import pandas as pd
+import numpy as np
+import os
+
+
+def load_stocks(tickers):
+    """Computes panel of geometric intraday-returns for stocks."""
+    folder = '/econ/home/g/gfs8/PYTHONCLASS/StocksHF'
+
+    # Obtain the data and times from the first file
+    date_times = pd.read_csv(f'{folder}{tickers[0]}.csv',
+                             skiprows=0, header=None, usecols=[0, 1])
+    dt = pd.to_datetime(date_times[0]*10**4+date_times[1], format='%Y%m%d%M%S')
+    dt.name = 'Time'
+
+    # Create extractor to simplify list inside pd.concat
+    def extract(folder, ticker):
+        df = pd.read_csv(f'{folder}{ticker}.csv',
+                         skiprows=0,
+                         header=None)
+        df = df.iloc[:, 2]
+        df.name = ticker
+        return df
+
+    panel = pd.concat([extract(folder, t) for t in tickers], axis=1)
+    panel.index = dt
+    # Compute geometric returns, but only intraday
+    returns = np.log(panel).groupby(panel.index.date).diff()
+    returns = returns.dropna()
+    return returns
+
+
+def computeRV(returns):
+    return returns.groupby(returns.index.date).apply(lambda x: (x**2).sum())
+
+
+def bootstrap_returns(returns):
+    groups = returns.groupby(returns.index.date, group_keys=False)
+    return groups.apply(lambda group: group.sample(n=group.shape[0], replace=True))
+
+
+def getCI(df_iterable):
+    """Computes 99% confidence intervals from a list of pandas data frames."""
+    all_stats = np.array([df.values for df in df_iterable])
+    # Obtain column names
+    cols = df_iterable[0].columns.values
+    # Obtain indices
+    indices = df_iterable[0].index
+    # Create multi index indicate this is the lower bound
+    cols_lower = pd.MultiIndex.from_tuples(zip(cols, ['lower']*len(cols)))
+    # Create data frame with lower bound of confidence interval
+    lower = pd.DataFrame(data=np.quantile(all_stats, 0.005, axis=0),
+                         index=indices, columns=cols_lower)
+    # Create multi index indicate this is the upper bound
+    cols_upper = pd.MultiIndex.from_tuples(zip(cols, ['upper']*len(cols)))
+    # Create data frame with upper bound of confidence interval
+    upper = pd.DataFrame(data=np.quantile(all_stats, 0.995, axis=0),
+                         index=indices, columns=cols_upper)
+    # Merge both frames
+    ci = pd.merge(left=lower, right=upper, left_index=True, right_index=True)
+    # Do a sort on the columns first hierarchy
+    return ci.sort_index(axis=1, level=0)
+\end{lstlisting}
+
+We have a couple of things missing:
+\begin{enumerate}
+\item Need to get the tickers (AAPL, BA, BAC) from the csv files;
+\item Choose one of the tickers to run the code;
+\item Obtain the confidence intervals;
+\item Save the results with the appropriate name.
+\end{enumerate}
+
+How do we choose one of the tickers to run the code?
+Since we will be launching several jobs, each responsible for one stock, we need to have a way to change which stock will be used at each job.
+The solution to this problem is a Slurm directive called \texttt{-{}-array}.
+Consider the following bash script:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+#!/bin/bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH --array=1-12
+python rv_conf_intervals.py
+\end{lstlisting}
+We can use the \texttt{-{}-array} directive to submit multiple jobs with Slurm.
+The directive \texttt{-{}-array=1-10} will launch ten different jobs, numbered from 1 to 10.
+Each job will execute our Python script.
+Since each job has a different number, each job will create a separate \texttt{.out} output file.
+However, this output file is just what is displayed in the terminal, and is mainly used for debugging.
+
+When we submit a job with \texttt{-{}-array}, a variable is created with the number of the number of the job.
+We can pass this variable to the Python script and use it to select which stock should be used.
+The variable name that holds the job number is \texttt{SLURM\_ARRAY\_TASK\_ID}.
+We can access its value in the \texttt{bash} script with \texttt{\$SLURM\_ARRAY\_TASK\_ID}.
+We can then pass this value to the Python script:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+#!/bin/bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH --array=1-12
+python rv_conf_intervals.py $SLURM_ARRAY_TASK_ID
+\end{lstlisting}
+Now, inside the \texttt{rv\_conf\_intervals.py} script, we can access the value of the variable  \texttt{SLURM\_ARRAY\_TASK\_ID}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import sys
+
+print(f'Script Name: {sys.argv[0]'}
+print(f'SLURM_ARRAY_TASK_ID = {sys.argv[1]}')
+# the variables are passed as strings, so we need to conver to the appropriate format
+job_number = int(sys.argv[1])
+\end{lstlisting}
+We can use this number to decide which stock to use.
+
+After obtaining the confidence intervals, we need to store the resulting data frame in a file.
+We can do so, with the data frame method \texttt{to\_csv}.
+
+Let's modify the \texttt{rv\_conf\_intervals.py} script to incorporate these changes:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import pandas as pd
+import numpy as np
+import os
+import sys
+import time
+
+
+folder = '/econ/home/g/gfs8/PYTHONCLASS/StocksHF/'
+
+# Create a main function that will connect all the pieces
+def main(folder=folder):
+    # Obtain job number
+    # Remember that try blocks do not create a new scope
+    try:
+        job_number = int(sys.argv[1])
+    except IndexError:
+        message = ("Expected a job number to be passed to the script. "
+                   "This script should be executed via the CLI. "
+                   "Specifically: python rv_conf_intervals.py $SLURM_ARRAY_TASK_ID")
+        raise IndexError(message)
+    except ValueError:
+        message = (f"Expected an integer, but got a {type(sys.argv[1])}.")
+
+    # Obtain tickers
+    tickers = sorted([f.strip('.csv') for f in os.listdir(folder) if f.endswith('.csv')])
+    print(tickers)
+
+    # Load data
+    # we need to pass an iterable, even if it only has one element
+    print(f"Loading returns: {tickers[job_number]}")
+    ret = load_stocks([tickers[job_number]])
+    total_bsamples = 10
+    print(f"Bootstrap loop with {total_bsamples} samples")
+    df_iterable = [computeRV(bootstrap_returns(ret)) for _ in range(total_bsamples)]
+    print("Computing confidence intervals")
+    ci = getCI(df_iterable)
+    print("Storing results")
+    results_file = f'RV_CI_{tickers[job_number]}.csv'
+    ci.to_csv(results_file)
+    print("Done!")
+
+
+def load_stocks(tickers, folder=folder):
+    """Computes panel of geometric intraday-returns for stocks."""
+    # Obtain the data and times from the first file
+    date_times = pd.read_csv(f'{folder}{tickers[0]}.csv',
+                             skiprows=0, header=None, usecols=[0, 1])
+    dt = pd.to_datetime(date_times[0]*10**4+date_times[1], format='%Y%m%d%M%S')
+    dt.name = 'Time'
+
+    # Create extractor to simplify list inside pd.concat
+    def extract(folder, ticker):
+        df = pd.read_csv(f'{folder}{ticker}.csv',
+                         skiprows=0,
+                         header=None)
+        df = df.iloc[:, 2]
+        df.name = ticker
+        return df
+
+    panel = pd.concat([extract(folder, t) for t in tickers], axis=1)
+    panel.index = dt
+    # Compute geometric returns, but only intraday
+    returns = np.log(panel).groupby(panel.index.date).diff()
+    returns = returns.dropna()
+    return returns
+
+
+def computeRV(returns):
+    return returns.groupby(returns.index.date).apply(lambda x: (x**2).sum())
+
+
+def bootstrap_returns(returns):
+    groups = returns.groupby(returns.index.date, group_keys=False)
+    return groups.apply(lambda group: group.sample(n=group.shape[0], replace=True))
+
+
+def getCI(df_iterable):
+    """Computes 99% confidence intervals from a list of pandas data frames."""
+    all_stats = np.array([df.values for df in df_iterable])
+    # Obtain column names
+    cols = df_iterable[0].columns.values
+    # Obtain indices
+    indices = df_iterable[0].index
+    # Create multi index indicate this is the lower bound
+    cols_lower = pd.MultiIndex.from_tuples(zip(cols, ['lower']*len(cols)))
+    # Create data frame with lower bound of confidence interval
+    lower = pd.DataFrame(data=np.quantile(all_stats, 0.005, axis=0),
+                         index=indices, columns=cols_lower)
+    # Create multi index indicate this is the upper bound
+    cols_upper = pd.MultiIndex.from_tuples(zip(cols, ['upper']*len(cols)))
+    # Create data frame with upper bound of confidence interval
+    upper = pd.DataFrame(data=np.quantile(all_stats, 0.995, axis=0),
+                         index=indices, columns=cols_upper)
+    # Merge both frames
+    ci = pd.merge(left=lower, right=upper, left_index=True, right_index=True)
+    # Do a sort on the columns first hierarchy
+    return ci.sort_index(axis=1, level=0)
+
+
+# Call the main function after everything is defined
+start = time.perf_counter()
+main()
+print(f"Total Time: {time.perf_counter() - start} seconds")
+\end{lstlisting}
+
+The variable \texttt{job\_number} is initialized by the \texttt{bash} script.
+We use it to select the stock ticker, which in turns defines the name for the \texttt{.csv} file which holds the results.
+Thus, each job, which has its own unique number, will create a unique \texttt{.csv} file.
+This also has the advantage that if some job fails (a bug, or takes too much resource, or bad weather), then we can quickly find it.
+We can also use the \texttt{job\_number} to set the seed for random number generation, for example.
+
+Create the bash script \texttt{send\_rv\_conf\_intervals.sh}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+#!/bin/bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4G
+#SBATCH --array=0-11
+echo $SLURM_ARRAY_TASK_ID
+source ~/.bashrc
+pwd
+date
+python --version
+python rv_conf_intervals.py $SLURM_ARRAY_TASK_ID
+\end{lstlisting}
+We use the directive \texttt{-{}-mem-per-cpu} to specify how much memory should be available to each CPU.
+Since we are launching multiple jobs with a single CPU each, this defines how much memory should be available per job.
+Notice we change the values passed by \texttt{-{}-array} so that they match how many stocks we have, and also the way Python indexes lists (starting at 0).
+
+We can submit the script to Slurm and verify that indeed 12 jobs were created:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# Submit script for execution
+sbatch send_rv_conf_intervals.sh
+#+END_SRC bash
+
+A job id is assigned.
+Look at all jobs that were created:
+#+ATTR_LATEX: :options style=bash
+#+BEGIN_SRC bash -n
+squeue -u gfs8
+#+END_SRC bash
+
+Notice that =JOBID= follows the fomrat =xxxxxx_y=, where =xxxxxx= is the job id, and =y= is the job number specified in the =--array= directive.
+Also notice that many =slurm-xxxxxx_y.out= files were created:
+#+ATTR_LATEX: :options style=bash
+#+BEGIN_SRC bash -n
+ls -1 slurm-*
+# The * above expands slurm- to all existing filenames that
+# begin with slurm-
+# To print in the correct order (sorted numerically instead of alphabetically):
+ls -1 -v slurm*
+# To see the output of all the .out files, we need to pass the results of the
+# ls command as the input of the cat command:
+ls -1 -v slurm* | xargs cat
+#+END_SRC bash
+
+The jobs should be done now:
+#+ATTR_LATEX: :options style=bash
+#+BEGIN_SRC bash -n
+squeue -u gfs8
+\end{lstlisting}
+
+Notice that the .csv files were created:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+ls -1 *.csv
+# We can sort the names numerically with the option -v
+ls -1 -v *.csv
+\end{lstlisting}
+
+We can print them on the screen with \texttt{cat}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+cat *.csv
+\end{lstlisting}
+The directive \texttt{-{}-array} takes a range of numbers, like \texttt{1-10}, and launches jobs using those numbers to create the job ids.
+However, the range of numbers can be discontinuous.
+For example, the directive \texttt{-{}-array=1-3,5,7-10} would launch jobs with ids 1, 2, 3, 5, 7, 8, 9 and 10, skipping the ids 4 and 6.
+It is also possible to use \texttt{-{}-array=7} to launch a single job with that id number.
+The single value or discontinuous \texttt{-{}-array} directives are useful for resubmitting a specific job that failed.
+\subsubsection{Observations}
+\label{sec:org7ee78a7}
+When we submitted the code to the cluster, we set the number of bootstrap samples to a low number (10).
+In practice, however, we would need that number to be much higher, at least 1000.
+When the number of bootstrap samples is much higher, the code will take a long time to run, and the \texttt{.out} file will be updated very infrequently.
+To force the file to be updated, we need to modify the \texttt{print} commands to \texttt{print(..., flush=True)}.
+
+We can get a sense for how much memory our code needs, by computing how many bytes of memory the data frame objects use.
+The method \texttt{getsizeof} of the \texttt{sys} module returns the size (in bytes) of any Python object:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import sys
+ret = load_stocks(['AAPL'])
+print(f"Size of Returns Data Frame: {sys.getsizeof(ret)*10**-6} MB")
+rv = computeRV(ret)
+print(f"Size of Data Frame: {sys.getsizeof(rv)*10**-6} MB")
+\end{lstlisting}
+It does not seem our script will use a lot of memory.
+In our bash script, we requested for 4 gigabytes of memory, which should be more than enough.
+\section{Digital Ocean}
+\label{sec:org189c16f}
+The Economics Cluster can be used to speed up computation, but is limited to current Duke students and faculty, and, at times, can be difficult to use due to large queues.
+Companies that offer \href{https://en.wikipedia.org/wiki/Infrastructure\_as\_a\_service}{infrastructure as a service (IAAS)} come to the rescue when we need to use a cluster (or one powerful computer), but can no longer access the department cluster.
+These companies basically offer compute power by the hour.
+For example, we can start a computer with however many cores and memory we require, install the software we need, run our code, extract the results, and then shut off the computer.
+This setup can be very efficient, since you only need to pay for the hours you use, eliminating the high fixed cost of buying and setting up a high-performance computer.
+
+We will use \href{https://m.do.co/c/c2080c9faccc}{DigitalOcean} due to its simplicity, but other companies also offer similar services (\href{https://cloud.google.com/compute/}{Google Compute Engine} and \href{https://aws.amazon.com/ec2/}{Amazon EC2}).
+The service itself is not free, but if you sign up for \href{https://m.do.co/c/c2080c9faccc}{DigitalOcean} following this link, then you will get a \$50 credit to spend over 30 days.
+You can also get more credit for being a student by signing up for Github's education package.
+\subsection{Modifying Code to Work on a Single Computer with Several Cores}
+\label{sec:org9c4b9c4}
+We will use \href{https://m.do.co/c/c2080c9faccc}{DigitalOcean} to run our bootstrapping code on a single computer with several cores.
+To do so, we will use the \texttt{concurrent} module.
+The idea is to have each core execute the \texttt{main} function for a different stock, saving the results on a folder as the function finishes running.
+Let's modify the code to account for the new architecture:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import pandas as pd
+import numpy as np
+import os
+import sys
+import time
+from concurrent import futures
+
+
+# Create a main function that will connect all the pieces
+def main(job_number, folder, total_bsamples=10):
+    # Load data
+    # we need to pass an iterable, even if it only has one element
+    ret = load_stocks([tickers[job_number]], folder)
+    df_iterable = [computeRV(bootstrap_returns(ret)) for _ in range(total_bsamples)]
+    ci = getCI(df_iterable)
+    results_file = f'RV_CI_{tickers[job_number]}.csv'
+    ci.to_csv(results_file)
+    return True
+
+
+def load_stocks(tickers, folder):
+    """Computes panel of geometric intraday-returns for stocks."""
+    # Obtain the data and times from the first file
+    date_times = pd.read_csv(f'{folder}{tickers[0]}.csv',
+                             skiprows=0, header=None, usecols=[0, 1])
+    dt = pd.to_datetime(date_times[0]*10**4+date_times[1], format='%Y%m%d%M%S')
+    dt.name = 'Time'
+
+    # Create extractor to simplify list inside pd.concat
+    def extract(folder, ticker):
+        df = pd.read_csv(f'{folder}{ticker}.csv',
+                         skiprows=0,
+                         header=None)
+        df = df.iloc[:, 2]
+        df.name = ticker
+        return df
+
+    panel = pd.concat([extract(folder, t) for t in tickers], axis=1)
+    panel.index = dt
+    # Compute geometric returns, but only intraday
+    returns = np.log(panel).groupby(panel.index.date).diff()
+    returns = returns.dropna()
+    return returns
+
+
+def computeRV(returns):
+    return returns.groupby(returns.index.date).apply(lambda x: (x**2).sum())
+
+
+def bootstrap_returns(returns):
+    groups = returns.groupby(returns.index.date, group_keys=False)
+    return groups.apply(lambda group: group.sample(n=group.shape[0], replace=True))
+
+
+def getCI(df_iterable):
+    """Computes 99% confidence intervals from a list of pandas data frames."""
+    all_stats = np.array([df.values for df in df_iterable])
+    # Obtain column names
+    cols = df_iterable[0].columns.values
+    # Obtain indices
+    indices = df_iterable[0].index
+    # Create MultiIndex for the lower bound
+    cols_lower = pd.MultiIndex.from_tuples(zip(cols, ['lower']*len(cols)))
+    # Create df for the lower bound of confidence interval
+    lower = pd.DataFrame(data=np.quantile(all_stats, 0.005, axis=0),
+                         index=indices, columns=cols_lower)
+    # Create MultiIndex for the upper bound
+    cols_upper = pd.MultiIndex.from_tuples(zip(cols, ['upper']*len(cols)))
+    # Create df for the upper bound of confidence interval
+    upper = pd.DataFrame(data=np.quantile(all_stats, 0.995, axis=0),
+                         index=indices, columns=cols_upper)
+    # Merge both frames
+    ci = pd.merge(left=lower, right=upper, left_index=True, right_index=True)
+    # Do a sort on the columns first hierarchy
+    return ci.sort_index(axis=1, level=0)
+
+
+
+# Execute main() for the different stock tickers
+total_cpus = os.cpu_count()
+print(f"Total CPUs: {total_cpus}")
+folder = '/Users/guilhermesalome/Teaching/Duke/Econ890 Python - 2019/supporting/data/StocksHF/'
+tickers = sorted([f.strip('.csv') for f in os.listdir(folder) if f.endswith('.csv')])
+
+start = time.perf_counter()
+with futures.ProcessPoolExecutor(max_workers=total_cpus) as executor:
+    to_do = {}
+    for i in range(len(tickers)):
+        future = executor.submit(main, job_number=i, folder=folder, total_bsamples=10)
+        to_do[future] = i
+        print(f"Scheduled {tickers[i]} at {future}")
+    results = {}
+    for future in futures.as_completed(to_do.keys()):
+        i = to_do[future]
+        value = future.result()
+        results[tickers[i]] = value
+        print(f'{tickers[i]}: {value}')
+stop = time.perf_counter()
+print(f"Total Time: {stop - start} seconds")
+\end{lstlisting}
+Test the code works with a few bootstrap samples and two cores.
+The only change necessary to make this code work on a different computer is to \textbf{\textbf{change the \texttt{folder} variable}} to the appropriate value.
+\subsection{Launching a Droplet}
+\label{sec:org74f49b8}
+DigitalOcean uses the word droplet to refer to their compute nodes.
+To launch a droplet, first log in with your account, then go on the menu \texttt{Manage} and click on \texttt{Droplets} (see Figure \ref{fig:orgae1054d}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Python - 2019/supporting/python_digital_ocean_droplet.png}
+\caption{\label{fig:orgae1054d}
+Droplets menu when no Droplets exist.}
+\end{figure}
+
+Click on \texttt{Create Droplet}, and a new page should open.
+On the new page, choose the following options:
+\begin{itemize}
+\item Distributions: Ubuntu 18 x64
+\item Choose a plan: CPU Optimized, option with 4 GB of memory 2 CPUs
+\item Choose a datacenter region: New York or San Francisco
+\item Authentication: One-time password
+\end{itemize}
+Then click on the button to create the droplet.
+At the time of writing, this system costs 0.06 dollars per hour.
+\textbf{\textbf{You will be charge this amount per hour, and the charge will only stop after you shut down and delete your droplet.}}
+
+The droplet will be initialized, and you will receive an email with the password to log in on the droplet.
+After the droplet is done initializing, you should see a page similar to the one depicted in Figure \ref{fig:org9848ced}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Python - 2019/supporting/python_droplet_created.png}
+\caption{\label{fig:org9848ced}
+Droplet was initialized and is now available for usage.}
+\end{figure}
+
+You can use \texttt{ssh} to connect to the droplet. The username is \texttt{root}, and the host name is the ip address of the droplet, which was sent to your email and is also shown on the website.
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+ssh root@159.65.231.37
+\end{lstlisting}
+You should answer \texttt{yes} to the security question.
+After connecting, you will be immediately prompted for changing your password.
+After that, we will need to install Python and all the packages we require.
+Ubuntu, which is the operating system of our droplet, has an application for downloading packages and installing them: \texttt{apt-get}.
+You can think of it as an "App Store" that you use via the command line interface (CLI).)
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# update the packages available in the "app store"
+apt-get update
+# install python 3 and the package manager pip
+apt-get install python3 python3-pip
+# in some systems, python is installed as python3
+python3 --version
+# the same thing goes for pip
+pip3 --version
+# install virtualenv
+pip3 install virtualenv
+# create new virtual environment
+virtualenv py36 -p python3
+# activeate environment
+source py36/bin/activate
+# update pip
+pip install -U pip
+# install required packages
+pip install numpy pandas
+\end{lstlisting}
+\subsection{Getting the Code on the Droplet}
+\label{sec:org4b8e319}
+Get the data on the droplet with \texttt{wget}:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/python-for-economists/lecture-notes/master/supporting/data/StocksHF.zip
+# install unzip
+apt-get install unzip
+# unzip data
+unzip StocksHF.zip
+rm StocksHF.zip
+# copy the script to the computer
+nano rv_conf_intervals.py
+\end{lstlisting}
+Remember to update the variable \texttt{folder}.
+
+\subsection{Executing and Extracting the Results}
+\label{sec:org547b366}
+We can now run the code by simply typing \texttt{python rv\_conf\_intervals.py}.
+Always test the code with a smaller sample and a small number of cores.
+This is important to iron out any other issues that might appear, and to keep costs low while we are testing.
+To extract the results from the computer you can use \texttt{scp}, Git and Github, Cyberduck, or any other method you prefer.
+
+After you test your code on a smaller droplet, you may choose to increase the number of CPUs available to the script.
+It is easy to do that in DigitalOcean.
+Go back to the droplet page, and look for the menu option "More" and then choose "Resize".
+On the "Resize" page (see Figure \ref{fig:orgc5e064e}), you can increase the number of CPUs and memory available to your droplet.
+This requires the droplet to temporarily shut down.
+When it turns on again, all your files and packages are still going to be in the same place, and you can just run the code.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Python - 2019/supporting/python_resize_droplet.png}
+\caption{\label{fig:orgc5e064e}
+Droplet resize page.}
+\end{figure}
+
+When the droplet finishes resizing, you need to turn it on again (by clicking on the turn on button at the top of the page).
+Then, use \texttt{ssh} to connect back to the droplet.
+You can now execute your code with far more bootstrap samples:
+\lstset{language=bash,label= ,caption= ,captionpos=b,firstnumber=1,numbers=left,style=bash}
+\begin{lstlisting}
+# connect to droplet
+ssh root@159.65.231.37
+# activate environment
+source py36/bin/activate
+# update number of bootstrap samples in the script to 1000
+emacs rv_conf_intervals.py
+# total_bsamples=1000
+# run the code
+python3 rv_conf_intervals.py
+\end{lstlisting}
+Notice that we are only launching 12 new Python processes, and our code does not make use of more than 13 cores.
+If you get a computer with more than 13 cores, you should try to adapt your code to make use of all of the compute power.
+Otherwise, use a computer with less cores to keep costs low.
+
+After the code is done running, retrieve its results.
+Then, if you are done, destroy the droplet to stop charges to your account (see Figure \ref{fig:orgb6ad212}).
+When the droplet is destroyed, all of the files are permanently deleted.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/Users/guilhermesalome/Teaching/Duke/Econ890 Python - 2019/supporting/python_destroy_droplet.png}
+\caption{\label{fig:orgb6ad212}
+Destroy the Droplet to limit costs.}
+\end{figure}
+
+\section{Assignment}
+\label{sec:orgacf567d}
+\begin{problem}
+Modify the scripts \texttt{send\_rv\_conf\_intervals.sh} and \texttt{rv\_conf\_intervals.py} so that a new folder is created to store the resulting \texttt{.csv} files.
+If the folder already exists, the files inside it should be deleted before the script runs.
+\end{problem}
+
+\begin{problem}
+Create a Python script that takes all of the \texttt{.csv} files generated by the script \texttt{rv\_conf\_intervals.py} and creates a single pandas data frame containing all of the results. Then save the results in a \texttt{.csv} file.
+\end{problem}
+
+\begin{problem}
+What is the \href{https://en.wikipedia.org/wiki/Hierarchical\_Data\_Format}{Hierarchical Data Format} useful for?
+Does pandas offer any API to deal with HDF files?
+If so, describe how to use this API (how to save a data frame in this format, how to load a data frame saved in the format).
+\end{problem}
+
+\begin{problem}
+Modify \texttt{rv\_conf\_intervals.py} to use the HDF file format.
+Save the results in this format.
+Compare the file sizes with the \texttt{.csv} file sizes.
+What are the pros and cons of using the HDF file format when compared to the \texttt{.csv} format?
+\end{problem}
+
+\begin{problem}
+Compare the advantages and disadvantages of the following takes on parallel computing with the cluster:
+\begin{itemize}
+\item Launching a single job that uses multiple cores;
+\item Launching several jobs that use a single core.
+\item Launching several jobs that use several cores.
+\end{itemize}
+\end{problem}
+
+\begin{problem}
+Assume you mistakenly launched several jobs with the \texttt{-{}-array=1-500000} directive. Instead of typing \texttt{scancel job\_id} for each job, how would you use \texttt{scancel} to cancel all of the jobs you submitted at once?
+\end{problem}
+
+\begin{problem}
+(Optional)
+
+Consider a deterministic growth model, where an agent decides between consumption (\(c_t\)) and investment in capital (\(k_t\)), while maximizing his utility.
+We can write this problem as:
+\begin{align*}
+  \max&\sum_{t=0}^{\infty}\beta^tU(c_t)\\
+  \text{subject to }&
+                      \begin{cases}
+                        k_{t+1} = k_t^{\alpha} - c_t + (1-\delta)k_t, \forall t >= 0\\
+                        k_0 > 0
+                      \end{cases}
+\end{align*}
+Write the problem as a \href{https://en.wikipedia.org/wiki/Bellman\_equation}{Bellman equation}.
+Let \(U(c; \sigma)=\frac{c^{1-\sigma}-1}{1-\sigma}\).
+Obtain the Euler equation for this problem in terms of the consumption \(c\).
+Solve the problem by Value Function Iteration.
+Consider \(\sigma=2\), \(\beta=0.95\), \(\delta=0.1\) and \(\alpha=0.33\).
+Use the steady state value of \(k\) to create a grid for the possible values of \(k\), say \(100\) points between \(0.25 k^*\) and \(1.75 k^*\).
+Start with a guess for \(V\) over the grid, for example \(V(k)=0\) for all \(k\) in the grid.
+Use a minimization function to solve for \(k\).
+You may want to add the constraint that \(c\) should always be positive.
+
+Use the Econ Cluster to speed up the solution of this problem.
+Compare the speed gain with solving the problem using your local computer.
+\end{problem}
+\end{document}
