@@ -1,0 +1,610 @@
+% Created 2019-07-30 Tue 16:28
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[style=authoryear,natbib]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{/Users/guilhermesalome/Dropbox/references.bib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage[]{algorithm2e}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\E}[1]{\mathbb{E}{\left[#1\right]}}
+\newcommand{\EQ}[1]{\mathbb{E}_t^{\mathbb{Q}}{\left[#1\right]}}
+\newcommand{\EP}[1]{\mathbb{E}_t^{\mathbb{P}}{\left[#1\right]}}
+\newcommand{\e}[1]{\text{e}^{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\dis}{\overset{d}{\sim}}
+\newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
+\newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\stdnormal}{\mathcal{N}\left(0, 1\right)}
+\newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\Poisson}[1]{\text{Poisson}\left(#1\right)}
+\newcommand{\Uniform}[1]{\text{Unif}#1}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+\newtheorem{problem}{Problem}
+\usepackage[hang,small,bf]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{resizegather}
+\usepackage{multirow}
+\definecolor{darkgreen}{rgb}{0.1, 0.6, 0.1}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{listings}
+\lstdefinestyle{bash}{language=bash,style=Matlab-editor,morekeywords={ssh,cd,pwd,mkdir,ls,man,rmdir,rm,nano,vim,emacs,cat,cp,mv,echo,head,tail,which}}
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+\lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\lstdefinestyle{powershell}{language=bash,style=Matlab-editor,morekeywords={Get-Command}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{}
+\fancyhf{}
+\rfoot{Page \thepage}
+\usepackage{ifthen}
+\rhead{\ifthenelse{\value{page}=1}{Guilherme Salom\'{e}}{Summer \the\year}}
+\lhead{\ifthenelse{\value{page}=1}{Econ890-04 Python}{Econ890-04 Python}}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{listings}
+\date{}
+\title{Plotting with Matplotlib}
+\hypersetup{
+ pdfauthor={Guilherme Salomé},
+ pdftitle={Plotting with Matplotlib},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+Matplotlib is a library built for creating high-quality plots.
+It provides control over several aspects of plots, can be used with Latex, can generate animations, and can output plots in various formats (like png, jpg and PDF).
+Furthermore, Matplotlib is a building block for \href{https://matplotlib.org/thirdpartypackages/index.html}{several other libraries} (\href{http://holoviews.org/index.html}{HoloViews}, \href{https://bokeh.pydata.org/en/latest/}{Bokeh} and \href{http://seaborn.pydata.org}{seaborn} are interesting projects).
+\section{Install}
+\label{sec:org6cc8feb}
+Matplotlib can be installed with \texttt{pip}.
+After activating your environment in the terminal, run:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+pip install matplotlib
+\end{lstlisting}
+Now \texttt{matplotlib} is available for Python and can be imported with:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import matplotlib
+\end{lstlisting}
+All of the Matplotlib functionality can now be accessed via the object \texttt{matplotlib}.
+Matplotlib offers all of the plotting functionality in the sub-package \texttt{pyplot}, which can be imported as:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+\end{lstlisting}
+Which makes the \texttt{matplotlib.pyplot} functionality available via \texttt{plt}.
+
+While using jupyter notebook, we will also execute a special command that starts with the percentage symbol.
+These type of commands are particular to jupyter and are not part of the Python language.
+These commands are used to configure how the notebook interacts with certain features of Python.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+%matplotlib inline
+\end{lstlisting}
+This command enables the display of figures directly in the notebook in the result part of the code cell.
+An alternative, would be \texttt{\%matplotlib}, which would open a window outside the notebook.
+You read more about it \href{https://ipython.readthedocs.io/en/stable/interactive/magics.html\#magic-matplotlib}{on the reference page}.
+\section{Basics}
+\label{sec:org6dd3bcc}
+Matplotlib offers two different styles for plotting: a high-level approach and a object-oriented approach.
+The high-level approach is convenient for quick plots:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import numpy as np
+x = np.linspace(0, 2*np.pi, 100)
+y = np.cos(x)
+
+# Plot the graph of y
+plt.plot(x, y, 'k-', linewidth=1.5)
+plt.show()
+\end{lstlisting}
+The function \texttt{plot} takes care of creating the figure window, adding the axes and then plotting the curve.
+While this is simple and convenient in some cases, it also creates several variables in the \texttt{plt} namespace without alerting the user.
+
+The second approach, and the one that is more Pythonic (to see Python guidelines type \texttt{import this}), makes the creation of the figure more explicit:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+fig, ax = plt.subplots()
+# subplots creates a window figure and the axes for plotting,
+# and then returns both objects
+ax.plot(x, y, 'k-', linewidth=1)
+fig.show()
+\end{lstlisting}
+This second approach is object-oriented, since we use the methods of the object \texttt{ax} to create draw the plot on the figure.
+This approach is explicit on what it is doing, but also offers more fine control over the plot.
+\section{Scatter Plots}
+\label{sec:org7711c3a}
+Let's generate some fake data to plot:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import numpy as np
+noise = np.random.normal(size=(1000, 1))
+x = np.random.normal(size=(1000, 1))
+beta = np.random.uniform(size=(1, 1))
+y = x@beta + noise
+\end{lstlisting}
+We will create a scatter plot while specifying many of the options that you might use in your own plots.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Create figure and axis:
+fig, ax = plt.subplots(nrows=1,
+                       ncols=1,
+                       figsize=(12, 6))
+# nrows, ncols: used for multiple plots in a single figure
+# figsize: changes figure window size (length, height)
+
+# Scatter plot:
+ax.scatter(x, y,
+           color='black',       # color of points
+           marker='o',          # marker style
+           alpha=1,             # transparency
+           label='Points: $(x,y)$')
+# label: label for legend,
+# notice the use of Latex works in matplotlib
+
+# Add a single point:
+ax.scatter(0, 0, s=50,          # s for marker size
+           color=(1, 0, 0),     # color specified as RGB triple
+           marker='*',          # marker style
+           label='Special Point: $(0,0)$')  # notice the use of Latex
+
+# Add title and labels:
+ax.set(title='Scatter Plot Example',
+       xlabel='Value of $x$',
+       ylabel='Value of $y$')
+
+# For more control over title and labels:
+ax.set_title('Scatter Plot Example',
+             fontdict={'fontsize': 18,  # in pixels
+                       'fontweight': 'bold'})
+# fontweight: can be an int, like 600, but varies with font
+ax.set_xlabel('Value of $x$', fontdict={'fontsize': 12}, labelpad=12)
+ax.set_ylabel('Value of $y$', fontdict={'fontsize': 12}, labelpad=12)
+
+# Change range of values on axis:
+ax.set_xlim((-6, 6))
+ax.set_ylim((-10, 10))
+# Same as:
+ax.set_xlim(left=-6, right=6)
+ax.set_ylim(bottom=-10, top=10)
+
+# Add legends:
+ax.legend(loc='best',
+          fontsize=18)
+# loc: 'upper right', 'center right', 'lower right', and so on
+
+# Turn on a semi-transparent grid:
+ax.grid(True, alpha=0.5)
+
+# Save figure:
+fig.savefig('scatter-plot.png', dpi=300)
+fig.show()
+
+# Close figure window:
+plt.close(fig)
+\end{lstlisting}
+Notice the use of \texttt{\$ \$} on labels.
+Matplotlib understands Latex expressions without the need of any other adjustment.
+\section{Line Plots}
+\label{sec:org79e92a2}
+Let's create a line plot of the data:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Estimate linear model
+beta_hat = np.linalg.inv(x.T@x)@x.T@y
+x_min = 1.1*x.min()
+x_max = 1.1*x.max()
+x_values = np.linspace(x_min, x_max)
+y_values = x_values
+# Create figure and axis
+fig, ax = plt.subplots(nrows=1,
+                       ncols=1,
+                       figsize=(12, 6))
+# Line plot:
+ax.plot(x_values, y_values,
+        color='black',
+        alpha=1,
+        label='Points: $(x,y)$')
+# add title and labels
+ax.set(title='Scatter Plot Example',
+       xlabel='Value of $x$',
+       ylabel='Value of $y$')
+# change range of values on axis
+ax.set_xlim([-6, 6])
+ax.set_ylim([-10, 10])
+# add legends
+ax.legend()
+# turn on grid
+ax.grid(True, alpha=0.5)
+# Save figure:
+fig.savefig('line-plot.png', dpi=300)
+fig.show()                      # show the figure on a window
+# Close figure:
+# plt.close(fig)
+\end{lstlisting}
+\section{Combining the Scatter and Line Plots}
+\label{sec:org6bbcccb}
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# Create figure and axis:
+fig, ax = plt.subplots(nrows=1,
+                       ncols=1,
+                       figsize=(12, 6))
+# Scatter plot:
+ax.scatter(x, y, color=[0.8, 0.8, 0.8], marker='o', label='Sample')
+
+# Add a single point:
+ax.scatter(0, 0, s=200, color='red', marker='*',
+           label='Special Point: $(0,0)$')
+
+# Add the line plot:
+ax.plot(x_values, y_values, linewidth=2, color='black',
+        label='Estimated Model')
+
+# Add title and labels:
+ax.set(title='Linear Regression Example',
+       xlabel='$x$',
+       ylabel='$y$')
+ax.legend(fontsize=18)
+ax.grid(True, alpha=0.5)
+
+# Save figure:
+fig.savefig('scatter-plot.png', dpi=300)
+fig.show()
+
+# Close figure window:
+plt.close(fig)
+\end{lstlisting}
+\section{Multiple Plots in a Figure}
+\label{sec:org8fb8626}
+We can create a single figure window that contains separate plots.
+That is, we can create a figure window with multiple separate axes.
+
+Now, use \texttt{plt.subplots} to create a figure window and multiple axes:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+fig, axes = plt.subplots(nrows=2,
+                       ncols=1,
+                       figsize=(12, 14))  # height is 14 now
+# ax is now a Numpy array containing the two axis just created
+# We can plot to each axis by using each of the objects
+# in the array ax.
+
+# Plot on the first axis:
+axes[0].scatter(x, y, color='black', marker='o',
+              label='Points: $(x,y)$')
+# add a single point
+axes[0].scatter(0, 0, s=200,
+              color='red', marker='*',
+              label='Special Point: $(0,0)$')
+# add title and labels
+axes[0].set(title='Scatter Plot Example',
+          xlabel='Value of $x$',
+          ylabel='Value of $y$')
+
+# Plot on the second axis:
+axes[1].plot(x, y, color='black',
+           label='Points: $(x,y)$')
+# add title and labels
+axes[1].set(title='Scatter Plot Example',
+          xlabel='Value of $x$',
+          ylabel='Value of $y$')
+
+# For turning on legends and the grid, we can use a loop:
+for axis in axes:
+    # add legends
+    axis.legend()
+    # turn on grid
+    axis.grid(True, alpha=0.5)
+fig.show()
+\end{lstlisting}
+Notice the change in the \texttt{nrows} option and in the \texttt{figsize} so that both plots have space in the rendered figure.
+
+Let's create a figure with 4 axes:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(12, 12))
+# Now, axes is a 2x2 numpy array, where each element represents one of
+# the axis in the figure.
+for row in axes:
+    for axis in row:
+        mean = np.random.uniform(-1, 1)
+        std = np.random.uniform(1, 4)
+        axis.hist(np.random.normal(mean, std, size=(2000, 1)), bins=50)
+        axis.set_title(fr'$\mathcal{{N}}\left(\mu={mean:.2f}, \sigma={std:.2f}\right)$')
+fig.show()
+\end{lstlisting}
+\section{Surface Plots}
+\label{sec:org3271894}
+While the focus of Matplotlib is on 2-dimensional plots, the package still offers some tools to create surface plots.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+\end{lstlisting}
+The \texttt{Axes3D} updates \texttt{plt} so that we can also create surface plots, and \texttt{cm} will be used to specify the color-map of the figure.
+
+Define a function to plot:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def rosenbrock(x, y):
+    a = 1
+    b = 100
+    return (a-x)**2+b*(y-x**2)**2
+\end{lstlisting}
+
+We need to create a grid of points where the function will be evaluated:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+x_grid = np.linspace(-2, 2, 50)
+y_grid = np.linspace(-2, 2, 50)
+# help(np.meshgrid)
+x, y = np.meshgrid(x_grid, y_grid)
+z = rosenbrock(x, y)
+\end{lstlisting}
+The elements of \texttt{x} and \texttt{y} define a mesh of points in the plane.
+By getting an element of the matrix in \texttt{x} and an element in the same position in the matrix \texttt{y}, we can compute the value of \texttt{z}.
+
+We can now create the figure and the surface plot.
+Here we need to go one level lower and first create the figure, and then add the axis separately.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+fig = plt.figure(figsize=(12, 8))
+axis = fig.add_subplot(1, 1, 1,     # nrows, ncols, index
+                       projection='3d')
+surf = axis.plot_surface(x, y, z,
+                         rcount=50,     # downsamples input x
+                         ccount=50,     # downsamples input y
+                         alpha=0.7,     # transparency
+                         cmap=cm.cool
+                         )
+# color-map: hot, winter, jet and
+#            terrain are some of the many options
+
+fig.colorbar(surf,              # inserts colorbar based on these values
+             ax=axis,           # on this axis
+             shrink=0.5,        # shrinks the height of the colorbar
+             orientation='vertical')
+fig.show()
+\end{lstlisting}
+See the \href{https://matplotlib.org/tutorials/colors/colormaps.html}{reference page on colormaps} to see all available options.
+\section{Customizing Defaults}
+\label{sec:org1c32678}
+There are a few ways of customizing the defaults on Matplotlib.
+A low-level customization of defaults is by altering the properties of the \texttt{matplotlib.rcParams}.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import matplotlib as mpl
+# object that holds all default values
+print(mpl.rcParams)
+fig, ax = plt.subplots()
+ax.plot(np.linspace(-5, 5), np.linspace(-5, 5), linewidth=1.5)
+# change default value for linewidth
+mpl.rcParams['lines.linewidth'] = 5
+ax.plot(np.linspace(-5, 5), np.linspace(5, -5))
+fig.show()
+# Reset default values:
+mpl.rcdefaults()
+\end{lstlisting}
+For more details on \texttt{rcParams} read \href{https://matplotlib.org/users/customizing.html\#matplotlib-rcparams}{this reference page}.
+
+There is a high-level way of customizing the defaults via style sheets.
+Style sheets are basically files where the \texttt{rcParams} have been set in a certain way, and you just use those settings.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def plotlines():
+    fig, ax = plt.subplots()
+    for i in range(5):
+        x = np.linspace(0, 2*np.pi, 100)
+        y = np.cos(x + i*np.pi/2)
+        ax.plot(x, y)
+    return fig, ax
+
+
+fig, ax = plotlines()
+fig.show()
+# change style sheet
+plt.style.use('ggplot')
+fig, ax = plotlines()
+fig.show()
+\end{lstlisting}
+
+Due to the number of people that have some type of color vision deficiency, we might want to use a more friendly color scheme:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+plt.style.use('seaborn-colorblind')
+fig, ax = plotlines()
+fig.show()
+# or a grayscale (which also works well for printing)
+plt.style.use('grayscale')
+fig, ax = plotlines()
+fig.show()
+\end{lstlisting}
+The official \href{https://matplotlib.org/gallery/style\_sheets/style\_sheets\_reference.html}{style sheets reference page} contains the names of the different built-in styles. This \href{https://tonysyu.github.io/raw\_content/matplotlib-style-gallery/gallery.html}{page} also displays the different style sheets, but with different styles of plots.
+
+\section{Assignment}
+\label{sec:orged932ae}
+There are many other types of plots we have not covered, like the ones generated with the functions \href{https://matplotlib.org/3.1.1/api/\_as\_gen/matplotlib.axes.Axes.bar.html\#matplotlib.axes.Axes.bar}{\texttt{bar}} and \href{https://matplotlib.org/3.1.1/api/\_as\_gen/matplotlib.axes.Axes.contour.html\#matplotlib.axes.Axes.contour}{\texttt{contour}}.
+We will cover some other important tools for plotting in the assignment problems.
+However, a full documentation of the plotting facilities in Matplotlib is available on the \href{https://matplotlib.org/api/axes\_api.html\#plotting}{Axes reference page}.
+
+\begin{problem}
+Use the housing data set to estimate a linear regression of the logarithm of the median house value on the logarithm of the total number of bedrooms.
+Given the beta estimate, compute \(\E{\ln{\text{Median House Value}}\vert\ln{\text{Total Bedrooms}}}\) over a range of values for the total number of bedrooms (say from \(1\) to \(30\)) and make a plot with the values.
+\end{problem}
+
+\begin{problem}
+Using the standard error estimates for \(\hat{\beta}\), create a \(95\%\) confidence interval \(\E{\ln{\text{Median House Value}}\vert\ln{\text{Total Bedrooms}}}\).
+Extend the plot from the previous problem with the confidence interval.
+\end{problem}
+
+\begin{problem}
+(Shading Confidence Intervals)
+
+Read the documentation of the \href{https://matplotlib.org/api/\_as\_gen/matplotlib.axes.Axes.fill\_between.html\#matplotlib.axes.Axes.fill\_between}{\texttt{fill\_between}} function.
+Use it to shade the area between the two curves of the confidence interval.
+Change the \texttt{alpha} property so that the curve in the middle is also visible.
+\end{problem}
+
+\begin{problem}
+(Shading Confidence Intervals)
+
+Consider a figure and its \texttt{axis} object, in which one line was plotted.
+The \texttt{axis.lines} property returns a list with all lines plotted on that axis (in this case there is only one).
+Alternatively, you can use the \texttt{axis} method \texttt{get\_lines} to also get the same list.
+Given a line object in the \texttt{axis.lines} list, you can recover its color with the method \texttt{get\_color}.
+Use the \texttt{get\_color} method to automatically set the color of the shaded confidence interval when calling \texttt{fill\_between}, so that the shaded region has the same color as the line. Also use the \texttt{alpha} property so that the shaded region is transparent.
+\end{problem}
+
+\begin{problem}
+Download the following file: \href{https://github.com/matlab-for-economists/data}{\texttt{AAPL.csv}}.
+The file follows the \href{https://en.wikipedia.org/wiki/Comma-separated\_values}{.csv} format and contains the stock price of the publicly traded company \href{https://en.wikipedia.org/wiki/Apple\_Inc.}{Apple Inc.}
+The file has 3 columns (no headers): date, time and price.
+The first column contains the date of a given price in the \texttt{YYYYMMDD} format.
+For example, a date of \texttt{20070103} means January 3rd of 2007.
+The second column contains the time of a given price in the \texttt{HHMM} format.
+For example, a time of \texttt{935} means that the price in the 3rd column was recorded at 9:35 am.
+The last column contains the stock price in dollars at the given date and time.
+
+Load the data into Python.
+\end{problem}
+
+\begin{problem}
+The geometric return of a stock over a time interval that starts at time \(t-1\) and ends at time \(t\) is given by:
+\begin{align*}
+r_t \equiv \ln{\frac{P_t}{P_{t-1}}}
+\end{align*}
+where \(P_t\) is the price of the stock at time \(t\).
+
+The stock market is open only during some hours of the day, closing at around 4 pm.
+The data you downloaded has prices sampled every 5-minutes of the day.
+We can use this data to compute intraday returns and overnight returns.
+Intraday returns are returns of a stock within a day.
+In this case, we can compute intraday returns for every 5 minutes interval.
+Overnight returns are the returns from the time the market closes at a given day, to the time the market opens on the next day.
+
+How many days of data are in the data set? Find answer with code.
+
+How many observations do you have each day? Find answer with code. Remember that you can do integer division with \texttt{//}.
+
+Read the documentation of the \href{https://docs.scipy.org/doc/numpy/reference/generated/numpy.reshape.html}{\texttt{numpy.reshape}} function, and pay special attention to the \texttt{order} input.
+Also, read the documentation for \href{https://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html}{\texttt{numpy.diff}}, and pay special attention to the \texttt{axis} input.
+
+Compute the \uline{intraday} geometric returns from the stock prices.
+\end{problem}
+
+\begin{problem}
+Create a histogram of the intraday geometric returns.
+\end{problem}
+
+\begin{problem}
+(Optional)
+
+Read about \href{https://en.wikipedia.org/wiki/Kernel\_density\_estimation}{Kernel density estimation}.
+Use the function \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian\_kde.html}{\texttt{scipy.stats.gaussian\_kde}} to estimate the density of the distribution of the intraday returns.
+You will need to install the \href{https://docs.scipy.org/doc/scipy/reference/index.html}{\texttt{scipy}} package.
+\end{problem}
+
+\begin{problem}
+(Time Series Plot)
+
+Create a 2D-line plot of the intraday returns.
+The returns should be reshaped into a vector so that you plot a single time series.
+For the x-axis use a range of numbers.
+\end{problem}
+
+\begin{problem}
+(Time Series Plot)
+
+To modify the x-axis so that it correctly displays timestamps, we need to use the first two columns of the data set to obtain the timestamps for each return.
+
+Python has a built-in module named \href{https://docs.python.org/3.6/library/datetime.html}{\texttt{datetime}} which supplies a class for manipulating dates and times.
+We will use the class \href{https://docs.python.org/3.6/library/datetime.html\#datetime-objects}{\texttt{datetime}} of the module \texttt{datetime} to create objects that represent the date (year, month and day) and time (hour, minute and second) of each return.
+
+We can create a \texttt{datetime.datetime} instance in several different ways.
+The constructor of this class takes the date and time as inputs, and returns the instance:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+from datetime import datetime
+# Create a date
+print(datetime(2017, 11, 20))          # November 20th, 2017
+# Create a date with time
+print(datetime(2017, 11, 20, 9, 27))  # 9:27 AM (24 hour clock)
+print(datetime(2017, 11, 20, 23, 55))  # 11:55 PM (24 hour clock)
+# We can also create a datetime from a string
+print(datetime.strptime('20171120 0927', '%Y%m%d %H%M'))
+\end{lstlisting}
+The string \texttt{'\%Y\%m\%d \%H\%M'} is a formatting string so that the method \texttt{strptime} can understand what the number \texttt{'20171120 0927'} means.
+You \uline{must} read this \href{https://docs.python.org/3.6/library/datetime.html\#strftime-and-strptime-behavior}{section} to understand what is the meaning of the format codes, like \texttt{\%Y}.
+
+Why did I type \texttt{'0927'} instead of \texttt{'927'} when I called the method \texttt{strptime} above?
+
+Use the first two columns of \texttt{AAPL.csv} to generate the \texttt{datetime} instances for each price.
+
+Hint 1: How would you generate the \texttt{datetime} instance for just one observation?
+
+Hint 2: To loop over two vectors we can the built-in function \href{https://docs.python.org/3.6/library/functions.html\#zip}{\texttt{zip}}. For example:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+dates = [20070102, 20070103, 20070104]
+times = [930, 1234, 1635]
+for date, time in zip(dates, times):
+    print(date, time)
+\end{lstlisting}
+\end{problem}
+
+\begin{problem}
+(Time Series Plot)
+
+Since we are plotting the time series for the intraday returns, you need to recover the \texttt{datetime} instances for only the appropriate returns.
+
+Plot the time series of intraday returns, but now use the \texttt{datetime} objects for the x-axis.
+The returns and the dates should be vectors when calling the plot function.
+\end{problem}
+\end{document}
