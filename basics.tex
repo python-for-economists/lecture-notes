@@ -1,4 +1,4 @@
-% Created 2019-07-03 Wed 17:45
+% Created 2019-07-26 Fri 12:55
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
@@ -36,6 +36,7 @@
 \newcommand{\Var}[1]{\mathrm{Var}\left(#1\right)}
 \newcommand{\Corr}[1]{\mathrm{Corr}\left(#1\right)}
 \newcommand{\Normal}[1]{\mathcal{N}\left(0, #1\right)}
+\newcommand{\stdnormal}{\mathcal{N}\left(0, 1\right)}
 \newcommand{\Max}[1]{\text{max}\left\{#1\right\}}
 \newcommand{\Set}[1]{\left\{#1\right\}}
 \renewcommand{\ln}[1]{\text{ln}\left(#1\right)}
@@ -72,6 +73,7 @@
 \definecolor{Operators}{rgb}{0,0,0}
 \definecolor{Background}{rgb}{0.98,0.98,0.98}
 \lstdefinelanguage{jupyter-python}{numbers=left, numberstyle=\footnotesize, numbersep=1em, xleftmargin=1em, framextopmargin=2em, framexbottommargin=2em, showspaces=false, showtabs=false, showstringspaces=false, frame=l, tabsize=4, basicstyle=\ttfamily\small\setstretch{1}, backgroundcolor=\color{Background}, commentstyle=\color{Comments}\slshape, stringstyle=\color{Strings}, morecomment=[s][\color{Strings}]{"""}{"""}, morecomment=[s][\color{Strings}]{'''}{'''}, morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert}, keywordstyle={\color{Keywords}\bfseries}, morekeywords={[2]@invariant,pylab,numpy,np,scipy}, keywordstyle={[2]\color{Decorators}\slshape}, emph={self}, emphstyle={\color{self}\slshape},}
+\lstdefinestyle{powershell}{language=bash,style=Matlab-editor,morekeywords={Get-Command}}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancypagestyle{plain}{}
@@ -96,14 +98,14 @@
 \maketitle
 This lecture covers the core of the Python language, introducing the main concepts of the language and providing a comprehensive set of tools that can be used to solve several fundamental problems.
 \section{Interacting with Python}
-\label{sec:orgdf13d90}
+\label{sec:orgb2a27ce}
 There are two ways to execute Python scripts.
 First, you write a \texttt{.py} file and run it in a terminal with \texttt{python3 myfile.py}.
 Second, you execute the Python commands line by line in the Python REPL (read-eval-print-loop).
 To open the Python REPL simply type \texttt{python3} in the terminal. You can quit Python by running \texttt{exit()} or with Control-D.
 In the Jupyter notebook you are interacting with a REPL, each cell you execute sends the commands to the interpreter, which then executes and prints outputs and then waits for more commands.
 \section{Built-In Data Types}
-\label{sec:orga5f8216}
+\label{sec:orgecf282d}
 The main data types that are built-in Python are:
 \begin{itemize}
 \item Numerics: hold different types of numbers (integers, floats and complex numbers);
@@ -117,7 +119,7 @@ The main data types that are built-in Python are:
 \end{itemize}
 All of the built-in types are fully described \href{https://docs.python.org/3.6/library/stdtypes.html}{here}. We will cover most of them. There are also many built-in functions, which are described \href{https://docs.python.org/3.6/library/functions.html}{here}, and we will cover some of them as we go.
 \subsection{Numerical Data}
-\label{sec:org4b95d46}
+\label{sec:org86d318c}
 Numbers are separated into three different types: \texttt{int}, \texttt{float} and \texttt{complex}.
 Integers can be as big as required, as long as you have free memory available.
 
@@ -229,7 +231,7 @@ print(float(h), type(float(h)))
 \end{lstlisting}
 These functions are useful to convert strings into numbers.
 \subsection{Text Data}
-\label{sec:orgc511144}
+\label{sec:org996bbb2}
 Textual data in Python is stored in \href{https://docs.python.org/3.6/library/stdtypes.html\#textseq}{\texttt{str}} objects.
 There are several ways of creating strings:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
@@ -327,7 +329,7 @@ Remember that strings are immutable, so string methods all return new strings wh
 We will use other methods after we talk about sequences and booleans.
 A complete list of the string methods is available \href{https://docs.python.org/3.6/library/stdtypes.html\#string-methods}{here}.
 \subsection{Boolean}
-\label{sec:org03406d5}
+\label{sec:orge63c3fc}
 There are two boolean values: \texttt{True} and \texttt{False}.
 The booleans are a subclass of integers, and, in some contexts, the integers 1 and 0 represent the booleans \texttt{True} and \texttt{False}.
 
@@ -367,7 +369,7 @@ The most common objects that will lead to a \texttt{False} value are:
 \end{itemize}
 Other objects that are non-empty will lead to a value of \texttt{True}.
 \subsection{Sequences}
-\label{sec:orgf3b7add}
+\label{sec:org0ce6d60}
 Sequences define a sequence of objects where the order of the objects is kept.
 There are three basic types: \texttt{list}, \texttt{tuple}, \texttt{range}.
 A \href{https://docs.python.org/3.6/library/stdtypes.html\#list}{\texttt{list}} can hold any number of elements and types of objects:
@@ -473,7 +475,7 @@ tuple_of_numbers.append(100)    # raises error
 tuple_of_numbers.pop()          # raises error
 del tuple_of_numbers[0]         # raises error
 \end{lstlisting}
-Tuples are more efficient that lists since they occupy less bytes.
+Tuples are more efficient than lists since they occupy less bytes.
 Tuples are used when you want to fix a sequence of values that should not be changed.
 
 A \href{https://docs.python.org/3.6/library/stdtypes.html\#range}{\texttt{range}} constructs a sequence of numbers and is often used for looping a specific number of times in a loop.
@@ -486,7 +488,7 @@ print(list(range(0, 10, 2)))
 It is important to know that all functions that return a list of numbers in Python exclude the last number from the list. For example \texttt{range(5)} returns a list with the numbers \texttt{0,1,2,3,4}. This is because lists start in the index 0, so the last index of a list with 5 elements is the index 4.
 This contrasts with lists in Matlab which start at index 1, but is a small change that is more natural to programming and is the default in most of the programming languages.
 \subsection{Sets}
-\label{sec:orgb4dc9ad}
+\label{sec:org9a77b70}
 A \href{https://docs.python.org/3.6/library/stdtypes.html\#set}{\texttt{set}} is a list of \uline{distinct} objects without a specific order (unordered collection).
 To create a set we pass a list of elements to the \texttt{set} function:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
@@ -546,7 +548,7 @@ students.add('F')               # error
 A \texttt{frozenset} is useful when you want to name a set of values that will have some use in your program.
 This makes your code more readable and easier to identify key parameters.
 \subsection{Mapping (Dictionaries)}
-\label{sec:org8043729}
+\label{sec:orgb5b9298}
 A mapping is an object that associates names (keys) to values (any object).
 The standard implementation of a mapping in Python is a dictionary: \href{https://docs.python.org/3.6/library/stdtypes.html\#dict}{\texttt{dict}}.
 A dictionary can be created by giving the \texttt{dict} constructor a list of \texttt{key:value} pairs:
@@ -581,8 +583,8 @@ list(grades.items())            # a list of the key:value pairs
 \end{lstlisting}
 Other methods are described \href{https://docs.python.org/3.6/library/stdtypes.html\#dict}{here}.
 \subsection{Objects}
-\label{sec:orgc7c4f34}
-Objects are the core of everything in Python. In fact, every data in Python is represented by an object. All of the basic types we studied so far are types. That is why when we call \texttt{type(1)}, for example, we get back \texttt{<class 'int'>}. This means the number 1 is an object of the class int.
+\label{sec:orgf82b017}
+Objects are the core of everything in Python. In fact, every data in Python is represented by an object. All of the basic types we studied so far are objects. That is why when we call \texttt{type(1)}, for example, we get back \texttt{<class 'int'>}. This means the number 1 is an object of the class int.
 
 Every object in Python has: an identity, a type and a value.
 This means every single variable we declare in our scripts will have an identity, a type and a value, since everything in Python is an object, no exceptions.
@@ -632,7 +634,7 @@ help(a.sort)
 For now we will skip the topic of how to define new objects, but we will talk about it after we cover loops, conditionals and functions.
 
 \subsection{Exceptions}
-\label{sec:org2c02f05}
+\label{sec:orgf5a5353}
 Exceptions are objects that hold the information about errors that occur in Python during the run-time of a script.
 There are many built-in exceptions that are raised depending on the situation.
 For example, trying to access an element of a list with an index that is not correct will raise an \href{https://docs.python.org/3.6/library/exceptions.html?highlight=indexerror\#IndexError}{\texttt{IndexError}}:
@@ -686,10 +688,10 @@ The EAFP approach is what we will use when handling errors.
 Handling errors is an extremely important topic, but requires understanding conditionals, so we will defer studying exceptions to a later section.
 
 \section{Control Flow Tools}
-\label{sec:org7795b2b}
+\label{sec:org513d3c1}
 Control flow refers to the tools we have available to control the execution of our script: conditionals (if, else, elif), loops (while, for) and functions.
 \subsection{Conditionals}
-\label{sec:org88bd86c}
+\label{sec:org7405560}
 The syntax for \href{https://docs.python.org/3.6/tutorial/controlflow.html\#if-statements}{\texttt{if}} statements is:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -707,7 +709,7 @@ Contrary to other languages that use brackets or the \texttt{end} keyword to del
 The indentation indicates what is inside the \texttt{if} block and what is not.
 Finally, notice that semicolons are not required by Python, you can still use them but they are not required, instead Python uses linebreaks to find the end of the command.
 
-The condition that comes after the \texttt{if} keyword is an expression that evaluates to a boolean. If that is true, then the indented code after \texttt{if}  is executed. If the expression evaluates to false, then the indented code after \texttt{eslse} is executed.
+The condition that comes after the \texttt{if} keyword is an expression that evaluates to a boolean. If that is true, then the indented code after \texttt{if}  is executed. If the expression evaluates to false, then the indented code after \texttt{else} is executed.
 
 For example:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
@@ -755,7 +757,7 @@ else:
     doOtherThing
 \end{lstlisting}
 \subsection{Loops}
-\label{sec:orgd7c340f}
+\label{sec:org8fbfe4c}
 In Python, we can write loops with \href{https://docs.python.org/3.6/tutorial/introduction.html\#first-steps-towards-programming}{\texttt{while}} and \href{https://docs.python.org/3.6/tutorial/controlflow.html\#for-statements}{\texttt{for}}.
 
 A while loop evaluates an expression, and, if it is True, a block of is executed and the loop repeats.
@@ -854,7 +856,7 @@ for i in range(a, n, s):
 \end{lstlisting}
 The function \texttt{range(a, n, s)} will create a list of numbers starting at the value \texttt{a}, stops before the value \texttt{n}, and has a step size \texttt{s}.
 \subsection{Break and Else Statements in For Loops}
-\label{sec:orge46c2e9}
+\label{sec:orge61baae}
 The \href{https://docs.python.org/3.6/tutorial/controlflow.html?\#break-and-continue-statements-and-else-clauses-on-loops}{\texttt{break}} keyword can be used inside a loop (either for or while) to break out of it.
 Specifically, the \texttt{break} keyword breaks out of the most inner loop.
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
@@ -895,7 +897,7 @@ for number in checkIfPrime:
 
 Notice that the \texttt{else} clause does not belong to the \texttt{if}, but actually to the \texttt{for}, the indentations are different.
 \subsection{Functions}
-\label{sec:orge44d3d8}
+\label{sec:org8cc4c47}
 Functions can be defined with the \texttt{def} keyword and there is no need to specify the type of the return (remember values in Python are inferred when they are assigned).
 The body of the function starts in the next line and must be indented.
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
@@ -964,7 +966,7 @@ a = sayHello()
 a == None                       # True
 \end{lstlisting}
 \subsubsection{Functions are Objects, like everything else}
-\label{sec:orgbba6de7}
+\label{sec:orgdf134e4}
 Functions are first-class objects, which means they are treated the same as any other object in the language.
 Remember, everything in Python is an object.
 Functions can be created, destroyed (this is done automatically by Python), passed to other functions, assigned to a variable, returned from another function.
@@ -1011,7 +1013,7 @@ greetMyself()
 greetingFactory('Doe')()
 \end{lstlisting}
 \subsubsection{Default Values}
-\label{sec:org40c3c7b}
+\label{sec:org81a5f3e}
 Functions can take arguments with default values! (This is not the case in Matlab, where default values is not straightforward)
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1078,7 +1080,7 @@ foo(1, z=20, y=10)
 foo(z=20, y=10, 1)              # error
 \end{lstlisting}
 \subsubsection{Functions with *args and **kwargs}
-\label{sec:orgd87025b}
+\label{sec:orgbdfe0a6}
 You will often find functions where some of its inputs are called \texttt{*args} and \texttt{**kwards}:
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1116,7 +1118,7 @@ If no extra arguments are passed, then "args" and "kwargs" will be empty:
 f(1)
 \end{lstlisting}
 \subsubsection{Anonymous Functions: lambdas}
-\label{sec:orge6a4a8c}
+\label{sec:orgc97ce96}
 We can declare short inline functions using the \texttt{lambda} keyword.
 \lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1162,8 +1164,181 @@ print(grades)
 grades.sort(key=lambda x: x[1], reverse=True)
 print(grades)
 \end{lstlisting}
+\section{Input and Output}
+\label{sec:org59662e2}
+We now turn to loading and saving files with Python.
+To begin, let's create a new file and save some data in it.
+Open a file for writing with \texttt{open}:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+f = open('file.txt', 'w')
+# f is an object representing the file
+# f has a method for writing to the file: f.write
+# f.write takes a string and outputs it to the file
+f.write('column1,column2,column3\n')
+# \n is a special character that represents a new line
+f.write('1.23,2.34,0.3,4.5')
+# Close the file so that it is saved
+f.close()
+\end{lstlisting}
+The file was created in the working directory Python is using.
+If you are in jupyter notebook, the working directory will be the folder where you launched jupyter notebook from using the terminal.
+You can use the built-in package \texttt{os} to find the working directory:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+import os
+os.getcwd()
+\end{lstlisting}
+You can change the path to elsewhere with \texttt{os.chdir}.
+We can inspect the file outside Python by opening it with a text editor.
+
+Let's open the file for reading now:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+f = open('file.txt', 'r')       # r for reading only
+# We can go through the file in different ways
+help(f.read)
+# f.read: Reads until EOF (end of file) and returns a string with everything
+data = f.read()
+print(data)
+# Print string without interpreting the special character \n as a new line
+print(repr(data))
+\end{lstlisting}
+Python uses a cursor to go through the file.
+When we called f.read, this cursor moved through all characters of the file and stopped at the end of the file.
+Thus, if we call f.read again, Python will start reading the file from where the cursor is at. Since the cursor is already at the end of the file we will get an empty string, since there is nothing to read:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+print(f.read())
+print(repr(f.read()))
+# To re-read the file, we can either close it and open it again
+f.close()
+print(f)
+f.read()                        # file is closed
+f = open('file.txt', 'r')
+# Now, the cursor is back at the beginning of the file
+print(f.read())
+# The cursor is back at the end of the file
+# Move the cursor back to the beginning with f.seek
+help(f.seek)
+f.seek(0)
+print(f.read())
+f.seek(0)
+# We can read line by line with f.readline
+print(f.readline())
+# reads until it finds \n, and outputs the result
+# Read the next line
+print(f.readline())
+# Read the next line, which does not exist
+print(f.readline())             # empty string
+\end{lstlisting}
+The file object is also an iterator (we will discuss iterators in detail later on).
+It can be used in a for-loop in a way similar to a list of numbers.
+But, in this case, we have a list of lines:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+f.seek(0)
+for line in f:
+    print(line)
+# After we are done with the file, we can close it
+f.close()
+\end{lstlisting}
+Notice we had to open and close the file.
+We can use something called a context manager to the closing job for us.
+We will discuss context managers in detail later on.
+We use a context manager with the \texttt{with} keyword:
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+with open('file.txt', 'r') as f:
+    # Inside this block, f represents the file.
+    # We can now read the file however we prefer.
+    data = f.read()
+# When we exit the "with" block, it will take care of closing
+# the file for us. The file will be closed even if there is an
+# error which interrupts the execution of the code.
+print(data)
+
+# Create another file
+header = ["Name", "Final Grade"]
+grades = {'Gui': 'B',
+          'Joe': 'A',
+          'John': 'A+'}
+for name, grade in grades.items():
+    print(name, grade)
+with open('grades.txt', 'w') as f:
+    f.write(",".join(header) + '\n')
+    for name, grade in grades.items():
+        f.write(name + "," + grade + "\n")
+# Load the file and print grades
+with open('grades.txt', 'r') as f:
+    for line in f:
+        name, grade = line.split(',')
+        # returns a list, which we can unpack
+        print(name + ' ' + grade)
+\end{lstlisting}
+\section{Objects}
+\label{sec:orgc7dec81}
+A class is what defines an object, and is a way of creating a structure (the object) that has data and functions together.
+We have seen many examples so far, like the Python list.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+a = [1, 2, 3]
+# Creates an instance of a list.
+print(a.__class__)
+# The list a has data, but also functions:
+a.append("4")
+\end{lstlisting}
+When we create a new class, we are defining a new type of object.
+
+An object in python consists of a type, an id, data (attributes) and methods (functions).
+The attributes of an object can be, for example, the main piece of data it is storing, but also other relevant information.
+Some of its attributes can be functions, which are referred to as the methods of that class.
+The methods of an object usually work on the data contained in that object, like in the case of the list, where the \texttt{append} method used the data stored in \texttt{a} to modify its value.
+
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+# create an instance of a class
+x = ['a', 'b', 'c']
+# check whether an attribute is a method
+callable(x.append)
+callable(x.__doc__)             # this is a documentation string for the class of x
+# Some symbols overload methods of an object.
+# For example, [] overload the method __getitem__
+print(x[0])
+print(x.__getitem__(0))
+# [] can also overload the method __setitem__
+x[0] = 'A'                      # item assignment
+print(x[0])
+x.__setitem__(0, 'a')
+print(x[0])
+# It is possible to change what [] means by changing the definition
+# of the functions __setitem__ and __getitem__ in the list class.
+\end{lstlisting}
+
+Everything in Python is an object, including variables, files, functions and even modules.
+\lstset{language=jupyter-python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+def foo(x):
+    """Docs"""
+    return x + 1
+
+
+# A function has a type:
+print(type(foo))
+# It has an id:
+print(id(foo))
+# It has attributes:
+print(foo.__name__, foo.__doc__)
+# It has methods:
+print(foo.__call__)
+print(foo.__call__(1))
+# Parentheses overload the __call__ method
+print(foo(1))
+# We can see all of its attributes with dir:
+print(dir(foo))
+\end{lstlisting}
 \section{Handling Exceptions}
-\label{sec:org31c2bf8}
+\label{sec:orgd6ef056}
 It is possible to write a Python script that can handle exceptions as they occur during execution.
 In fact, many of Python's own functions use exceptions as a form of control flow.
 Let's see how we can handle errors:
@@ -1245,7 +1420,7 @@ However, before doing so, the code in the \texttt{finally} clause is executed.
 
 The real world use of the \texttt{finally} clause is to guarantee that resources are correctly closed, like closing a file or a network connection even if an error in the script occurred.
 \section{Assertions}
-\label{sec:org393f5d4}
+\label{sec:orgda998f2}
 Exceptions and the \texttt{try} blocks are used to tackle errors that you can handle.
 Assertions are used to alert you of an error that cannot be recovered (that should stop the execution of the script).
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
@@ -1256,23 +1431,23 @@ Assertions are used to alert you of an error that cannot be recovered (that shou
 \end{lstlisting}
 The \href{https://docs.python.org/3.6/reference/simple\_stmts.html\#the-assert-statement}{\texttt{assert}} statement will check if the variable \texttt{discount} is between 0 and 1, and, if it is not, it will raise an \texttt{AssertionError} with the message "Discount greater than actual price".
 
-If the \texttt{discountPrice} function sits in the middle of a payment system of some company, and at some point it is invoked with a discount that is greater than 100$\backslash$%, then something clearly went wrong somewhere.
+If the \texttt{discountPrice} function sits in the middle of a payment system of some company, and at some point it is invoked with a discount that is greater than 100\%, then something clearly went wrong somewhere.
 We found a bug!
 If this assertion error occurred, then we need to stop the program and fix it.
 An assertion error should only be raised if there is a bug in your program.
 \section{Assignment}
-\label{sec:org967c6c0}
+\label{sec:org4065272}
 All assignments should be submitted to the Github repository you have been assigned to.
-The deadline is August 16th by 11 PM.
+The deadline is \textbf{August 12th by 11 PM}.
 You should write a report in Latex with the solutions to the problems below.
 If the problem requires you to code, then the code should also be included in the report.
-For a quick guide on how to add Matlab code to your Latex files, refer to the Section "Adding Matlab Code" on \href{https://guilhermesalome.com/teaching/2018-empirical-methods-in-financial-econometrics/posts/lecture-1-latex.html\#org61c35bc}{this tutorial}.
+You can add code to Latex with the \href{http://texdoc.net/texmf-dist/doc/latex/listings/listings.pdf}{lstlisting package} (see \href{https://tex.stackexchange.com/a/83883/65818}{this stack post}) or the \href{http://tug.ctan.org/tex-archive/macros/latex/contrib/minted/minted.pdf}{minted package} (see \href{https://stackoverflow.com/a/1985330/1445572}{this other stack post}).
 
 Go to \href{https://www.codewars.com/users/sign\_in}{Codewars} and sign in with your \href{https://github.com}{Github} account.
 Solve the problems listed below.
 Your code must pass the submission test on the Codewars website.
 \subsection{Introductory Problems (start here)}
-\label{sec:org7de2e2b}
+\label{sec:orgb30120a}
 \begin{itemize}
 \item \href{https://www.codewars.com/kata/56dec885c54a926dcd001095}{Opposite Number}
 \item \href{https://www.codewars.com/kata/53da3dbb4a5168369a0000fe}{Even or Odd}
@@ -1287,7 +1462,7 @@ Your code must pass the submission test on the Codewars website.
 \item \href{https://www.codewars.com/kata/576b93db1129fcf2200001e6}{Summation with Exclusion}
 \end{itemize}
 \subsection{More Problems}
-\label{sec:org26b6dc4}
+\label{sec:org9a61f3b}
 \begin{itemize}
 \item \href{https://www.codewars.com/kata/54ff3102c1bad923760001f3}{Count Vowels}
 \item \href{https://www.codewars.com/kata/56747fd5cb988479af000028}{Middle Characters}
@@ -1301,7 +1476,7 @@ Your code must pass the submission test on the Codewars website.
 \item \href{https://www.codewars.com/kata/525f50e3b73515a6db000b83}{Create Phone Number}
 \end{itemize}
 \subsection{Challenges}
-\label{sec:org9fd0eb3}
+\label{sec:org7833473}
 \begin{itemize}
 \item \href{https://www.codewars.com/kata/55bf01e5a717a0d57e0000ec}{Multiplicative Persistence}
 \item \href{https://www.codewars.com/kata/556deca17c58da83c00002db}{Tribonacci Sequence}
